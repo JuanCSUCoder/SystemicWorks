@@ -12,6 +12,7 @@ Loopy.TOOL_INK = 0;
 Loopy.TOOL_DRAG = 1;
 Loopy.TOOL_ERASE = 2;
 Loopy.TOOL_LABEL = 3;
+Loopy.TOOL_PAN = 4;
 
 function Loopy(config){
 
@@ -26,6 +27,10 @@ function Loopy(config){
 	self.offsetX = 0;
 	self.offsetY = 0;
 	self.offsetScale = 1;
+
+	// Panning
+	self.canvasX = 0;
+	self.canvasY = 0;
 
 	// Mouse
 	Mouse.init(document.getElementById("canvasses")); // TODO: ugly fix, ew
@@ -50,6 +55,7 @@ function Loopy(config){
 	self.drag = new Dragger(self);
 	self.erase = new Eraser(self);
 	self.label = new Labeller(self);
+	self.pan = new Pan(self);
 
 	// Play Controls
 	self.playbar = new PlayControls(self);
