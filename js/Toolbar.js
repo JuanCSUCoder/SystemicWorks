@@ -58,8 +58,22 @@ function Toolbar(loopy){
 
 	// Populate those buttons!
 	self.addButton({
+		id: "drag",
+		tooltip: "MO(V)E",
+		callback: function(){
+			self.setTool("drag");
+		}
+	});
+	self.addButton({
+		id:'pan',
+		tooltip: "PAN",
+		callback: function() {
+			self.setTool('pan');
+		}
+	});
+	self.addButton({
 		id: "ink",
-		tooltip: "PE(N)CIL",
+		tooltip: "LI(N)KER",
 		callback: function(){
 			self.setTool("ink");
 		}
@@ -69,13 +83,6 @@ function Toolbar(loopy){
 		tooltip: "(T)EXT",
 		callback: function(){
 			self.setTool("label");
-		}
-	});
-	self.addButton({
-		id: "drag",
-		tooltip: "MO(V)E",
-		callback: function(){
-			self.setTool("drag");
 		}
 	});
 	self.addButton({
