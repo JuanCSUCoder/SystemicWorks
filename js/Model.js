@@ -198,6 +198,11 @@ function Model(loopy){
 		if(self.loopy.mode==Loopy.MODE_EDIT) drawCountdown=drawCountdownFull;
 	});
 
+	// OR MOVED
+	subscribe("canvas/moved", function () {
+		drawCountdown = drawCountdownFull;
+	})
+
 	// OR RESIZE or RESET
 	subscribe("resize",function(){ drawCountdown=drawCountdownFull; });
 	subscribe("model/reset",function(){ drawCountdown=drawCountdownFull; });
@@ -252,6 +257,8 @@ function Model(loopy){
 			ty += _PADDING; // dunno why but this is needed
 		}
 		ctx.setTransform(s, 0, 0, s, tx, ty);
+
+		ctx.translate(loopy.canvasX, loopy.canvasY);
 
 		// Draw Grid
 		ctx.drawImage(grid_img, 0, 0);
