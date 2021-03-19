@@ -22,11 +22,14 @@ canvas{
 #canvasses[fullscreen=yes]{
 	width: 100%;
 }
+#canvasses[cursor=drag]{
+	cursor: url('cursors/drag.png') 0 30, auto;
+}
 #canvasses[cursor=ink]{
 	cursor: url('cursors/ink.png') 0 30, auto;
 }
-#canvasses[cursor=drag]{
-	cursor: url('cursors/drag.png') 15 15, auto;
+#canvasses[cursor=pan]{
+	cursor: url('cursors/pan.png') 15 15, auto;
 }
 #canvasses[cursor=erase]{
 	cursor: url('cursors/erase.png') 5 25, auto;
@@ -105,10 +108,12 @@ div[big=yes] .play_button_label{
 
 #toolbar{
 	position: absolute;
-	left: 0px;
-	top: calc(33% - 142.5px); /* 33% - half of toolbar height */
+	left: 0;
+	top: 0;
 
-	width:75px; height:280px;
+	display: flex;
+	flex-direction: row;
+
 	padding: 5px;
 	background-color: #ddd;
 
@@ -122,7 +127,8 @@ div[big=yes] .play_button_label{
 }
 
 .toolbar_button{
-	width:60px; height:60px;
+	width: 30px;
+	height:30px;
 	margin: 5px;
 	border: 2px solid #ddd;
 	cursor: pointer;
