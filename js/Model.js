@@ -142,6 +142,30 @@ function Model(loopy){
 		
 	};
 
+	//////////
+	// GRID //
+	//////////
+
+	var grid_svg_data = '<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"> \
+			<defs> \
+					<pattern id="smallGrid" width="30" height="30" patternUnits="userSpaceOnUse"> \
+							<path d="M 30 0 L 0 0 0 30" fill="none" stroke="gray" stroke-width="2" /> \
+					</pattern> \
+					<pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"> \
+							<rect width="80" height="80" fill="url(#smallGrid)" /> \
+							<path d="M 80 0 L 0 0 0 80" fill="none" stroke="black" stroke-width="1" /> \
+					</pattern> \
+			</defs> \
+			<rect width="100%" height="100%" fill="url(#smallGrid)" /> \
+	</svg>';
+
+	var DOMURL = window.URL || window.webkitURL || window;
+
+	var grid_img = new Image();
+	var grid_svg = new Blob([grid_svg_data], {type: 'image/svg+xml;charset=utf-8'});
+	var grid_url = DOMURL.createObjectURL(grid_svg);
+
+	grid_img.src = grid_url;
 
 
 	///////////////////
@@ -218,7 +242,7 @@ function Model(loopy){
 		var ty = loopy.offsetY*2;
 		tx -= CW+_PADDING;
 		ty -= CH+_PADDING;
-		var s = loopy.offsetScale;
+		var s = loopy.offsetScale; // TODO: Zooming
 		tx = s*tx;
 		ty = s*ty;
 		tx += CW+_PADDING;
@@ -228,6 +252,9 @@ function Model(loopy){
 			ty += _PADDING; // dunno why but this is needed
 		}
 		ctx.setTransform(s, 0, 0, s, tx, ty);
+
+		// Draw Grid
+		ctx.drawImage(grid_img, 0, 0);
 
 		// Draw labels THEN edges THEN nodes
 		for(var i=0;i<self.labels.length;i++) self.labels[i].draw(ctx);
