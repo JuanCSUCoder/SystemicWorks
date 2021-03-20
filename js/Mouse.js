@@ -40,8 +40,8 @@ Mouse.init = function(target){
 		var my = event.y*s + ty;
 
 		// Mouse!
-		Mouse.x = mx;
-		Mouse.y = my;
+		Mouse.x = mx - loopy.initialCanvasX;
+		Mouse.y = my - loopy.initialCanvasY;
 
 		Mouse.moved = true;
 		publish("mousemove");
