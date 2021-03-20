@@ -31,6 +31,8 @@ function Loopy(config){
 	// Panning
 	self.canvasX = 0;
 	self.canvasY = 0;
+	self.initialCanvasX = 0;
+	self.initialCanvasY = 0;
 
 	// Mouse
 	Mouse.init(document.getElementById("canvasses")); // TODO: ugly fix, ew
