@@ -29,8 +29,6 @@ function Loopy(config){
 	self.offsetScale = 1;
 
 	// Panning
-	self.canvasX = 0;
-	self.canvasY = 0;
 	self.initialCanvasX = 0;
 	self.initialCanvasY = 0;
 

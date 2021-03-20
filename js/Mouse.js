@@ -32,16 +32,18 @@ Mouse.init = function(target){
 		tx += (CW+_PADDING)/2;
 		ty += (CH+_PADDING)/2;
 
-		tx -= loopy.offsetX;
-		ty -= loopy.offsetY;
+		if (loopy.tool!=Loopy.TOOL_PAN) {
+			tx -= loopy.offsetX;
+			ty -= loopy.offsetY;
+		}
 
 		// Mutliply by Mouse vector
 		var mx = event.x*s + tx;
 		var my = event.y*s + ty;
 
 		// Mouse!
-		Mouse.x = mx - loopy.initialCanvasX;
-		Mouse.y = my - loopy.initialCanvasY;
+		Mouse.x = mx;
+		Mouse.y = my;
 
 		Mouse.moved = true;
 		publish("mousemove");

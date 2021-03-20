@@ -245,8 +245,8 @@ function Model(loopy){
 		var CH = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
 		var tx = loopy.offsetX*2;
 		var ty = loopy.offsetY*2;
-		tx -= CW+_PADDING-loopy.canvasX;
-		ty -= CH+_PADDING-loopy.canvasY;
+		tx -= CW+_PADDING;
+		ty -= CH+_PADDING;
 		var s = loopy.offsetScale; // TODO: Zooming
 		tx = s*tx;
 		ty = s*ty;

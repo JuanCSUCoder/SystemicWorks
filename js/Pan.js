@@ -7,36 +7,30 @@ function Pan(loopy) {
 	self.mouseXRef = 0;
 	self.mouseYRef = 0;
 
-	self.canvasX = 0;
-	self.canvasY = 0;
-
 	var canvas = _createCanvas();
 	var ctx = canvas.getContext("2d");
 
 	subscribe("mousedown", function () {
 		self.active = true;
 		
-		self.mouseXRef = Mouse.x - self.canvasX;
-		self.mouseYRef = Mouse.y - self.canvasY;
+		self.mouseXRef = Mouse.x - loopy.offsetX;
+		self.mouseYRef = Mouse.y - loopy.offsetY;
 
-		loopy.initialCanvasX = self.canvasX;
-		loopy.initialCanvasY = self.canvasY;
+		loopy.initialCanvasX = loopy.offsetX;
+		loopy.initialCanvasY = loopy.offsetY;
 	})
 
 	subscribe("mouseup", function () {
 		self.active = false;
 
-		loopy.initialCanvasX = self.canvasX;
-		loopy.initialCanvasY = self.canvasY;
+		loopy.initialCanvasX = loopy.offsetX;
+		loopy.initialCanvasY = loopy.offsetY;
 	})
 
 	subscribe("mousemove", function () {
 		if(window.loopy.tool == Loopy.TOOL_PAN && self.active) {
-			self.canvasX = Mouse.x - self.mouseXRef;
-			self.canvasY = Mouse.y - self.mouseYRef;
-
-			loopy.canvasX = self.canvasX;
-			loopy.canvasY = self.canvasY;
+			loopy.offsetX = Mouse.x - self.mouseXRef;
+			loopy.offsetY = Mouse.y - self.mouseYRef;
 
 			publish("canvas/moved");
 		}
