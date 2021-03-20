@@ -245,8 +245,8 @@ function Model(loopy){
 		var CH = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
 		var tx = loopy.offsetX*2;
 		var ty = loopy.offsetY*2;
-		tx -= CW+_PADDING;
-		ty -= CH+_PADDING;
+		tx -= CW+_PADDING-loopy.canvasX;
+		ty -= CH+_PADDING-loopy.canvasY;
 		var s = loopy.offsetScale; // TODO: Zooming
 		tx = s*tx;
 		ty = s*ty;
@@ -256,9 +256,8 @@ function Model(loopy){
 			tx += _PADDING; // dunno why but this is needed
 			ty += _PADDING; // dunno why but this is needed
 		}
-		ctx.setTransform(s, 0, 0, s, tx, ty);
 
-		ctx.translate(loopy.canvasX, loopy.canvasY);
+		ctx.setTransform(s, 0, 0, s, tx, ty);
 
 		// Draw Grid
 		ctx.drawImage(grid_img, 0, 0);
