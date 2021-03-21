@@ -77,21 +77,16 @@ canvas{
     margin: 0;
 }
 .play_button_icon{
-	width: 25px;
-	height: 25px;
+	width: 10px;
+	height: 10px;
+	margin: 5px;
 	background-image: url(icons/controls.png);
-	display: inline-block;
 	background-size: 400% 100%;
 }
 .play_button_icon[icon="0"]{ background-position: 0 0; }
-.play_button_icon[icon="1"]{ background-position: -25px 0; }
-.play_button_icon[icon="2"]{ background-position: -50px 0; }
-.play_button_icon[icon="3"]{ background-position: -75px 0; }
-.play_button_label{
-	display: inline-block;
-	position: relative;
-    top: -5px;
-}
+.play_button_icon[icon="1"]{ background-position: -10px 0; }
+.play_button_icon[icon="2"]{ background-position: -20px 0; }
+.play_button_icon[icon="3"]{ background-position: -30px 0; }
 div[big=yes] .play_button_icon{
 	width: 30px;
 	height: 30px;
@@ -113,6 +108,7 @@ div[big=yes] .play_button_label{
 
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 
 	padding: 5px;
 	background-color: #ddd;
@@ -244,14 +240,17 @@ div[big=yes] .play_button_label{
 	margin-bottom: 5px;
 }
 .component_button{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	
 
-	width: calc(100% - 20px);
 	background: #888;
 	color: #fff;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 100;
 	text-align: center;
-	padding: 10px;
+	padding: 7px;
 	border-radius: 5px;
 
 	cursor: pointer;

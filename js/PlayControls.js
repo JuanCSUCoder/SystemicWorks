@@ -9,7 +9,7 @@ PLAY CONTROLS CODE:
 function PlayControls(loopy){
 
 	var self = this;
-	PageUI.call(self, document.getElementById("playbar"));
+	PageUI.call(self, document.getElementById("toolbar"));
 
 	self.loopy = loopy;
 
@@ -37,12 +37,13 @@ function PlayControls(loopy){
 				//self.showPage("Edit");
 			}
 		})).dom;
-		buttonDOM.setAttribute("big","yes");
-		buttonDOM.style.fontSize = "28px";
-		buttonDOM.style.height = "35px";
+		buttonDOM.style.backgroundColor = "green";
+		buttonDOM.style.marginLeft = "25px";
 
 		self.addPage("Editor", page);
 	})();
+
+	PageUI.call(self, document.getElementById("playbar"));
 
 	// During the Player
 	(function(){
@@ -60,6 +61,7 @@ function PlayControls(loopy){
 					publish("model/reset");
 				}
 			})).dom;
+			buttonDOM.style.backgroundColor = "#d49b00";
 			buttonDOM.style.width = "100px";
 			buttonDOM.style.left = "0px";
 			buttonDOM.style.top = "0px";
@@ -89,6 +91,7 @@ function PlayControls(loopy){
 					loopy.setMode(Loopy.MODE_EDIT);
 				}
 			})).dom;
+			buttonDOM.style.backgroundColor = "red";
 			buttonDOM.style.width = "100px";
 			buttonDOM.style.left = "0px";
 			buttonDOM.style.top = "0px";
@@ -101,6 +104,7 @@ function PlayControls(loopy){
 					publish("model/reset");
 				}
 			})).dom;
+			buttonDOM.style.backgroundColor = "#d49b00";
 			buttonDOM.style.width = "100px";
 			buttonDOM.style.right = "0px";
 			buttonDOM.style.top = "0px";
@@ -136,8 +140,8 @@ function PlayButton(config){
 
 	// Tooltip!
 	if(config.tooltip){
-		self.dom.setAttribute("data-balloon", config.tooltip);
-		self.dom.setAttribute("data-balloon-pos", "top");
+		self.dom.setAttribute("aria-label", config.tooltip);
+		self.dom.setAttribute("data-balloon-pos", "down");
 	}
 
 }
