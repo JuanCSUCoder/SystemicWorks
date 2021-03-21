@@ -22,11 +22,14 @@ canvas{
 #canvasses[fullscreen=yes]{
 	width: 100%;
 }
+#canvasses[cursor=drag]{
+	cursor: url('cursors/drag.png') 0 3, auto;
+}
 #canvasses[cursor=ink]{
 	cursor: url('cursors/ink.png') 0 30, auto;
 }
-#canvasses[cursor=drag]{
-	cursor: url('cursors/drag.png') 15 15, auto;
+#canvasses[cursor=pan]{
+	cursor: url('cursors/pan.png') 15 15, auto;
 }
 #canvasses[cursor=erase]{
 	cursor: url('cursors/erase.png') 5 25, auto;
@@ -74,21 +77,16 @@ canvas{
     margin: 0;
 }
 .play_button_icon{
-	width: 25px;
-	height: 25px;
+	width: 10px;
+	height: 10px;
+	margin: 5px;
 	background-image: url(icons/controls.png);
-	display: inline-block;
 	background-size: 400% 100%;
 }
 .play_button_icon[icon="0"]{ background-position: 0 0; }
-.play_button_icon[icon="1"]{ background-position: -25px 0; }
-.play_button_icon[icon="2"]{ background-position: -50px 0; }
-.play_button_icon[icon="3"]{ background-position: -75px 0; }
-.play_button_label{
-	display: inline-block;
-	position: relative;
-    top: -5px;
-}
+.play_button_icon[icon="1"]{ background-position: -10px 0; }
+.play_button_icon[icon="2"]{ background-position: -20px 0; }
+.play_button_icon[icon="3"]{ background-position: -30px 0; }
 div[big=yes] .play_button_icon{
 	width: 30px;
 	height: 30px;
@@ -105,10 +103,13 @@ div[big=yes] .play_button_label{
 
 #toolbar{
 	position: absolute;
-	left: 0px;
-	top: calc(33% - 142.5px); /* 33% - half of toolbar height */
+	left: 0;
+	top: 0;
 
-	width:75px; height:280px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
 	padding: 5px;
 	background-color: #ddd;
 
@@ -122,7 +123,8 @@ div[big=yes] .play_button_label{
 }
 
 .toolbar_button{
-	width:60px; height:60px;
+	width: 30px;
+	height:30px;
 	margin: 5px;
 	border: 2px solid #ddd;
 	cursor: pointer;
@@ -238,14 +240,17 @@ div[big=yes] .play_button_label{
 	margin-bottom: 5px;
 }
 .component_button{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	
 
-	width: calc(100% - 20px);
 	background: #888;
 	color: #fff;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 100;
 	text-align: center;
-	padding: 10px;
+	padding: 7px;
 	border-radius: 5px;
 
 	cursor: pointer;

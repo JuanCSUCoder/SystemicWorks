@@ -17,6 +17,7 @@
 		69: "erase", // (E)rase
 		84: "label", // (T)ext
 		83: "save", // (S)ave
+		80: "pan", // (P)an
 
 	};
 

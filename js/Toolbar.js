@@ -10,7 +10,7 @@ function Toolbar(loopy){
 
 	// Tools & Buttons
 	var buttons = [];
-	var buttonsByID = {};
+	self.buttonsByID = {};
 	self.dom = document.getElementById("toolbar");
 	self.addButton = function(options){
 
@@ -27,13 +27,13 @@ function Toolbar(loopy){
 		});
 		self.dom.appendChild(button.dom);
 		buttons.push(button);
-		buttonsByID[id] = button;
+		self.buttonsByID[id] = button;
 
 		// Keyboard shortcut!
 		(function(id){
 			subscribe("key/"+id,function(){
 				loopy.ink.reset(); // also CLEAR INK CANVAS
-				buttonsByID[id].callback();
+				self.buttonsByID[id].callback();
 			});
 		})(id);
 
@@ -58,8 +58,22 @@ function Toolbar(loopy){
 
 	// Populate those buttons!
 	self.addButton({
+		id: "drag",
+		tooltip: "MO(V)E",
+		callback: function(){
+			self.setTool("drag");
+		}
+	});
+	self.addButton({
+		id:"pan",
+		tooltip: "(P)AN",
+		callback: function() {
+			self.setTool('pan');
+		}
+	});
+	self.addButton({
 		id: "ink",
-		tooltip: "PE(N)CIL",
+		tooltip: "LI(N)KER",
 		callback: function(){
 			self.setTool("ink");
 		}
@@ -72,13 +86,6 @@ function Toolbar(loopy){
 		}
 	});
 	self.addButton({
-		id: "drag",
-		tooltip: "MO(V)E",
-		callback: function(){
-			self.setTool("drag");
-		}
-	});
-	self.addButton({
 		id: "erase",
 		tooltip: "(E)RASE",
 		callback: function(){
@@ -87,11 +94,11 @@ function Toolbar(loopy){
 	});
 
 	// Select button
-	buttonsByID.drag.callback();
+	self.buttonsByID.drag.callback();
 
 	// Return to default
 	subscribe("model/changed", function() {
-		buttonsByID.drag.callback();
+		self.buttonsByID.drag.callback();
 	});
 
 	// Hide & Show
@@ -109,8 +116,8 @@ function ToolbarButton(toolbar, config){
 	self.dom.style.backgroundImage = "url('"+config.icon+"')";
 
 	// Tooltip!
-	self.dom.setAttribute("data-balloon", config.tooltip);
-	self.dom.setAttribute("data-balloon-pos", "right");
+	self.dom.setAttribute("aria-label", config.tooltip);
+	self.dom.setAttribute("data-balloon-pos", "down-left");
 
 	// Selected?
 	self.select = function(){

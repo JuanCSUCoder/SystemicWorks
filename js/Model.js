@@ -142,6 +142,36 @@ function Model(loopy){
 		
 	};
 
+	//////////
+	// GRID //
+	//////////
+
+	var grid_w = 50;
+	var grid_h = 50;
+	var grid_square = 4;
+	var grid_tile = 5;
+	var grid_stroke = 2;
+
+	var grid_svg_data = '<svg width="'+(grid_w*grid_square*grid_tile)+1+'" height="'+(grid_h*grid_square*grid_tile)+1+'" xmlns="http://www.w3.org/2000/svg"> \
+			<defs> \
+					<pattern id="smallGrid" width="'+grid_w+'" height="'+grid_h+'" patternUnits="userSpaceOnUse"> \
+							<path d="M '+grid_w+' 0 L 0 0 0 '+grid_h+'" fill="none" stroke="gray" stroke-width="'+grid_stroke+'" /> \
+					</pattern> \
+					<pattern id="grid" width="'+grid_w*grid_square+'" height="'+grid_h*grid_square+'" patternUnits="userSpaceOnUse"> \
+							<rect width="'+grid_w*grid_square+'" height="'+grid_h*grid_square+'" fill="url(#smallGrid)" /> \
+							<path d="M '+grid_w*grid_square+' 0 L 0 0 0 '+grid_h*grid_square+'" fill="none" stroke="grey" stroke-width="'+grid_stroke*2+'" /> \
+					</pattern> \
+			</defs> \
+			<rect width="100%" height="100%" fill="url(#grid)" /> \
+	</svg>';
+
+	var DOMURL = window.URL || window.webkitURL || window;
+
+	var grid_img = new Image();
+	var grid_svg = new Blob([grid_svg_data], {type: 'image/svg+xml;charset=utf-8'});
+	var grid_url = DOMURL.createObjectURL(grid_svg);
+
+	grid_img.src = grid_url;
 
 
 	///////////////////
@@ -173,6 +203,11 @@ function Model(loopy){
 	subscribe("model/changed", function(){
 		if(self.loopy.mode==Loopy.MODE_EDIT) drawCountdown=drawCountdownFull;
 	});
+
+	// OR MOVED
+	subscribe("canvas/moved", function () {
+		drawCountdown = drawCountdownFull;
+	})
 
 	// OR RESIZE or RESET
 	subscribe("resize",function(){ drawCountdown=drawCountdownFull; });
@@ -218,7 +253,7 @@ function Model(loopy){
 		var ty = loopy.offsetY*2;
 		tx -= CW+_PADDING;
 		ty -= CH+_PADDING;
-		var s = loopy.offsetScale;
+		var s = loopy.offsetScale; // TODO: Zooming
 		tx = s*tx;
 		ty = s*ty;
 		tx += CW+_PADDING;
@@ -227,7 +262,11 @@ function Model(loopy){
 			tx += _PADDING; // dunno why but this is needed
 			ty += _PADDING; // dunno why but this is needed
 		}
+
 		ctx.setTransform(s, 0, 0, s, tx, ty);
+
+		// Draw Grid
+		ctx.drawImage(grid_img, 0, 0);
 
 		// Draw labels THEN edges THEN nodes
 		for(var i=0;i<self.labels.length;i++) self.labels[i].draw(ctx);
