@@ -146,17 +146,23 @@ function Model(loopy){
 	// GRID //
 	//////////
 
-	var grid_svg_data = '<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"> \
+	var grid_w = 50;
+	var grid_h = 50;
+	var grid_square = 4;
+	var grid_tile = 10;
+	var grid_stroke = 2;
+
+	var grid_svg_data = '<svg width="'+(grid_w*grid_square*grid_tile)+1+'" height="'+(grid_h*grid_square*grid_tile)+1+'" xmlns="http://www.w3.org/2000/svg"> \
 			<defs> \
-					<pattern id="smallGrid" width="50" height="50" patternUnits="userSpaceOnUse"> \
-							<path d="M 50 0 L 0 0 0 50" fill="none" stroke="gray" stroke-width="2" /> \
+					<pattern id="smallGrid" width="'+grid_w+'" height="'+grid_h+'" patternUnits="userSpaceOnUse"> \
+							<path d="M '+grid_w+' 0 L 0 0 0 '+grid_h+'" fill="none" stroke="gray" stroke-width="'+grid_stroke+'" /> \
 					</pattern> \
-					<pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"> \
-							<rect width="80" height="80" fill="url(#smallGrid)" /> \
-							<path d="M 80 0 L 0 0 0 80" fill="none" stroke="grey" stroke-width="2" /> \
+					<pattern id="grid" width="'+grid_w*grid_square+'" height="'+grid_h*grid_square+'" patternUnits="userSpaceOnUse"> \
+							<rect width="'+grid_w*grid_square+'" height="'+grid_h*grid_square+'" fill="url(#smallGrid)" /> \
+							<path d="M '+grid_w*grid_square+' 0 L 0 0 0 '+grid_h*grid_square+'" fill="none" stroke="grey" stroke-width="'+grid_stroke*2+'" /> \
 					</pattern> \
 			</defs> \
-			<rect width="100%" height="100%" fill="url(#smallGrid)" /> \
+			<rect width="100%" height="100%" fill="url(#grid)" /> \
 	</svg>';
 
 	var DOMURL = window.URL || window.webkitURL || window;
