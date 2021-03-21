@@ -38,6 +38,26 @@ function Ink(loopy){
 		ctx.lineWidth = 5;
 		ctx.lineCap = "round";
 
+		// Translate to center, (translate, scale, translate) to expand to size
+		var canvasses = document.getElementById("canvasses");
+		var CW = canvasses.clientWidth - _PADDING - _PADDING;
+		var CH = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
+		var tx = loopy.offsetX*2;
+		var ty = loopy.offsetY*2;
+		tx -= CW+_PADDING;
+		ty -= CH+_PADDING;
+		var s = loopy.offsetScale; // TODO: Zooming
+		tx = s*tx;
+		ty = s*ty;
+		tx += CW+_PADDING;
+		ty += CH+_PADDING;
+		if(loopy.embedded){
+			tx += _PADDING; // dunno why but this is needed
+			ty += _PADDING; // dunno why but this is needed
+		}
+
+		ctx.setTransform(s, 0, 0, s, tx, ty);
+
 		// Draw line from last to current
 		ctx.beginPath();
 		ctx.moveTo(lastPoint[0]*2, lastPoint[1]*2);
