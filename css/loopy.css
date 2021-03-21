@@ -23,7 +23,7 @@ canvas{
 	width: 100%;
 }
 #canvasses[cursor=drag]{
-	cursor: url('cursors/drag.png') 0 30, auto;
+	cursor: url('cursors/drag.png') 0 3, auto;
 }
 #canvasses[cursor=ink]{
 	cursor: url('cursors/ink.png') 0 30, auto;
