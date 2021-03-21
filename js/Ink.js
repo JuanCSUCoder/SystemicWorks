@@ -69,7 +69,25 @@ function Ink(loopy){
 
 	};
 	self.reset = function(){
-		ctx.clearRect(0,0,canvas.width,canvas.height); // Clear canvas
+		// Translate to center, (translate, scale, translate) to expand to size
+		var canvasses = document.getElementById("canvasses");
+		var CW = canvasses.clientWidth - _PADDING - _PADDING;
+		var CH = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
+		var tx = loopy.offsetX*2;
+		var ty = loopy.offsetY*2;
+		tx -= CW+_PADDING;
+		ty -= CH+_PADDING;
+		var s = loopy.offsetScale; // TODO: Zooming
+		tx = s*tx;
+		ty = s*ty;
+		tx += CW+_PADDING;
+		ty += CH+_PADDING;
+		if(loopy.embedded){
+			tx += _PADDING; // dunno why but this is needed
+			ty += _PADDING; // dunno why but this is needed
+		}
+
+		ctx.clearRect(-tx, -ty, canvas.width,canvas.height); // Clear canvas
 		self.strokeData = []; // Reset stroke data
 	};
 	subscribe("mousedown",function(){
