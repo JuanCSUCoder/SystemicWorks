@@ -116,8 +116,8 @@ function ToolbarButton(toolbar, config){
 	self.dom.style.backgroundImage = "url('"+config.icon+"')";
 
 	// Tooltip!
-	self.dom.setAttribute("data-balloon", config.tooltip);
-	self.dom.setAttribute("data-balloon-pos", "right");
+	self.dom.setAttribute("aria-label", config.tooltip);
+	self.dom.setAttribute("data-balloon-pos", "down-left");
 
 	// Selected?
 	self.select = function(){
