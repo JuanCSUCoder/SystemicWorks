@@ -149,7 +149,7 @@ function Model(loopy){
 	var grid_w = 50;
 	var grid_h = 50;
 	var grid_square = 4;
-	var grid_tile = 10;
+	var grid_tile = 5;
 	var grid_stroke = 2;
 
 	var grid_svg_data = '<svg width="'+(grid_w*grid_square*grid_tile)+1+'" height="'+(grid_h*grid_square*grid_tile)+1+'" xmlns="http://www.w3.org/2000/svg"> \
