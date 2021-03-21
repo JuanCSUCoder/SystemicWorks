@@ -10,7 +10,7 @@ function Toolbar(loopy){
 
 	// Tools & Buttons
 	var buttons = [];
-	var buttonsByID = {};
+	self.buttonsByID = {};
 	self.dom = document.getElementById("toolbar");
 	self.addButton = function(options){
 
@@ -27,13 +27,13 @@ function Toolbar(loopy){
 		});
 		self.dom.appendChild(button.dom);
 		buttons.push(button);
-		buttonsByID[id] = button;
+		self.buttonsByID[id] = button;
 
 		// Keyboard shortcut!
 		(function(id){
 			subscribe("key/"+id,function(){
 				loopy.ink.reset(); // also CLEAR INK CANVAS
-				buttonsByID[id].callback();
+				self.buttonsByID[id].callback();
 			});
 		})(id);
 
@@ -65,8 +65,8 @@ function Toolbar(loopy){
 		}
 	});
 	self.addButton({
-		id:'pan',
-		tooltip: "PAN",
+		id:"pan",
+		tooltip: "(P)AN",
 		callback: function() {
 			self.setTool('pan');
 		}
@@ -94,11 +94,11 @@ function Toolbar(loopy){
 	});
 
 	// Select button
-	buttonsByID.drag.callback();
+	self.buttonsByID.drag.callback();
 
 	// Return to default
 	subscribe("model/changed", function() {
-		buttonsByID.drag.callback();
+		self.buttonsByID.drag.callback();
 	});
 
 	// Hide & Show
