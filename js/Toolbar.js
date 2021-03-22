@@ -44,6 +44,11 @@ function Toolbar(loopy){
 		for(var i=0;i<buttons.length;i++){
 			buttons[i].deselect();
 		}
+
+		if (loopy.locked) {
+			buttons[buttons.length-1].select();
+		}
+
 		button.select();
 	};
 
@@ -92,13 +97,26 @@ function Toolbar(loopy){
 			self.setTool("erase");
 		}
 	});
+	self.addButton({
+		id: "lock",
+		tooltip: "Press to Lock Edit Tools",
+		callback: function () {
+			if (loopy.locked) {
+				loopy.locked = false;
+			} else {
+				loopy.locked = true;
+			}
+		}
+	})
 
 	// Select button
 	self.buttonsByID.drag.callback();
 
 	// Return to default
 	subscribe("model/changed", function() {
-		self.buttonsByID.drag.callback();
+		if (!loopy.locked) {
+			self.buttonsByID.drag.callback();
+		}
 	});
 
 	// Hide & Show
@@ -128,10 +146,22 @@ function ToolbarButton(toolbar, config){
 	};
 
 	// On Click
-	self.callback = function(){
-		config.callback();
-		toolbar.selectButton(self);
-	};
+	if (config.id=='lock') {
+		self.callback = function() {
+			config.callback();
+			if (loopy.locked) {
+				self.select();
+			} else {
+				self.deselect();
+			}
+		}
+	} else {
+		self.callback = function(){
+			config.callback();
+			toolbar.selectButton(self);
+		};
+	}
+	
 	self.dom.onclick = self.callback;
 
 }
