@@ -384,7 +384,7 @@ function Model(loopy){
 				y: node[2],
 				init: node[3],
 				label: decodeURIComponent(node[4]),
-				hue: node[5]
+				hue: decodeURIComponent(node[5])
 			});
 		}
 
