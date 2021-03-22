@@ -130,6 +130,9 @@ function Sidebar(loopy){
 			//label: "Label:",
 			textarea: true
 		}));
+		page.addComponent("color", new ComponentColorPicker({
+			label: "<br>Color:",
+		}));
 		page.onshow = function(){
 			// Focus on the text field
 			page.getComponent("text").select();
@@ -319,6 +322,33 @@ function ComponentInput(config){
 		setTimeout(function(){ input.select(); },10);
 	};
 
+}
+
+function ComponentColorPicker(config) {
+
+	// Inherit
+	var self = this;
+	Component.apply(self);
+
+	self.dom = document.createElement("div");
+	var label = _createLabel(config.label);
+	var className = "component_input";
+	var input = _createPicker(className);
+	input.oninput = function(event){
+		self.setValue(input.value);
+	};
+	self.dom.appendChild(label);
+	self.dom.appendChild(input);
+
+	// Show
+	self.show = function(){
+		input.value = self.getValue();
+	};
+
+	// Select
+	self.select = function(){
+		setTimeout(function(){ input.select(); },10);
+	};
 }
 
 function ComponentSlider(config){
