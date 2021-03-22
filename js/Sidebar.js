@@ -40,13 +40,8 @@ function Sidebar(loopy){
 			label: "<br><br>Name:"
 			//label: "Name:"
 		}));
-		page.addComponent("hue", new ComponentSlider({
-			bg: "color",
+		page.addComponent("hue", new ComponentColorPicker({
 			label: "Color:",
-			options: [0,1,2,3,4,5],
-			oninput: function(value){
-				Node.defaultHue = value;
-			}
 		}));
 		page.addComponent("init", new ComponentSlider({
 			bg: "initial",
@@ -129,6 +124,9 @@ function Sidebar(loopy){
 			label: "<br><br>Label:",
 			//label: "Label:",
 			textarea: true
+		}));
+		page.addComponent("color", new ComponentColorPicker({
+			label: "<br>Color:",
 		}));
 		page.onshow = function(){
 			// Focus on the text field
@@ -319,6 +317,33 @@ function ComponentInput(config){
 		setTimeout(function(){ input.select(); },10);
 	};
 
+}
+
+function ComponentColorPicker(config) {
+
+	// Inherit
+	var self = this;
+	Component.apply(self);
+
+	self.dom = document.createElement("div");
+	var label = _createLabel(config.label);
+	var className = "component_input";
+	var input = _createPicker(className);
+	input.oninput = function(event){
+		self.setValue(input.value);
+	};
+	self.dom.appendChild(label);
+	self.dom.appendChild(input);
+
+	// Show
+	self.show = function(){
+		input.value = self.getValue();
+	};
+
+	// Select
+	self.select = function(){
+		setTimeout(function(){ input.select(); },10);
+	};
 }
 
 function ComponentSlider(config){

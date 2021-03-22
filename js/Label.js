@@ -20,7 +20,8 @@ function Label(model, config){
 	_configureProperties(self, config, {
 		x: 0,
 		y: 0,
-		text: "..."
+		text: "...",
+		color: "#000000"
 	});
 
 	// Draw
@@ -51,7 +52,7 @@ function Label(model, config){
 		ctx.font = "100 "+Label.FONTSIZE+"px sans-serif";
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
-		ctx.fillStyle = "#000";
+		ctx.fillStyle = self.color;
 
 		// ugh new lines are a PAIN.
 		var lines = self.breakText();

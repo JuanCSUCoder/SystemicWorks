@@ -79,6 +79,19 @@ function _createInput(className, textarea){
 	return input;
 }
 
+function _createPicker(className){
+	var input = document.createElement("input");
+
+	input.setAttribute("class", className);
+	input.setAttribute("type", "color");
+
+	input.addEventListener("keydown",function(event){
+		event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true);
+	},false); // STOP IT FROM TRIGGERING KEY.js
+	
+	return input;
+}
+
 function _createNumberInput(onUpdate){
 
 	var self = {};
