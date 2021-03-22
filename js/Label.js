@@ -20,7 +20,8 @@ function Label(model, config){
 	_configureProperties(self, config, {
 		x: 0,
 		y: 0,
-		text: "..."
+		text: "...",
+		color: "#000000"
 	});
 
 	// Draw

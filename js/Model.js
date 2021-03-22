@@ -346,7 +346,8 @@ function Model(loopy){
 			labels.push([
 				Math.round(label.x),
 				Math.round(label.y),
-				encodeURIComponent(encodeURIComponent(label.text))
+				encodeURIComponent(encodeURIComponent(label.text)),
+				encodeURIComponent(encodeURIComponent(label.color))
 			]);
 		}
 		data.push(labels);
@@ -406,7 +407,8 @@ function Model(loopy){
 			self.addLabel({
 				x: label[0],
 				y: label[1],
-				text: decodeURIComponent(label[2])
+				text: decodeURIComponent(label[2]),
+				color: decodeURIComponent(label[3])
 			});
 		}
 
