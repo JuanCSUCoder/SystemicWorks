@@ -309,7 +309,7 @@ function Model(loopy){
 				Math.round(node.y),
 				node.init,
 				encodeURIComponent(encodeURIComponent(node.label)),
-				node.hue
+				encodeURIComponent(encodeURIComponent(node.hue))
 			]);
 		}
 		data.push(nodes);
