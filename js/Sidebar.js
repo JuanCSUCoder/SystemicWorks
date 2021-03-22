@@ -40,13 +40,8 @@ function Sidebar(loopy){
 			label: "<br><br>Name:"
 			//label: "Name:"
 		}));
-		page.addComponent("hue", new ComponentSlider({
-			bg: "color",
+		page.addComponent("hue", new ComponentColorPicker({
 			label: "Color:",
-			options: [0,1,2,3,4,5],
-			oninput: function(value){
-				Node.defaultHue = value;
-			}
 		}));
 		page.addComponent("init", new ComponentSlider({
 			bg: "initial",
