@@ -57,6 +57,9 @@ function Loopy(config){
 	self.label = new Labeller(self);
 	self.pan = new Pan(self);
 
+	// Tools Lock
+	self.locked = false;
+
 	// Play Controls
 	self.playbar = new PlayControls(self);
 	self.playbar.showPage("Editor"); // start here
