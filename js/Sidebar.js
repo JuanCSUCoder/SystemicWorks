@@ -163,11 +163,8 @@ function Sidebar(loopy){
 		page.addComponent(new ComponentHTML({
 			html: ""+
 			
-			"<b style='font-size:1.4em'>LOOPY</b> (v1.1)<br>a tool for thinking in systems<br><br>"+
-
-			"<span class='mini_button' onclick='publish(\"modal\",[\"examples\"])'>see examples</span> "+
-			"<span class='mini_button' onclick='publish(\"modal\",[\"howto\"])'>how to</span> "+
-			"<span class='mini_button' onclick='publish(\"modal\",[\"credits\"])'>credits</span><br><br>"+
+			"<b style='font-size:1.4em'>LoopyWorks</b> (v0.1)<br>an advanced and free tool for thinking in systems<br><br>"+
+			"<font size='3'>License: GPLv3</font>"+
 
 			"<hr/><br>"+
 
@@ -178,10 +175,8 @@ function Sidebar(loopy){
 
 			"<hr/><br>"+
 				
-			"<span>LOOPY</span> is "+
-			"made by <a target='_blank' href='http://ncase.me'>nicky case</a> "+
-			"with your support <a target='_blank' href='https://www.patreon.com/ncase'>on patreon</a> &lt;3<br><br>"+
-			"<span style='font-size:0.85em'>P.S: go read <a target='_blank' href='https://www.amazon.com/Thinking-Systems-Donella-H-Meadows/dp/1603580557'>Thinking In Systems</a>, thx</span>"
+			"<span>LoopyWorks</span> is "+
+			"made by <a target='_blank' href='https://github.com/JCSUCoder'>JCSUCoder</a> based in the <a target='_blank' href='https://ncase.me/loopy/'>LOOPY(v1.1)</a> concept of <a target='_blank' href='http://ncase.me'>nicky case</a> "
 
 		}));
 		self.addPage("Edit", page);
