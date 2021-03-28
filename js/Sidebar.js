@@ -56,7 +56,7 @@ function Sidebar(loopy){
 
 			// Set color of Slider
 			var node = page.target;
-			var color = Node.COLORS[node.hue];
+			var color = node.hue;
 			page.getComponent("init").setBGColor(color);
 
 			// Focus on the name field IF IT'S "" or "?"
@@ -94,10 +94,9 @@ function Sidebar(loopy){
 				Edge.defaultStrength = value;
 			}
 		}));
-		page.addComponent(new ComponentHTML({
-			html: "(to make a stronger relationship, draw multiple arrows!)<br><br>"+
-			"(to make a delayed relationship, draw longer arrows)"
-		}));
+		page.addComponent("color", new ComponentColorPicker({
+			label: "Color: "
+		}))
 		page.addComponent(new ComponentButton({
 			//label: "delete edge",
 			label: "delete arrow",

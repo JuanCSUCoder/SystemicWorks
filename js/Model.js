@@ -317,23 +317,28 @@ function Model(loopy){
 		// Edges
 		var edges = [];
 		for(var i=0;i<self.edges.length;i++){
-			var edge = self.edges[i];
-			// 0 - from
-			// 1 - to
-			// 2 - arc
-			// 3 - strength
-			// 4 - rotation (optional)
-			var dataEdge = [
-				edge.from.id,
-				edge.to.id,
-				Math.round(edge.arc),
-				edge.strength
-			];
-			if(dataEdge.f==dataEdge.t){
-				dataEdge.push(Math.round(edge.rotation));
-			}
-			edges.push(dataEdge);
-		}
+      var edge = self.edges[i];
+      // 0 - from
+      // 1 - to
+      // 2 - arc
+      // 3 - strength
+      // 4 - rotation (optional)
+      // 5 - thickness
+			// 6 - color
+
+      var dataEdge = [
+        edge.from.id,
+        edge.to.id,
+        Math.round(edge.arc),
+        edge.strength,
+				edge.thickness,
+				encodeURIComponent(encodeURIComponent(edge.color))
+      ];
+      if (dataEdge.f == dataEdge.t) {
+        dataEdge.push(Math.round(edge.rotation));
+      }
+      edges.push(dataEdge);
+    }
 		data.push(edges);
 
 		// Labels
@@ -395,7 +400,9 @@ function Model(loopy){
 				from: edge[0],
 				to: edge[1],
 				arc: edge[2],
-				strength: edge[3]
+				strength: edge[3],
+				thickness: edge[5],
+				color: decodeURIComponent(edge[6])
 			};
 			if(edge[4]) edgeConfig.rotation=edge[4];
 			self.addEdge(edgeConfig);

@@ -8,6 +8,8 @@ Edge.allSignals = [];
 Edge.MAX_SIGNALS = 100;
 Edge.MAX_SIGNALS_PER_EDGE = 10;
 Edge.defaultStrength = 1;
+Edge.defaultColor = "#666";
+Edge.defaultThickness = 3;
 
 function Edge(model, config){
 
@@ -21,12 +23,14 @@ function Edge(model, config){
 
 	// Default values...
 	_configureProperties(self, config, {
-		from: _makeErrorFunc("CAN'T LEAVE 'FROM' BLANK"),
-		to: _makeErrorFunc("CAN'T LEAVE 'TO' BLANK"),
-		arc: 100,
-		rotation: 0,
-		strength: Edge.defaultStrength
-	});
+    from: _makeErrorFunc("CAN'T LEAVE 'FROM' BLANK"),
+    to: _makeErrorFunc("CAN'T LEAVE 'TO' BLANK"),
+    arc: 100,
+    rotation: 0,
+    strength: Edge.defaultStrength,
+    thickness: Edge.defaultThickness,
+    color: Edge.defaultColor,
+  });
 
 	// Get my NODES
 	self.from = model.getNode(self.from);
@@ -365,8 +369,8 @@ function Edge(model, config){
 	self.draw = function(ctx){
 
 		// Width & Color
-		ctx.lineWidth = 4*Math.abs(self.strength)-2;
-		ctx.strokeStyle = "#666";
+		ctx.lineWidth = self.thickness;
+		ctx.strokeStyle = self.color;
 
 		// Translate & Rotate!
 		ctx.save();
@@ -413,7 +417,7 @@ function Edge(model, config){
 		ctx.save();
 		ctx.translate(lx, ly);
 		ctx.rotate(-a);
-		ctx.fillStyle = "#999";
+		ctx.fillStyle = self.color;
 		ctx.fillText(self.label, 0, 0);
 		ctx.restore();
 
