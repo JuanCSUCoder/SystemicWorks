@@ -97,6 +97,23 @@ function Sidebar(loopy){
 		page.addComponent("color", new ComponentColorPicker({
 			label: "Color: "
 		}))
+		page.addComponent(
+      "thickness",
+      new ComponentSlider({
+        bg: "initial",
+        label: "Thickness:",
+        options: [3, 4, 5, 6, 7, 8, 9],
+        oninput: function (value) {
+          Node.defaultValue = value;
+        },
+      })
+		);
+		page.onedit = function () {
+      // Set color of Slider
+      var edge = page.target;
+      var color = edge.color;
+      page.getComponent("thickness").setBGColor(color);
+    };
 		page.addComponent(new ComponentButton({
 			//label: "delete edge",
 			label: "delete arrow",
