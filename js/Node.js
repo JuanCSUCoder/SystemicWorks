@@ -4,17 +4,8 @@ NODE!
 
 **********************************/
 
-Node.COLORS = {
-	0: "#EA3E3E", // red
-	1: "#EA9D51", // orange
-	2: "#FEEE43", // yellow
-	3: "#BFEE3F", // green
-	4: "#7FD4FF", // blue
-	5: "#A97FFF" // purple
-};
-
 Node.defaultValue = 0.5;
-Node.defaultHue = 0;
+Node.defaultHue = "#00EE00";
 
 Node.DEFAULT_RADIUS = 60;
 
