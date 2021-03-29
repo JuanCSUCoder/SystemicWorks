@@ -331,12 +331,16 @@ function Model(loopy){
         edge.to.id,
         Math.round(edge.arc),
         edge.strength,
-				edge.thickness,
-				encodeURIComponent(encodeURIComponent(edge.color))
       ];
       if (dataEdge.f == dataEdge.t) {
         dataEdge.push(Math.round(edge.rotation));
-      }
+			}
+			
+			dataEdge = dataEdge.concat([
+        edge.thickness,
+        encodeURIComponent(encodeURIComponent(edge.color)),
+      ]);
+
       edges.push(dataEdge);
     }
 		data.push(edges);
