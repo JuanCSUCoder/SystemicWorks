@@ -56,7 +56,7 @@ function Sidebar(loopy){
 
 			// Set color of Slider
 			var node = page.target;
-			var color = Node.COLORS[node.hue];
+			var color = node.hue;
 			page.getComponent("init").setBGColor(color);
 
 			// Focus on the name field IF IT'S "" or "?"
@@ -94,10 +94,26 @@ function Sidebar(loopy){
 				Edge.defaultStrength = value;
 			}
 		}));
-		page.addComponent(new ComponentHTML({
-			html: "(to make a stronger relationship, draw multiple arrows!)<br><br>"+
-			"(to make a delayed relationship, draw longer arrows)"
-		}));
+		page.addComponent("color", new ComponentColorPicker({
+			label: "Color: "
+		}))
+		page.addComponent(
+      "thickness",
+      new ComponentSlider({
+        bg: "initial",
+        label: "Thickness:",
+        options: [3, 4, 5, 6, 7, 8, 9],
+        oninput: function (value) {
+          Node.defaultValue = value;
+        },
+      })
+		);
+		page.onedit = function () {
+      // Set color of Slider
+      var edge = page.target;
+      var color = edge.color;
+      page.getComponent("thickness").setBGColor(color);
+    };
 		page.addComponent(new ComponentButton({
 			//label: "delete edge",
 			label: "delete arrow",
@@ -171,7 +187,6 @@ function Sidebar(loopy){
 			"<span class='mini_button' onclick='publish(\"modal\",[\"save_link\"])'>save as link</span> <br><br>"+
 			"<span class='mini_button' onclick='publish(\"export/file\")'>save as file</span> <br><br>"+
 			"<span class='mini_button' onclick='publish(\"import/file\")'>load from file</span> <br><br>"+
-			"<span class='mini_button' onclick='publish(\"modal\",[\"embed\"])'>embed in your website</span> <br><br>"+
 
 			"<hr/><br>"+
 				
