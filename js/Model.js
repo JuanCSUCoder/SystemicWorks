@@ -325,6 +325,7 @@ function Model(loopy){
       // 4 - rotation (optional)
       // 5 - thickness
 			// 6 - color
+			// 7 - delay
 
       var dataEdge = [
         edge.from.id,
@@ -338,7 +339,8 @@ function Model(loopy){
 			
 			dataEdge = dataEdge.concat([
         edge.thickness,
-        encodeURIComponent(encodeURIComponent(edge.color)),
+				encodeURIComponent(encodeURIComponent(edge.color)),
+				edge.delay,
       ]);
 
       edges.push(dataEdge);
@@ -406,7 +408,8 @@ function Model(loopy){
 				arc: edge[2],
 				strength: edge[3],
 				thickness: edge[5],
-				color: decodeURIComponent(edge[6])
+				color: decodeURIComponent(edge[6]),
+				delay: edge[7],
 			};
 			if(edge[4]) edgeConfig.rotation=edge[4];
 			self.addEdge(edgeConfig);

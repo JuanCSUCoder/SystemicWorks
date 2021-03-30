@@ -94,6 +94,14 @@ function Sidebar(loopy){
 				Edge.defaultStrength = value;
 			}
 		}));
+		page.addComponent("delay", new ComponentSlider({
+			bg: "delay",
+			label: "Delay: ",
+			options: [0, 1],
+			oninput: function (value) {
+				Edge.defaultDelay = value;
+			}
+		}))
 		page.addComponent("color", new ComponentColorPicker({
 			label: "Color: "
 		}))
