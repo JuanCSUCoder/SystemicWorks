@@ -28,15 +28,17 @@ function PlayControls(loopy){
 		var page = new Page();
 
 		// PLAY BUTTON
-		var buttonDOM = page.addComponent(new PlayButton({
-			icon: 0,
-			label: "Play",
-			tooltip: isMacLike ? "⌘-Enter" : "control-enter",
-			onclick: function(){
-				loopy.setMode(Loopy.MODE_PLAY);
-				//self.showPage("Edit");
-			}
-		})).dom;
+		var buttonDOM = page.addComponent(
+      new PlayButton({
+        icon: 0,
+        label: "Visualize Flow",
+        tooltip: isMacLike ? "⌘-Enter" : "control-enter",
+        onclick: function () {
+          loopy.setMode(Loopy.MODE_PLAY);
+          //self.showPage("Edit");
+        },
+      })
+    ).dom;
 		buttonDOM.style.backgroundColor = "green";
 		buttonDOM.style.marginLeft = "25px";
 
