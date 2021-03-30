@@ -10,6 +10,7 @@ Edge.MAX_SIGNALS_PER_EDGE = 10;
 Edge.defaultStrength = 1;
 Edge.defaultColor = "#666";
 Edge.defaultThickness = 3;
+Edge.defaultDelay = 0;
 
 function Edge(model, config){
 
@@ -30,6 +31,7 @@ function Edge(model, config){
     strength: Edge.defaultStrength,
     thickness: Edge.defaultThickness,
     color: Edge.defaultColor,
+		delay: Edge.defaultDelay,
   });
 
 	// Get my NODES
@@ -214,7 +216,8 @@ function Edge(model, config){
 		startAngle, endAngle,
 		y2, begin, end,
 		arrowLength, ax, ay, aa,
-		labelAngle, lx, ly, labelBuffer; // BECAUSE I'VE LOST CONTROL OF MY LIFE.
+		labelAngle, lx, ly, labelBuffer,
+		dmx, dmy, dml, dms, dmr;
 	self.update = function(speed){
 
 		////////////////////////////////////////////////
@@ -275,6 +278,25 @@ function Edge(model, config){
 		ax = w/2 + Math.cos(end)*r;
 		ay = y2 + Math.sin(end)*r;
 		aa = end + Math.TAU/4;
+
+		// Delay Mark
+		var dmm = (w / 4) / r;
+		if (self.arc>0) {
+			dmr = end - dmm;
+		} else {
+			dmr = end + dmm;
+		}
+
+		// if (self.arc > 0) {
+		// 	dmr = Math.abs(end - begin) / dmm + begin;
+		// } else {
+		// 	dmr = begin - Math.abs(end - begin) / dmm;
+		// }
+
+		dml = 35 * 2;
+		dms = 15 * 2;
+		dmx = w / 2 + Math.cos(dmr) * r;
+		dmy = y2 + Math.sin(dmr) * r;
 
 		// My label is...
 		var s = self.strength;
@@ -409,6 +431,21 @@ function Edge(model, config){
 
 		// Stroke!
 		ctx.stroke();
+
+		// Draw Delay
+		if (self.delay > 0) {
+			ctx.save();
+			ctx.translate(dmx, dmy)
+			if (self.arc < 0) ctx.scale(-1, -1);
+			ctx.rotate(dmr);
+			ctx.moveTo(-dml/2, 0);
+			ctx.lineTo(dml/2, 0);
+			ctx.stroke();
+			ctx.moveTo(-dml/2, dms);
+      ctx.lineTo(dml/2, dms);
+			ctx.stroke();
+			ctx.restore();
+		}
 
 		// Draw label
 		ctx.font = "100 60px sans-serif";
