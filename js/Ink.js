@@ -225,7 +225,7 @@ function Ink(loopy){
 				if(r<Ink.MINIMUM_RADIUS) r=Ink.MINIMUM_RADIUS;*/
 
 				// LOCK TO JUST SMALLEST CIRCLE.
-				r = Ink.MINIMUM_RADIUS;
+				// r = Ink.MINIMUM_RADIUS;
 
 				// Make that node!
 				var newNode = loopy.model.addNode({
