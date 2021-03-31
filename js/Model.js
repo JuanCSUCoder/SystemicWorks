@@ -541,6 +541,13 @@ function Model(loopy){
 			return;
 		}
 
+		// Clicked on a LoopMark? Edit that LoopMark
+		var clickedLoopMark = self.getLoopMarkByPoint(Mouse.x, Mouse.y);
+		if (clickedLoopMark) {
+			loopy.sidebar.edit(clickedLoopMark);
+			return;
+		}
+
 		// If the tool LABEL? If so, TRY TO CREATE LABEL.
 		if(self.loopy.tool==Loopy.TOOL_LABEL){
 			loopy.label.tryMakingLabel();
