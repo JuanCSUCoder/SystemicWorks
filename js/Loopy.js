@@ -57,6 +57,7 @@ function Loopy(config){
 	self.erase = new Eraser(self);
 	self.label = new Labeller(self);
 	self.pan = new Pan(self);
+	self.loop = new Loop(self);
 
 	// Tools Lock
 	self.locked = false;

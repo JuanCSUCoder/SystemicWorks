@@ -142,6 +142,31 @@ function Model(loopy){
 		
 	};
 
+	///////////////
+	// LOOP MARK //
+	///////////////
+
+	self.loop_marks = [];
+
+	// Add Loop Mark
+	self.addLoopMark = function (config) {
+		publish("model/changed");
+
+		// Add Loop Mark
+		var loop_mark = new LoopMark(self, config);
+		self.loop_marks.push(loop_mark);
+		self.update();
+		
+		return loop_mark;
+	};
+
+	// Remove Loop Mark
+	self.removeLoopMark = function (loop_mark) {
+		publish("model/changed");
+
+		self.loop_marks.splice(self.loop_marks.indexOf(loop_mark), 1);
+	}
+
 	//////////
 	// GRID //
 	//////////
@@ -268,10 +293,11 @@ function Model(loopy){
 		// Draw Grid
 		ctx.drawImage(grid_img, 0, 0);
 
-		// Draw labels THEN edges THEN nodes
+		// Draw labels THEN edges THEN nodes THEN loop_marks
 		for(var i=0;i<self.labels.length;i++) self.labels[i].draw(ctx);
 		for(var i=0;i<self.edges.length;i++) self.edges[i].draw(ctx);
-		for(var i=0;i<self.nodes.length;i++) self.nodes[i].draw(ctx);
+		for (var i = 0; i < self.nodes.length; i++) self.nodes[i].draw(ctx);
+		for (let i = 0; i < self.loop_marks.length; i++) self.loop_marks[i].draw(ctx);
 
 		// Restore
 		ctx.restore();
