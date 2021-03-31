@@ -130,6 +130,13 @@ div[big=yes] .play_button_label{
 	cursor: pointer;
 	background-size: 100% 100%;
 }
+.toolbar_separator {
+	width: 15px;
+	height: 30px;
+	margin: 5px;
+	border: 2px solid #ddd;
+	background-size: 100% 100%;
+}
 .toolbar_button[selected=yes]{
 	border: 2px solid #888;
 	background-color: #999;
