@@ -504,6 +504,15 @@ function Model(loopy){
 		return null;
 	};
 
+	self.getLoopMarkByPoint = function (x, y) {
+		var result;
+		for (let i = self.loop_marks.length - 1; i >= 0; i--) {
+			var loop_mark = self.loop_marks[i];
+			if (loop_mark.isPointInLoopMark(x, y)) return loop_mark;
+		}
+		return null;
+	}
+
 	// Click to edit!
 	subscribe("mouseclick",function(){
 
