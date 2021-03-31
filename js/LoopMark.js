@@ -4,8 +4,8 @@ LoopMark!
 
  *************************************/
 
-LoopMark.defaultOrientation = true;
-LoopMark.defaultType = true;
+LoopMark.defaultOrientation = 1;
+LoopMark.defaultType = 1;
 LoopMark.defaultColor = "#666";
 
 function LoopMark(model, config) {
