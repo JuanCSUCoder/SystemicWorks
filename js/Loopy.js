@@ -13,6 +13,7 @@ Loopy.TOOL_DRAG = 1;
 Loopy.TOOL_ERASE = 2;
 Loopy.TOOL_LABEL = 3;
 Loopy.TOOL_PAN = 4;
+Loopy.TOOL_LOOP = 5;
 
 function Loopy(config){
 
