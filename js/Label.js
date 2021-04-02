@@ -53,6 +53,8 @@ function Label(model, config){
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
 		ctx.fillStyle = self.color;
+		ctx.shadowColor = "white";
+    ctx.shadowBlur = 7;
 
 		// ugh new lines are a PAIN.
 		var lines = self.breakText();

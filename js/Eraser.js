@@ -33,6 +33,12 @@ function Eraser(loopy){
 			if(eraseLabel) eraseLabel.kill();
 		}
 
+		// Erase any loop marks under here
+		if (Mouse.pressed || clicked) {
+			var eraseLoopMark = loopy.model.getLoopMarkByPoint(Mouse.x, Mouse.y);
+			if (eraseLoopMark) eraseLoopMark.kill();
+		}
+
 	};
 
 	subscribe("mousemove",function(){

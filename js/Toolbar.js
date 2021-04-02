@@ -39,6 +39,14 @@ function Toolbar(loopy){
 
 	};
 
+	self.addSeparator = function() {
+    var separator = document.createElement("div");
+    separator.setAttribute("class", "toolbar_separator");
+    separator.style.backgroundImage = "url('css/icons/separator.png')";
+
+    self.dom.appendChild(separator);
+  }
+
 	// Select button
 	self.selectButton = function(button){
 		for(var i=0;i<buttons.length;i++){
@@ -76,6 +84,7 @@ function Toolbar(loopy){
 			self.setTool('pan');
 		}
 	});
+	self.addSeparator();
 	self.addButton({
 		id: "ink",
 		tooltip: "LI(N)KER",
@@ -83,6 +92,13 @@ function Toolbar(loopy){
 			self.setTool("ink");
 		}
 	});
+	self.addButton({
+		id: "loop",
+		tooltip: "(L)OOP",
+		callback: function () {
+			self.setTool("loop");
+		}
+	})
 	self.addButton({
 		id: "label",
 		tooltip: "(T)EXT",
@@ -97,6 +113,7 @@ function Toolbar(loopy){
 			self.setTool("erase");
 		}
 	});
+	self.addSeparator();
 	self.addButton({
 		id: "lock",
 		tooltip: "Press to Lock Edit Tools",

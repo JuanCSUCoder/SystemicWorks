@@ -181,6 +181,48 @@ function Sidebar(loopy){
 		self.addPage("Label", page);
 	})();
 
+	// LoopMark
+	(function () {
+		var page = new SidebarPage();
+
+		page.addComponent(
+      new ComponentButton({
+        header: true,
+        label: "back to top",
+        onclick: function () {
+          self.showPage("Edit");
+        },
+      })
+    );
+
+		page.addComponent("clockwise", new ComponentSlider({
+			bg: "delay",
+			label: "<br> <br> Clockwise: ",
+			options: [0, 1],
+			oninput: function (value) {
+				LoopMark.defaultOrientation = value;
+			}
+		}));
+
+		page.addComponent(
+      "reinforcement",
+      new ComponentSlider({
+        bg: "delay",
+        label: "Reinforcement: ",
+        options: [0, 1],
+        oninput: function (value) {
+          LoopMark.defaultOrientation = value;
+        },
+      })
+		);
+		
+		page.addComponent("color", new ComponentColorPicker({
+			label: "Color: ",
+		}))
+
+		self.addPage("LoopMark", page);
+	})();
+
 	// Edit
 	(function(){
 		var page = new SidebarPage();
@@ -199,7 +241,7 @@ function Sidebar(loopy){
 			"<hr/><br>"+
 				
 			"<span>LoopyWorks</span> is "+
-			"made by <a target='_blank' href='https://github.com/JCSUCoder'>JCSUCoder</a> based in the <a target='_blank' href='https://ncase.me/loopy/'>LOOPY(v1.1)</a> concept of <a target='_blank' href='http://ncase.me'>nicky case</a> "
+			"made by <a target='_blank' href='https://github.com/JCSUCoder'>JCSUCoder</a> based on the <a target='_blank' href='https://ncase.me/loopy/'>LOOPY(v1.1)</a> project of <a target='_blank' href='http://ncase.me'>nicky case</a> "
 
 		}));
 		self.addPage("Edit", page);

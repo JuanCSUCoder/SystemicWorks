@@ -50,6 +50,16 @@ function Dragger(loopy){
 			return;
 		}
 
+		// Any LoopMark under here? If so, start dragging!
+		var dragLoopMark = loopy.model.getLoopMarkByPoint(Mouse.x, Mouse.y);
+		if (dragLoopMark) {
+			self.dragging = dragLoopMark;
+			self.offsetX = Mouse.x - dragLoopMark.x;
+			self.offsetY = Mouse.y - dragLoopMark.y;
+			loopy.sidebar.edit(dragLoopMark);
+			return;
+		}
+
 	});
 	subscribe("mousemove",function(){
 
@@ -134,6 +144,18 @@ function Dragger(loopy){
 			// update coz visual glitches
 			loopy.model.update();
 			
+		}
+
+		// If dragging a LoopMark, move it
+		if (self.dragging && self.dragging._CLASS_=="LoopMark") {
+			// Model Changed
+			publish("model/changed");
+
+			var loop_mark = self.dragging;
+			loop_mark.x = Mouse.x - self.offsetX;
+			loop_mark.y = Mouse.y - self.offsetY;
+
+			loopy.model.update();
 		}
 
 	});

@@ -142,6 +142,31 @@ function Model(loopy){
 		
 	};
 
+	///////////////
+	// LOOP MARK //
+	///////////////
+
+	self.loop_marks = [];
+
+	// Add Loop Mark
+	self.addLoopMark = function (config) {
+		publish("model/changed");
+
+		// Add Loop Mark
+		var loop_mark = new LoopMark(self, config);
+		self.loop_marks.push(loop_mark);
+		self.update();
+		
+		return loop_mark;
+	};
+
+	// Remove Loop Mark
+	self.removeLoopMark = function (loop_mark) {
+		publish("model/changed");
+
+		self.loop_marks.splice(self.loop_marks.indexOf(loop_mark), 1);
+	}
+
 	//////////
 	// GRID //
 	//////////
@@ -268,10 +293,11 @@ function Model(loopy){
 		// Draw Grid
 		ctx.drawImage(grid_img, 0, 0);
 
-		// Draw labels THEN edges THEN nodes
+		// Draw labels THEN edges THEN nodes THEN loop_marks
 		for(var i=0;i<self.labels.length;i++) self.labels[i].draw(ctx);
 		for(var i=0;i<self.edges.length;i++) self.edges[i].draw(ctx);
-		for(var i=0;i<self.nodes.length;i++) self.nodes[i].draw(ctx);
+		for (var i = 0; i < self.nodes.length; i++) self.nodes[i].draw(ctx);
+		for (let i = 0; i < self.loop_marks.length; i++) self.loop_marks[i].draw(ctx);
 
 		// Restore
 		ctx.restore();
@@ -292,6 +318,7 @@ function Model(loopy){
 		// 1 - edges
 		// 2 - labels
 		// 3 - UID
+		// 4 - loop_marks
 
 		// Nodes
 		var nodes = [];
@@ -303,13 +330,16 @@ function Model(loopy){
 			// 3 - init value
 			// 4 - label
 			// 5 - hue
+			// 6 - radius
+
 			nodes.push([
 				node.id,
 				Math.round(node.x),
 				Math.round(node.y),
 				node.init,
 				encodeURIComponent(encodeURIComponent(node.label)),
-				encodeURIComponent(encodeURIComponent(node.hue))
+				encodeURIComponent(encodeURIComponent(node.hue)),
+				Math.round(node.radius)
 			]);
 		}
 		data.push(nodes);
@@ -366,6 +396,25 @@ function Model(loopy){
 		// META.
 		data.push(Node._UID);
 
+		// LoopMarks
+		var loop_marks = [];
+		for (let i = 0; i < self.loop_marks.length; i++) {
+			const loop_mark = self.loop_marks[i];
+			// 0 - x
+			// 1 - y
+			// 2 - clockwise
+			// 3 - reinforcement
+			// 4 - color
+			loop_marks.push([
+				Math.round(loop_mark.x),
+				Math.round(loop_mark.y),
+				loop_mark.clockwise,
+				loop_mark.reinforcement,
+				encodeURIComponent(encodeURIComponent(loop_mark.color))
+			]);
+		}
+		data.push(loop_marks);
+
 		// Return as string!
 		var dataString = JSON.stringify(data);
 		dataString = dataString.replace(/"/gi, "%22"); // and ONLY URIENCODE THE QUOTES
@@ -385,6 +434,9 @@ function Model(loopy){
 		var edges = data[1];
 		var labels = data[2];
 		var UID = data[3];
+		var loop_marks = data[4];
+
+		console.log(data);
 
 		// Nodes
 		for(var i=0;i<nodes.length;i++){
@@ -395,7 +447,8 @@ function Model(loopy){
 				y: node[2],
 				init: node[3],
 				label: decodeURIComponent(node[4]),
-				hue: decodeURIComponent(node[5])
+				hue: decodeURIComponent(node[5]),
+				radius: node[6],
 			});
 		}
 
@@ -426,6 +479,18 @@ function Model(loopy){
 			});
 		}
 
+		// LoopMarks
+		for (let i = 0; i < loop_marks.length; i++) {
+			const loop_mark = loop_marks[i];
+			self.addLoopMark({
+				x: loop_mark[0],
+				y: loop_mark[1],
+				clockwise: loop_mark[2],
+				reinforcement: loop_mark[3],
+				color: decodeURIComponent(loop_mark[4])
+			});
+		}
+
 		// META.
 		Node._UID = UID;
 
@@ -441,6 +506,11 @@ function Model(loopy){
 		// Just kill ALL labels.
 		while(self.labels.length>0){
 			self.labels[0].kill();
+		}
+
+		// Kill ALL Loop Marks
+		while (self.loop_marks.length>0) {
+			self.loop_marks[0].kill();
 		}
 	};
 
@@ -478,6 +548,15 @@ function Model(loopy){
 		return null;
 	};
 
+	self.getLoopMarkByPoint = function (x, y) {
+		var result;
+		for (let i = self.loop_marks.length - 1; i >= 0; i--) {
+			var loop_mark = self.loop_marks[i];
+			if (loop_mark.isPointInLoopMark(x, y)) return loop_mark;
+		}
+		return null;
+	}
+
 	// Click to edit!
 	subscribe("mouseclick",function(){
 
@@ -503,6 +582,13 @@ function Model(loopy){
 		var clickedEdge = self.getEdgeByPoint(Mouse.x, Mouse.y);
 		if(clickedEdge){
 			loopy.sidebar.edit(clickedEdge);
+			return;
+		}
+
+		// Clicked on a LoopMark? Edit that LoopMark
+		var clickedLoopMark = self.getLoopMarkByPoint(Mouse.x, Mouse.y);
+		if (clickedLoopMark) {
+			loopy.sidebar.edit(clickedLoopMark);
 			return;
 		}
 

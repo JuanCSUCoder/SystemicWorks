@@ -13,6 +13,7 @@ Loopy.TOOL_DRAG = 1;
 Loopy.TOOL_ERASE = 2;
 Loopy.TOOL_LABEL = 3;
 Loopy.TOOL_PAN = 4;
+Loopy.TOOL_LOOP = 5;
 
 function Loopy(config){
 
@@ -56,6 +57,7 @@ function Loopy(config){
 	self.erase = new Eraser(self);
 	self.label = new Labeller(self);
 	self.pan = new Pan(self);
+	self.loop = new Loop(self);
 
 	// Tools Lock
 	self.locked = false;
@@ -202,7 +204,7 @@ function Loopy(config){
 	
 	// "BLANK START" DATA:
 	var _blankData =
-    "[[[1,405,314,0.83,%22something%22,%22%252300FF00%22],[2,407,473,1,%22something%2520else%22,%22%25232efff1%22]],[[2,1,94,-1,0,6,%22%252330b300%22,1],[1,2,89,1,0,3,%22%2523014b4a%22,0]],[[612,401,%22need%2520ideas%2520on%2520what%2520to%250Asimulate%253F%2520how%2520about%253A%250A%250A%25E3%2583%25BBtechnology%250A%25E3%2583%25BBenvironment%250A%25E3%2583%25BBeconomics%250A%25E3%2583%25BBbusiness%250A%25E3%2583%25BBpolitics%250A%25E3%2583%25BBculture%250A%25E3%2583%25BBpsychology%250A%250Aor%2520better%2520yet%252C%2520a%250A*combination*%2520of%250Athose%2520systems.%250Ahappy%2520modeling!%22,%22%2523155601%22]],2%5D";
+    "[[[4,243,337,0.33,%22Actions%22,%22%25230b72e0%22,46],[7,525,329,0.5,%22Results%22,%22%2523c507df%22,55],[9,819,325,0,%22Slowing%2520Action%22,%22%2523d51010%22,48]],[[7,9,141,1,0,7,%22%2523c72323%22,0],[7,4,-155,1,0,7,%22%25233450b7%22,0],[9,7,152,-1,0,3,%22%2523c72323%22,1],[4,7,-149,1,0,5,%22%25233450b7%22,0]],[[531,165,%22Limits%2520to%2520Growth%22,%22%2523000000%22]],9,[[679,330,1,0,%22%2523c72323%22],[382,332,0,1,%22%25233450b7%22]]%5D";
 
 	self.loadFromURL = function(){
 		var data = _getParameterByName("data");
@@ -216,82 +218,6 @@ function Loopy(config){
 	///////////////////////////
 
 	self.init();
-
-	if(self.embedded){
-
-		// Hide all that UI
-		self.toolbar.dom.style.display = "none";
-		self.sidebar.dom.style.display = "none";
-
-		// If *NO UI AT ALL*
-		var noUI = !!parseInt(_getParameterByName("no_ui")); // force to Boolean
-		if(noUI){
-			_PADDING_BOTTOM = _PADDING;
-			self.playbar.dom.style.display = "none";
-		}
-
-		// Fullscreen canvas
-		document.getElementById("canvasses").setAttribute("fullscreen","yes");
-		self.playbar.dom.setAttribute("fullscreen","yes");
-		publish("resize");
-
-		// Center & SCALE The Model
-		self.model.center(true);
-		subscribe("resize",function(){
-			self.model.center(true);
-		});
-
-		// Autoplay!
-		self.setMode(Loopy.MODE_PLAY);
-
-		// Also, HACK: auto signal
-		var signal = _getParameterByName("signal");
-		if(signal){
-			signal = JSON.parse(signal);
-			var node = self.model.getNode(signal[0]);
-			node.takeSignal({
-				delta: signal[1]*0.33
-			});
-		}
-
-	}else{
-
-		// Center all the nodes & labels
-
-		// If no nodes & no labels, forget it.
-		if(self.model.nodes.length>0 || self.model.labels.length>0){
-
-			// Get bounds of ALL objects...
-			var bounds = self.model.getBounds();
-			var left = bounds.left;
-			var top = bounds.top;
-			var right = bounds.right;
-			var bottom = bounds.bottom;
-
-			// Re-center!
-			var canvasses = document.getElementById("canvasses");
-			var cx = (left+right)/2;
-			var cy = (top+bottom)/2;
-			var offsetX = (canvasses.clientWidth+50)/2 - cx;
-			var offsetY = (canvasses.clientHeight-80)/2 - cy;
-
-			// MOVE ALL NODES
-			for(var i=0;i<self.model.nodes.length;i++){
-				var node = self.model.nodes[i];
-				node.x += offsetX;
-				node.y += offsetY;
-			}
-
-			// MOVE ALL LABELS
-			for(var i=0;i<self.model.labels.length;i++){
-				var label = self.model.labels[i];
-				label.x += offsetX;
-				label.y += offsetY;
-			}
-
-		}
-
-	}
 
 	// NOT DIRTY, THANKS
 	self.dirty = false;

@@ -37,6 +37,9 @@ canvas{
 #canvasses[cursor=label]{
 	cursor: url('cursors/label.png') 15 15, auto;
 }
+#canvasses[cursor=loop]{
+	cursor: url('cursors/loop.png') 15 15, auto;
+}
 
 
 
@@ -128,6 +131,13 @@ div[big=yes] .play_button_label{
 	margin: 5px;
 	border: 2px solid #ddd;
 	cursor: pointer;
+	background-size: 100% 100%;
+}
+.toolbar_separator {
+	width: 15px;
+	height: 30px;
+	margin: 5px;
+	border: 2px solid #ddd;
 	background-size: 100% 100%;
 }
 .toolbar_button[selected=yes]{
