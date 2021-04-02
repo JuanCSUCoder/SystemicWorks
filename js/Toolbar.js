@@ -87,7 +87,7 @@ function Toolbar(loopy){
 	self.addSeparator();
 	self.addButton({
 		id: "ink",
-		tooltip: "LI(N)KER",
+		tooltip: "PE(N)CIL",
 		callback: function(){
 			self.setTool("ink");
 		}
