@@ -28,6 +28,14 @@ function LoopMark(model, config) {
 	var head = 3;
 	var r = 20;
 
+	self.kill = function () {
+    // Remove from parent!
+    model.removeLoopMark(self);
+
+    // Killed!
+    publish("kill", [self]);
+  }
+
 	self.draw = function (ctx) {
 		// Retina
 		var x = self.x * 2;
