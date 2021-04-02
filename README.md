@@ -1,4 +1,4 @@
-# LoopyWorks (v0.1)
+# LoopyWorks
 ### an advanced and free tool for thinking in systems
 
 **This repository contains only the webapp**

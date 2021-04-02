@@ -229,7 +229,7 @@ function Sidebar(loopy){
 		page.addComponent(new ComponentHTML({
 			html: ""+
 			
-			"<b style='font-size:1.4em'>LoopyWorks</b> (v0.1)<br>an advanced and free tool for thinking in systems<br><br>"+
+			"<b style='font-size:1.4em'>LoopyWorks</b> <br>(v1.0 - <strong>BETA</strong>)<br>an advanced and free tool for thinking in systems<br><br>"+
 			"<font size='3'>License: GPLv3</font>"+
 
 			"<hr/><br>"+
