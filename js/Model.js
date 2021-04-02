@@ -318,6 +318,7 @@ function Model(loopy){
 		// 1 - edges
 		// 2 - labels
 		// 3 - UID
+		// 4 - loop_marks
 
 		// Nodes
 		var nodes = [];
@@ -392,6 +393,25 @@ function Model(loopy){
 		// META.
 		data.push(Node._UID);
 
+		// LoopMarks
+		var loop_marks = [];
+		for (let i = 0; i < self.loop_marks.length; i++) {
+			const loop_mark = self.loop_marks[i];
+			// 0 - x
+			// 1 - y
+			// 2 - clockwise
+			// 3 - reinforcement
+			// 4 - color
+			loop_marks.push([
+				Math.round(loop_mark.x),
+				Math.round(loop_mark.y),
+				loop_mark.clockwise,
+				loop_mark.reinforcement,
+				encodeURIComponent(encodeURIComponent(loop_mark.color))
+			]);
+		}
+		data.push(loop_marks);
+
 		// Return as string!
 		var dataString = JSON.stringify(data);
 		dataString = dataString.replace(/"/gi, "%22"); // and ONLY URIENCODE THE QUOTES
@@ -411,6 +431,9 @@ function Model(loopy){
 		var edges = data[1];
 		var labels = data[2];
 		var UID = data[3];
+		var loop_marks = data[4];
+
+		console.log(data);
 
 		// Nodes
 		for(var i=0;i<nodes.length;i++){
@@ -449,6 +472,18 @@ function Model(loopy){
 				y: label[1],
 				text: decodeURIComponent(label[2]),
 				color: decodeURIComponent(label[3])
+			});
+		}
+
+		// LoopMarks
+		for (let i = 0; i < loop_marks.length; i++) {
+			const loop_mark = loop_marks[i];
+			self.addLoopMark({
+				x: loop_mark[0],
+				y: loop_mark[1],
+				clockwise: loop_mark[2],
+				reinforcement: loop_mark[3],
+				color: decodeURIComponent(loop_mark[4])
 			});
 		}
 
