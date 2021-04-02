@@ -330,13 +330,16 @@ function Model(loopy){
 			// 3 - init value
 			// 4 - label
 			// 5 - hue
+			// 6 - radius
+
 			nodes.push([
 				node.id,
 				Math.round(node.x),
 				Math.round(node.y),
 				node.init,
 				encodeURIComponent(encodeURIComponent(node.label)),
-				encodeURIComponent(encodeURIComponent(node.hue))
+				encodeURIComponent(encodeURIComponent(node.hue)),
+				Math.round(node.radius)
 			]);
 		}
 		data.push(nodes);
@@ -444,7 +447,8 @@ function Model(loopy){
 				y: node[2],
 				init: node[3],
 				label: decodeURIComponent(node[4]),
-				hue: decodeURIComponent(node[5])
+				hue: decodeURIComponent(node[5]),
+				radius: node[6],
 			});
 		}
 
