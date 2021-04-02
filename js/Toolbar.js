@@ -94,7 +94,7 @@ function Toolbar(loopy){
 	});
 	self.addButton({
 		id: "loop",
-		tooltip: "LOOP",
+		tooltip: "(L)OOP",
 		callback: function () {
 			self.setTool("loop");
 		}

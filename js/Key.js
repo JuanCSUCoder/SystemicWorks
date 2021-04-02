@@ -18,7 +18,7 @@
 		84: "label", // (T)ext
 		83: "save", // (S)ave
 		80: "pan", // (P)an
-
+		76: "loop"
 	};
 
 	// Event Handling
