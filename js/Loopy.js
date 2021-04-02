@@ -204,7 +204,7 @@ function Loopy(config){
 	
 	// "BLANK START" DATA:
 	var _blankData =
-    "[[[1,405,314,0.83,%22something%22,%22%252300FF00%22],[2,407,473,1,%22something%2520else%22,%22%25232efff1%22]],[[2,1,94,-1,0,6,%22%252330b300%22,1],[1,2,89,1,0,3,%22%2523014b4a%22,0]],[[612,401,%22need%2520ideas%2520on%2520what%2520to%250Asimulate%253F%2520how%2520about%253A%250A%250A%25E3%2583%25BBtechnology%250A%25E3%2583%25BBenvironment%250A%25E3%2583%25BBeconomics%250A%25E3%2583%25BBbusiness%250A%25E3%2583%25BBpolitics%250A%25E3%2583%25BBculture%250A%25E3%2583%25BBpsychology%250A%250Aor%2520better%2520yet%252C%2520a%250A*combination*%2520of%250Athose%2520systems.%250Ahappy%2520modeling!%22,%22%2523155601%22]],2,[]%5D";
+    "[[[4,243,337,0.33,%22Actions%22,%22%25230b72e0%22,46],[7,525,329,0.5,%22Results%22,%22%2523c507df%22,55],[9,819,325,0,%22Slowing%2520Action%22,%22%2523d51010%22,48]],[[7,9,141,1,0,3,%22%2523c72323%22,0],[7,4,-155,1,0,3,%22%25233450b7%22,0],[9,7,152,-1,0,3,%22%2523c72323%22,1],[4,7,-149,1,0,3,%22%25233450b7%22,0]],[[531,165,%22Limits%2520to%2520Growth%22,%22%2523000000%22]],9,[[679,330,1,0,%22%2523c72323%22],[382,332,0,1,%22%25233450b7%22]]%5D";
 
 	self.loadFromURL = function(){
 		var data = _getParameterByName("data");
