@@ -507,6 +507,11 @@ function Model(loopy){
 		while(self.labels.length>0){
 			self.labels[0].kill();
 		}
+
+		// Kill ALL Loop Marks
+		while (self.loop_marks.length>0) {
+			self.loop_marks[0].kill();
+		}
 	};
 
 
