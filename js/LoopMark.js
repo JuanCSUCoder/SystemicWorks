@@ -44,6 +44,13 @@ function LoopMark(model, config) {
 		ctx.save();
 		ctx.translate(x, y);
 
+		if (self.loopy.sidebar.currentPage.target == self) {
+      ctx.beginPath();
+      ctx.arc(0, 0, r + 40, 0, Math.TAU, false);
+      ctx.fillStyle = HIGHLIGHT_COLOR;
+      ctx.fill();
+    }
+
 		ctx.beginPath();
 
 		ctx.strokeStyle = self.color;
