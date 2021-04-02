@@ -236,6 +236,8 @@ function Node(model, config){
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
 		ctx.fillStyle = "#000";
+		ctx.shadowColor = "white";
+    ctx.shadowBlur = 7;
 		var width = ctx.measureText(self.label).width;
 		while(width > r*2 - 30){ // -30 for buffer. HACK: HARD-CODED.
 			fontsize -= 1;
