@@ -6,7 +6,7 @@ LoopMark!
 
 LoopMark.defaultOrientation = 1;
 LoopMark.defaultType = 1;
-LoopMark.defaultColor = "#666";
+LoopMark.defaultColor = "#666666";
 
 function LoopMark(model, config) {
 	var self = this;
@@ -25,6 +25,9 @@ function LoopMark(model, config) {
 		color: LoopMark.defaultColor,
 	});
 
+	var head = 3;
+	var r = 20;
+
 	self.draw = function (ctx) {
 		// Retina
 		var x = self.x * 2;
@@ -36,9 +39,18 @@ function LoopMark(model, config) {
 		ctx.beginPath();
 
 		ctx.strokeStyle = self.color;
-		ctx.lineWidth = 4*2;
+		ctx.lineWidth = 3 * 2;
+		
+		var headAngle;
 
-		ctx.arc(0, 0, 20 * 2, -Math.PI*5/4, Math.PI*2/5, !self.clockwise);
+		if (self.clockwise) {
+			ctx.arc(0, 0, r * 2, -Math.PI * 5 / 4, Math.PI * 2 / 5, !self.clockwise);
+			headAngle = Math.PI * 2 / 5;
+		} else {
+			ctx.arc(0, 0, r * 2, Math.PI * 1 / 4, -Math.PI * 7 / 5, !self.clockwise);
+			headAngle = -Math.PI * 7 / 5;
+		}
+		
 
 		ctx.stroke();
 
@@ -52,6 +64,20 @@ function LoopMark(model, config) {
 		} else {
 			ctx.fillText("B", 0, 0);
 		}
+
+		ctx.translate(Math.cos(headAngle) * r * 2, Math.sin(headAngle) * r * 2);
+		
+		if (self.clockwise) {
+			ctx.rotate(headAngle + Math.PI);
+		} else {
+			ctx.rotate(headAngle);
+		}
+
+		ctx.moveTo(head * 2, head * 2);
+		ctx.lineTo(0, 0);
+		ctx.lineTo(-head * 2, head * 2);
+
+		ctx.stroke();
 
 		ctx.restore();
 	}
