@@ -1,4 +1,4 @@
-# LoopyWorks
+# SystemicWorks
 ### an advanced and free tool for thinking in systems
 
 **This repository contains only the webapp**

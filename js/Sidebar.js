@@ -229,7 +229,7 @@ function Sidebar(loopy){
 		page.addComponent(new ComponentHTML({
 			html: ""+
 			
-			"<b style='font-size:1.4em'>LoopyWorks</b> <br>(v1.0 - <strong>BETA</strong>)<br>an advanced and free tool for thinking in systems<br><br>"+
+			"<b style='font-size:1.4em'>SystemicWorks</b> <br>(v1.0 - <strong>BETA</strong>)<br>an advanced and free tool for thinking in systems<br><br>"+
 			"<font size='3'>License: GPLv3</font>"+
 
 			"<hr/><br>"+
@@ -240,7 +240,7 @@ function Sidebar(loopy){
 
 			"<hr/><br>"+
 				
-			"<span>LoopyWorks</span> is "+
+			"<span>SystemicWorks</span> is "+
 			"made by <a target='_blank' href='https://github.com/JCSUCoder'>JCSUCoder</a> based on the <a target='_blank' href='https://ncase.me/loopy/'>LOOPY(v1.1)</a> project of <a target='_blank' href='http://ncase.me'>nicky case</a> "
 
 		}));
