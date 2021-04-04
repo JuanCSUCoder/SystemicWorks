@@ -1,0 +1,24 @@
+{
+  "name": "systemic-works",
+  "version": "1.0.0",
+  "description": "**This repository contains only the webapp**",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npx live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JCSUCoder/SystemicWorks.git"
+  },
+  "author": "Juan Camilo Sánchez Urrego <jcsu2019369@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/JCSUCoder/SystemicWorks/issues"
+  },
+  "homepage": "https://github.com/JCSUCoder/SystemicWorks#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "typescript": "^4.2.3"
+  }
+}
