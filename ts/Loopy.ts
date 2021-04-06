@@ -10,15 +10,16 @@ import Pan from "./tools/Pan";
 import Loop from "./tools/Loop";
 import Playbar from "./bars/Playbar";
 import Modal from "./bars/Modal";
-import { _getParameterByName } from "./Helpers";
+import { _getParameterByName, _tool2String } from "./Helpers";
 import * as MinPubSub from "./../js/minpubsub";
+import { publish, subscribe } from "./../js/minpubsub";
 
-enum LoopyMode {
+export enum LoopyMode {
 	Edit = 0,
 	Play = 1,
 }
 
-enum LoopyTool {
+export enum LoopyTool {
 	Ink = 0,
 	Drag = 1,
 	Erase = 2,
@@ -78,6 +79,49 @@ export default class Loopy {
 
 		this.playbar.showPage("Editor");
 		setInterval(this.update, 1000 / 30);
+
+		subscribe("model/changed", () => {
+			this.dirty = true;
+		});
+
+		subscribe("export/file", () => {
+			let element = document.createElement("a");
+
+			element.setAttribute("href", "data:text/plain;charset=utf-8," + this.model.serialize());
+			element.setAttribute("download", "system_model.smwks");
+
+			element.style.display = "none";
+			document.body.appendChild(element);
+
+			element.click();
+
+			document.body.removeChild(element);
+		});
+
+		subscribe("import/file", () => {
+			let input: HTMLInputElement = document.createElement("input");
+
+			input.type = "file";
+			input.onchange = (e: Event) => {
+				let file = (e.target as HTMLInputElement).files![0];
+
+				let reader = new FileReader();
+				reader.readAsText(file, "UTF-8");
+				reader.onload = readerEvent => {
+					var content = readerEvent.target?.result;
+					this.model.deserialize(content as string);
+				};
+			};
+
+			input.click();
+		});
+
+		this.init();
+		this.dirty = false;
+
+		document.body.style.opacity = "";
+
+		requestAnimationFrame(this.draw);
 	}
 
 	init() {
@@ -92,7 +136,7 @@ export default class Loopy {
 	update() {
 		this.mouseControl.update();
 
-		if (this.wobbleControls>=0) {
+		if (this.wobbleControls >= 0) {
 			this.wobbleControls--;
 		}
 
@@ -118,12 +162,42 @@ export default class Loopy {
 			this.toolbar.buttonsByID["drag"].callback();
 
 			this.wobbleControls = 45;
-			
+
 			this.sidebar.showPage("Edit");
 			this.playbar.showPage("Player");
-			
+
 			this.sidebar.dom?.setAttribute("mode", "play");
 			this.playbar.dom?.setAttribute("mode", "play");
+
+			document.getElementById("canvasses")?.removeAttribute("cursor");
+		} else {
+			MinPubSub.publish("model/reset");
 		}
+
+		if (mode == LoopyMode.Edit) {
+			this.wobbleControls = -1;
+
+			this.sidebar.showPage("Edit");
+			this.playbar.showPage("Editor");
+
+			this.sidebar.dom?.setAttribute("mode", "edit");
+			this.playbar.dom?.setAttribute("mode", "edit");
+
+			document.getElementById("canvasses")?.setAttribute("cursor", _tool2String(this.toolbar.currentTool) as string);
+		}
+	}
+
+	saveToURL(): string {
+		let dataString = this.model.serialize();
+		let uri = dataString;
+
+		let base = window.location.origin + window.location.pathname;
+		let link = base + "?data=" + uri;
+
+		this.dirty = false;
+
+		window.history.replaceState(null, "", link);
+
+		return link;
 	}
 }
