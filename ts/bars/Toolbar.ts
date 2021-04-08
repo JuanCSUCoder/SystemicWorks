@@ -1,5 +1,5 @@
 import { Dictionary } from "../Helpers";
-import Loopy from "../Loopy";
+import Loopy, { LoopyTool } from "../Loopy";
 
 type ButtonConfig = {
 	id: string,
@@ -18,6 +18,7 @@ class Button {
 
 export default class Toolbar {
 	buttonsByID: Dictionary<Button> = {};
+	currentTool: LoopyTool = LoopyTool.Drag;
 
 	constructor(loopy: Loopy) {
 
