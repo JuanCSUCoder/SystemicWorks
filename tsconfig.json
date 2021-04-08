@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
-		"target": "ES3",
-		"module": "CommonJS",
+		"target": "ES2015",
+		"module": "ES2015",
 		"outDir": "build",
 		"strict": true,
 		"moduleResolution": "node",
