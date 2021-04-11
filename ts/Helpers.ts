@@ -7,7 +7,11 @@ export function _getParameterByName(param_name: string): string | null {
 
 export interface Dictionary<Type> {
 	[key: string]: Type,
+	[key: number]: Type,
 }
+
+export let _PADDING = 25;
+export let _PADDING_BOTTOM = 110;
 
 export function _tool2String(toolEnum: LoopyTool): string | null {
 	switch (toolEnum) {
