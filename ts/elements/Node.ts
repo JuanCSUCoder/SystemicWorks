@@ -18,9 +18,23 @@ export default class Node {
 	defaultColor: string = "#00EE00";
 
 	id: number;
+	x: number;
+	y: number;
+	init: number;
+	label: string;
+	color: string;
+	radius: number;
 
 	constructor(model: Model, config: NodeConfig) {
 		this.id = config.id;
+
+		// Apply Configuration
+		this.x = config.x;
+		this.y = config.y;
+		this.init = config.init;
+		this.label = config.label;
+		this.color = config.color;
+		this.radius = config.radius;
 	}
 
 	// Update & Draw

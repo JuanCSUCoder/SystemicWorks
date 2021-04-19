@@ -6,12 +6,14 @@ import LoopMark, { LoopMarkConfig } from "./elements/LoopMark";
 import Node, { BasicNodeConfig, NodeConfig } from "./elements/Node";
 import { Dictionary, _createCanvas, _PADDING, _PADDING_BOTTOM } from "./Helpers";
 import Loopy, { LoopyMode } from "./Loopy";
+import ProjectLoader from "./ProjectLoader";
 
 
 
 export default class Model {
 	loopy: Loopy;
 	speed: number = 0.05;
+	project: ProjectLoader;
 
 	// Canvas
 	canvas: HTMLCanvasElement;
@@ -42,6 +44,7 @@ export default class Model {
 
 	constructor(loopy: Loopy) {
 		this.loopy = loopy;
+		this.project = new ProjectLoader("[[],[],[],0,[]]");
 
 		// Canvas
 		this.canvas = _createCanvas();
@@ -289,10 +292,10 @@ export default class Model {
 	// Serialize & Deserialize
 
 	serialize(): string {
-		return "";
+		return this.project.serializeV1(this);
 	}
 
 	deserialize(raw_data: string) {
-
+		this.project.deserializeAny(raw_data);
 	}
 }
