@@ -43,6 +43,7 @@ type LabelV1 = [
 	number, // X
 	number, // Y
 	string, // Label Text
+	string, // Color
 ];
 
 type LoopMarkV1 = [
@@ -62,12 +63,15 @@ export default class ProjectLoader {
 	}
 
 	// Deserializing Starting Function
-	deserializeAny(raw_data: string) {
+	deserializeAny(model: Model, raw_data: string) {
 		// Update Raw Data
 		this.raw_data = raw_data;
 
 		// TODO: Detect version and redirect process
+		this.deserializeV1(model, raw_data);
 	}
+
+	// Helper for All Versions
 
 	stringify(project: ProjectV1) {
 		let dataString = JSON.stringify(project);
@@ -75,6 +79,8 @@ export default class ProjectLoader {
 		dataString = dataString.substr(0, dataString.length - 1) + "%5D";// also replace THE LAST CHARACTER
 		return dataString;
 	}
+
+	// Version 1
 
 	serializeV1(model: Model): string {
 		let data: DraftProjectV1 = [];
@@ -108,9 +114,39 @@ export default class ProjectLoader {
 				edge.delay,
 			]);
 		});
+		data.push(edges);
 
-		// HEAD
+		// Labels
+		let labels: LabelV1[] = [];
+		model.labels.forEach(label => {
+			labels.push([
+				Math.round(label.x),
+				Math.round(label.y),
+				encodeURIComponent(encodeURIComponent(label.text)),
+				encodeURIComponent(encodeURIComponent(label.color)),
+			]);
+		});
+		data.push(labels);
+
+		data.push(model.nodeUID);
+
+		// LoopMarks
+		let loop_marks: LoopMarkV1[] = [];
+		model.loop_marks.forEach(loop_mark => {
+			loop_marks.push([
+				Math.round(loop_mark.x),
+				Math.round(loop_mark.y),
+				loop_mark.clockwise,
+				loop_mark.reinforcement,
+				encodeURIComponent(encodeURIComponent(loop_mark.color)),
+			]);
+		});
+		data.push(loop_marks);
 
 		return this.stringify(data as ProjectV1);
+	}
+
+	deserializeV1(model: Model, raw_data: string) {
+		model.clear();
 	}
 }

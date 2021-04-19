@@ -46,4 +46,12 @@ export default class Node {
 	draw(ctx: CanvasRenderingContext2D) {
 
 	}
+
+	kill() {
+
+	}
+
+	isPointInNode(x: number, y: number, buffer: number) {
+		return false;
+	}
 }

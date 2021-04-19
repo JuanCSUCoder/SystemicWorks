@@ -1,3 +1,4 @@
+import { publish, subscribe, unsubscribe } from "../../js/minpubsub";
 import Model from "../Model";
 import Node from "./Node";
 
@@ -17,6 +18,8 @@ export type Signal = {
 }
 
 export default class Edge {
+	model: Model;
+
 	// Properties
 	from: Node;
 	to: Node;
@@ -31,6 +34,8 @@ export default class Edge {
 	signals: Signal[] = [];
 
 	constructor(model: Model, config: EdgeConfig) {
+		this.model = model;
+
 		// Configure
 		this.from = config.from;
 		this.to = config.to;
@@ -42,7 +47,7 @@ export default class Edge {
 	}
 
 	kill() {
-
+		
 	}
 
 	// Update & Draw

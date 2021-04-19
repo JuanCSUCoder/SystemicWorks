@@ -529,6 +529,8 @@ function Model(loopy){
 		return null;
 	};
 
+	// HEAD
+
 	self.getEdgeByPoint = function(x, y, wholeArrow){
 		// TODO: wholeArrow option?
 		var result;

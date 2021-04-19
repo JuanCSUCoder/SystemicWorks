@@ -296,6 +296,38 @@ export default class Model {
 	}
 
 	deserialize(raw_data: string) {
-		this.project.deserializeAny(raw_data);
+		this.project.deserializeAny(this, raw_data);
 	}
+
+	clear() {
+		// Kill Nodes
+		while (this.nodes.length > 0) {
+			this.nodes[0].kill();
+		}
+
+		// Kill Labels
+		while (this.labels.length > 0) {
+			this.labels[0].kill();
+		}
+
+		// Kill LoopMarks
+		while (this.loop_marks.length > 0) {
+			this.loop_marks[0].kill();
+		}
+	}
+
+	// Helpers
+	getNodeByPoint(x: number, y: number, buffer: number) {
+		for (let i = this.nodes.length - 1; i >= 0; i--) {
+			const node = this.nodes[i];
+
+			if (node.isPointInNode(x, y, buffer)) {
+				return node;
+			}
+		}
+
+		return null;
+	}
+
+	// HEAD
 }
