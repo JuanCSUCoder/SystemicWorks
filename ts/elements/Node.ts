@@ -1,4 +1,5 @@
 import Model from "../Model";
+import { SimpleElement } from "./ElemType";
 
 export type BasicNodeConfig = {
 	x: number,
@@ -13,7 +14,7 @@ export interface NodeConfig extends BasicNodeConfig {
 	id: number;
 }
 
-export default class Node {
+export default class Node implements SimpleElement{
 	defaultValue: number = 0.5;
 	defaultColor: string = "#00EE00";
 
@@ -51,7 +52,18 @@ export default class Node {
 
 	}
 
+	// Helpers
+
 	isPointInNode(x: number, y: number, buffer: number) {
 		return false;
+	}
+
+	getBoundingBox() {
+		return {
+			left: 0,
+			top: 0,
+			right: 0,
+			bottom: 0,
+		};
 	}
 }

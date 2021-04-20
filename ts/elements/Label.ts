@@ -1,4 +1,5 @@
 import Model from "../Model";
+import { SimpleElement } from "./ElemType";
 
 export interface LabelConfig {
 	x: number;
@@ -7,7 +8,7 @@ export interface LabelConfig {
 	color: string;
 }
 
-export default class Label {
+export default class Label implements SimpleElement {
 	x: number;
 	y: number;
 	text: string;
@@ -27,5 +28,20 @@ export default class Label {
 
 	kill() {
 		
+	}
+
+	// Helpers
+	
+	isPointInLabel(x: number, y: number) {
+		return false;
+	}
+
+	getBoundingBox() {
+		return {
+			left: 0,
+			top: 0,
+			right: 0,
+			bottom: 0,
+		};
 	}
 }

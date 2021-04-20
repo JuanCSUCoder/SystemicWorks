@@ -4,4 +4,8 @@ export default class Labeller {
 	constructor(loopy: Loopy) {
 		
 	}
+
+	tryMakingLabel() {
+		
+	}
 }

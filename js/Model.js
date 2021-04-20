@@ -529,8 +529,6 @@ function Model(loopy){
 		return null;
 	};
 
-	// HEAD
-
 	self.getEdgeByPoint = function(x, y, wholeArrow){
 		// TODO: wholeArrow option?
 		var result;
@@ -639,6 +637,9 @@ function Model(loopy){
 		};
 
 	};
+
+	// HEAD
+
 	self.center = function(andScale){
 
 		// If no nodes & no labels, forget it.

@@ -1,5 +1,6 @@
 import { publish, subscribe, unsubscribe } from "../../js/minpubsub";
 import Model from "../Model";
+import { EdgeElement } from "./ElemType";
 import Node from "./Node";
 
 export interface EdgeConfig {
@@ -17,7 +18,7 @@ export type Signal = {
 
 }
 
-export default class Edge {
+export default class Edge implements EdgeElement {
 	model: Model;
 
 	// Properties
@@ -58,5 +59,20 @@ export default class Edge {
 
 	draw(ctx: CanvasRenderingContext2D) {
 
+	}
+
+	// Helpers
+	
+	isPointOnLabel(x: number, y: number) {
+		return false;
+	}
+
+	getBoundingBox() {
+		return {
+			left: 0,
+			top: 0,
+			right: 0,
+			bottom: 0,
+		};
 	}
 }

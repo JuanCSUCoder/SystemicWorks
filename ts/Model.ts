@@ -1,11 +1,13 @@
 import { publish, subscribe } from "../js/minpubsub";
 import Edge, { EdgeConfig } from "./elements/Edge";
+import { EdgeElement, SimpleElement } from "./elements/ElemType";
 import Grid from "./elements/Grid";
 import Label, { LabelConfig } from "./elements/Label";
 import LoopMark, { LoopMarkConfig } from "./elements/LoopMark";
 import Node, { BasicNodeConfig, NodeConfig } from "./elements/Node";
 import { Dictionary, _createCanvas, _PADDING, _PADDING_BOTTOM } from "./Helpers";
-import Loopy, { LoopyMode } from "./Loopy";
+import Loopy, { LoopyMode, LoopyTool } from "./Loopy";
+import Mouse from "./Mouse";
 import ProjectLoader from "./ProjectLoader";
 
 
@@ -90,6 +92,48 @@ export default class Model {
 				this.drawCountdown = this.drawCountdownFull * 2; // 4 seconds
 			} else {
 				this.drawCountdown = this.drawCountdownFull;
+			}
+		});
+
+		subscribe("mouseclick", () => {
+			if (this.loopy.mode == LoopyMode.Edit && this.loopy.tool != LoopyTool.Erase) {
+				// Check what was clicked and open edit page
+				let clickedNode = this.getNodeByPoint(this.loopy.mouseControl.x, this.loopy.mouseControl.y, 2);
+
+				if (clickedNode) {
+					this.loopy.sidebar.edit(clickedNode);
+					return;
+				}
+
+				let clickedLabel = this.getLabelByPoint(this.loopy.mouseControl.x, this.loopy.mouseControl.y);
+
+				if (clickedLabel) {
+					this.loopy.sidebar.edit(clickedLabel);
+					return;
+				}
+
+				let clickedEdge = this.getEdgeByPoint(this.loopy.mouseControl.x, this.loopy.mouseControl.y);
+
+				if (clickedEdge) {
+					this.loopy.sidebar.edit(clickedEdge);
+					return;
+				}
+
+				let clickedLoopMark = this.getLoopMarkByPoint(this.loopy.mouseControl.x, this.loopy.mouseControl.y);
+
+				if (clickedLoopMark) {
+					this.loopy.sidebar.edit(clickedLoopMark);
+					return;
+				}
+
+				// Add a Label if nothing was clicked and Label Tool is Selected
+				if (this.loopy.tool == LoopyTool.Label) {
+					this.loopy.labeller.tryMakingLabel();
+					return;
+				}
+
+				// If nothing of above is TRUE then go to main Edit Page
+				this.loopy.sidebar.showPage("Edit");
 			}
 		})
 	}
@@ -327,6 +371,61 @@ export default class Model {
 		}
 
 		return null;
+	}
+
+	getEdgeByPoint(x: number, y: number) {
+		for (let i = this.edges.length - 1; i >= 0; i--) { // top-down
+			let edge = this.edges[i];
+			if (edge.isPointOnLabel(x, y)) return edge;
+		}
+		return null;
+	}
+
+	getLabelByPoint(x: number, y: number) {
+		for (let i = this.labels.length - 1; i >= 0; i--) { // top-down
+			let label = this.labels[i];
+			if (label.isPointInLabel(x, y)) return label;
+		}
+		return null;
+	}
+
+	getLoopMarkByPoint(x: number, y: number) {
+		for (let i = this.loop_marks.length - 1; i >= 0; i--) {
+			let loop_mark = this.loop_marks[i];
+			if (loop_mark.isPointInLoopMark(x, y)) return loop_mark;
+		}
+		return null;
+	}
+
+	getBounds() {
+		if (this.nodes.length > 0 || this.labels.length > 0 || this.loop_marks.length > 0) {
+			// Get bounds of ALL objects...
+			let left = Infinity;
+			let top = Infinity;
+			let right = -Infinity;
+			let bottom = -Infinity;
+			let _testObjects = function (objects: SimpleElement[] | EdgeElement[]) {
+				for (let i = 0; i < objects.length; i++) {
+					let obj = objects[i];
+					let bounds = obj.getBoundingBox();
+					if (left > bounds.left) left = bounds.left;
+					if (top > bounds.top) top = bounds.top;
+					if (right < bounds.right) right = bounds.right;
+					if (bottom < bounds.bottom) bottom = bounds.bottom;
+				}
+			};
+			_testObjects(this.nodes);
+			_testObjects(this.edges);
+			_testObjects(this.labels);
+
+			// Return
+			return {
+				left: left,
+				top: top,
+				right: right,
+				bottom: bottom
+			};
+		}
 	}
 
 	// HEAD

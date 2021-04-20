@@ -1,4 +1,5 @@
 import Model from "../Model";
+import { SimpleElement } from "./ElemType";
 
 export interface LoopMarkConfig {
 	x: number;
@@ -8,7 +9,7 @@ export interface LoopMarkConfig {
 	color: string;
 }
 
-export default class LoopMark {
+export default class LoopMark implements SimpleElement {
 	x: number;
 	y: number;
 	clockwise: number;
@@ -30,5 +31,20 @@ export default class LoopMark {
 
 	kill() {
 		
+	}
+
+	// Helpers
+
+	isPointInLoopMark(x: number, y: number) {
+		return false;
+	}
+	
+	getBoundingBox() {
+		return {
+			left: 0,
+			top: 0,
+			right: 0,
+			bottom: 0,
+		};
 	}
 }
