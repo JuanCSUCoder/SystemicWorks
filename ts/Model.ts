@@ -5,7 +5,7 @@ import Grid from "./elements/Grid";
 import Label, { LabelConfig } from "./elements/Label";
 import LoopMark, { LoopMarkConfig } from "./elements/LoopMark";
 import Node, { BasicNodeConfig, NodeConfig } from "./elements/Node";
-import { Dictionary, _createCanvas, _PADDING, _PADDING_BOTTOM } from "./Helpers";
+import { Bounds, Dictionary, _createCanvas, _PADDING, _PADDING_BOTTOM } from "./Helpers";
 import Loopy, { LoopyMode, LoopyTool } from "./Loopy";
 import Mouse from "./Mouse";
 import ProjectLoader from "./ProjectLoader";
@@ -397,7 +397,7 @@ export default class Model {
 		return null;
 	}
 
-	getBounds() {
+	getBounds(): Bounds {
 		if (this.nodes.length > 0 || this.labels.length > 0 || this.loop_marks.length > 0) {
 			// Get bounds of ALL objects...
 			let left = Infinity;
@@ -417,6 +417,7 @@ export default class Model {
 			_testObjects(this.nodes);
 			_testObjects(this.edges);
 			_testObjects(this.labels);
+			_testObjects(this.loop_marks);
 
 			// Return
 			return {
@@ -425,8 +426,57 @@ export default class Model {
 				right: right,
 				bottom: bottom
 			};
+		} else {
+			let canvasses = document.getElementById("canvasses") as HTMLCanvasElement;
+			let fitWidth = canvasses.clientWidth - _PADDING - _PADDING;
+			let fitHeight = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
+
+			return {
+				left: 0,
+				top: 0,
+				right: fitWidth,
+				bottom: fitHeight,
+			};
 		}
 	}
 
-	// HEAD
+	center(scale: boolean) {
+		// TODO: LoopMarks Implementation
+		if (this.nodes.length > 0 || this.labels.length > 0) {
+			// Get Bounds
+			let bounds = this.getBounds();
+
+			// Re-Center
+			let canvasses: HTMLCanvasElement = document.getElementById("canvasses") as HTMLCanvasElement;
+			let fitWidth = canvasses.clientWidth - _PADDING - _PADDING;
+			let fitHeight = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
+			let cx = (bounds.left + bounds.right) / 2;
+			let cy = (bounds.top + bounds.bottom) / 2;
+			this.loopy.offsetX = (_PADDING + fitWidth) / 2 - cx;
+			this.loopy.offsetY = (_PADDING + fitHeight) / 2 - cy;
+
+			// Scale
+			if (scale) {
+				let w = bounds.right - bounds.left;
+				let h = bounds.bottom - bounds.top;
+
+				// Calculate Ratios
+				let modelRatio = w / h;
+				let screenRatio = fitWidth / fitHeight;
+
+				let scaleRatio;
+				
+				// Wider or Taller than Screen?
+				if (modelRatio > screenRatio) {
+					// Wider
+					scaleRatio = fitWidth / w;
+				} else {
+					scaleRatio = fitHeight / h;
+				}
+
+				// Scale then
+				this.loopy.offsetScale = scaleRatio;
+			}
+		}
+	}
 }

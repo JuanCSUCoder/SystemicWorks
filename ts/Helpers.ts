@@ -10,6 +10,13 @@ export interface Dictionary<Type> {
 	[key: number]: Type,
 }
 
+export interface Bounds {
+	left: number,
+	top: number,
+	right: number,
+	bottom: number,
+}
+
 export let _PADDING = 25;
 export let _PADDING_BOTTOM = 110;
 

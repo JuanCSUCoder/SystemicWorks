@@ -638,8 +638,6 @@ function Model(loopy){
 
 	};
 
-	// HEAD
-
 	self.center = function(andScale){
 
 		// If no nodes & no labels, forget it.
