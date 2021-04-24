@@ -127,6 +127,7 @@ function PlayControls(loopy){
 
 	})();
 	
+	return self;
 }
 
 function PlayButton(config){
@@ -190,3 +191,5 @@ function PlaySlider(config){
 	};
 
 }
+
+module.exports = PlayControls;

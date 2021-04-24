@@ -31,4 +31,7 @@ function Labeller(loopy){
 
 	};
 
+	return self;
 }
+
+module.exports = Labeller;

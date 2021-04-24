@@ -256,4 +256,7 @@ function Ink(loopy){
 
 	});
 
+	return self;
 }
+
+module.exports = Ink;

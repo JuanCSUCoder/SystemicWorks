@@ -240,6 +240,8 @@ function Modal(loopy){
 
 
 	})();
+
+	return self;
 }
 
 function ModalIframe(config){
@@ -263,3 +265,5 @@ function ModalIframe(config){
 	}
 
 }
+
+module.exports = Modal;

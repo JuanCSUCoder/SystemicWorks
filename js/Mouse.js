@@ -71,4 +71,7 @@ Mouse.init = function(target){
 		Mouse.showCursor("");
 	};
 
+	return self;
 };
+
+module.exports = Mouse;

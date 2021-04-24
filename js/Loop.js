@@ -10,4 +10,8 @@ function Loop(loopy) {
 			y: Mouse.y
 		});
 	});
+
+	return self;
 }
+
+module.exports = Loop;

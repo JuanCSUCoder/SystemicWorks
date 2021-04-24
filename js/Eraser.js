@@ -48,4 +48,7 @@ function Eraser(loopy){
 		self.erase(true);
 	});
 
+	return self;
 }
+
+module.exports = Eraser;

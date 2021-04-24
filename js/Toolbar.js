@@ -138,6 +138,7 @@ function Toolbar(loopy){
 
 	// Hide & Show
 
+	return self;
 }
 
 function ToolbarButton(toolbar, config){
@@ -182,3 +183,5 @@ function ToolbarButton(toolbar, config){
 	self.dom.onclick = self.callback;
 
 }
+
+module.exports = Toolbar;

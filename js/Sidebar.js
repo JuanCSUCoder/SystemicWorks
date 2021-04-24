@@ -254,6 +254,7 @@ function Sidebar(loopy){
 		}
 	});
 
+	return self;
 }
 
 function SidebarPage(){
@@ -535,3 +536,5 @@ function ComponentOutput(config){
 	};
 
 }
+
+module.exports = Sidebar;

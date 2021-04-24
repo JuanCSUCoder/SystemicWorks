@@ -172,4 +172,7 @@ function Dragger(loopy){
 
 	});
 
+	return self;
 }
+
+module.exports = Dragger;

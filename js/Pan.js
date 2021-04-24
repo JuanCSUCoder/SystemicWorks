@@ -35,4 +35,8 @@ function Pan(loopy) {
 			publish("canvas/moved");
 		}
 	})
+
+	return self;
 }
+
+module.exports = Pan;
