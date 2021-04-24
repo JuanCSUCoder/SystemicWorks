@@ -1,15 +1,16 @@
-import Mouse from "./Mouse";
+import Mouse from "../js/Mouse";
+import Sidebar from "../js/Sidebar";
+import Toolbar from "../js/Toolbar";
+import Ink from "../js/Ink";
+import Drag from "../js/Dragger";
+import Erase from "../js/Eraser";
+import Labeller from "../js/Labeller";
+import Pan from "../js/Pan";
+import Loop from "../js/Loop";
+import Playbar from "../js/PlayControls";
+import Modal from "../js/Modal";
+
 import Model from "./Model";
-import Sidebar from "./bars/Sidebar";
-import Toolbar from "./bars/Toolbar";
-import Ink from "./tools/Ink";
-import Drag from "./tools/Drag";
-import Erase from "./tools/Erase";
-import Labeller from "./tools/Labeller";
-import Pan from "./tools/Pan";
-import Loop from "./tools/Loop";
-import Playbar from "./bars/Playbar";
-import Modal from "./bars/Modal";
 import { _getParameterByName, _tool2String } from "./Helpers";
 import * as MinPubSub from "./../js/minpubsub";
 import { publish, subscribe } from "./../js/minpubsub";
@@ -43,12 +44,12 @@ export default class Loopy {
 	dirty = false;
 	wobbleControls = -1;
 
-	mouseControl: Mouse;
+	mouseControl: any;
 	model: Model;
 
-	sidebar: Sidebar;
-	toolbar: Toolbar;
-	playbar: Playbar;
+	sidebar: any;
+	toolbar: any;
+	playbar: any;
 	modal: Modal;
 
 	ink: Ink;
@@ -56,26 +57,26 @@ export default class Loopy {
 	erase: Erase;
 	labeller: Labeller;
 	pan: Pan;
-	loop: Loop;
+	loop: any;
 
 	_blankData =
 		"[[[4,243,337,0.33,%22Actions%22,%22%25230b72e0%22,46],[7,525,329,0.5,%22Results%22,%22%2523c507df%22,55],[9,819,325,0,%22Slowing%2520Action%22,%22%2523d51010%22,48]],[[7,9,141,1,0,7,%22%2523c72323%22,0],[7,4,-155,1,0,7,%22%25233450b7%22,0],[9,7,152,-1,0,3,%22%2523c72323%22,1],[4,7,-149,1,0,5,%22%25233450b7%22,0]],[[531,165,%22Limits%2520to%2520Growth%22,%22%2523000000%22]],9,[[679,330,1,0,%22%2523c72323%22],[382,332,0,1,%22%25233450b7%22]]%5D";
 
 	constructor() {
-		this.mouseControl = new Mouse(document.getElementById("canvasses"));
+		this.mouseControl = Mouse.init(document.getElementById("canvasses"));
 		this.model = new Model(this);
 
-		this.sidebar = new Sidebar(this);
-		this.toolbar = new Toolbar(this);
-		this.playbar = new Playbar(this);
-		this.modal = new Modal(this);
+		this.sidebar = Sidebar(this);
+		this.toolbar = Toolbar(this);
+		this.playbar = Playbar(this);
+		this.modal = Modal(this);
 
-		this.ink = new Ink(this);
-		this.drag = new Drag(this);
-		this.erase = new Erase(this);
-		this.labeller = new Labeller(this);
-		this.pan = new Pan(this);
-		this.loop = new Loop(this);
+		this.ink = Ink(this);
+		this.drag = Drag(this);
+		this.erase = Erase(this);
+		this.labeller = Labeller(this);
+		this.pan = Pan(this);
+		this.loop = Loop(this);
 
 		this.playbar.showPage("Editor");
 		setInterval(this.update, 1000 / 30);
