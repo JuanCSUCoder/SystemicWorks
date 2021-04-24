@@ -148,5 +148,65 @@ export default class ProjectLoader {
 
 	deserializeV1(model: Model, raw_data: string) {
 		model.clear();
+
+		let data = JSON.parse(raw_data);
+
+		// Get from array
+		let nodes: NodeV1[] = data[0];
+		let edges: EdgeV1[] = data[1];
+		let labels: LabelV1[] = data[2];
+		let UID: number = data[3];
+		let loop_marks: LoopMarkV1[] = data[4];
+
+		// Nodes
+		nodes.forEach(node => {
+			model.addNode({
+				id: node[0],
+				x: node[1],
+				y: node[2],
+				init: node[3],
+				label: decodeURIComponent(node[4]),
+				color: decodeURIComponent(node[5]),
+				radius: node[6],
+			});
+		});
+
+		// Edges
+		edges.forEach(edge => {
+			model.addEdge({
+				from: edge[0],
+				to: edge[1],
+				arc: edge[2],
+				strength: edge[3],
+				rotation: 0,
+				thickness: edge[5],
+				color: decodeURIComponent(edge[6]),
+				delay: edge[7],
+			});
+		});
+
+		// Labels
+		labels.forEach(label => {
+			model.addLabel({
+				x: label[0],
+				y: label[1],
+				text: decodeURIComponent(label[2]),
+				color: decodeURIComponent(label[3]),
+			});
+		});
+
+		// LoopMarks
+		loop_marks.forEach(loop_mark => {
+			model.addLoopMark({
+				x: loop_mark[0],
+				y: loop_mark[1],
+				clockwise: loop_mark[2],
+				reinforcement: loop_mark[3],
+				color: decodeURIComponent(loop_mark[4]),
+			});
+		});
+
+		// META
+		model.nodeUID = UID;
 	}
 }
