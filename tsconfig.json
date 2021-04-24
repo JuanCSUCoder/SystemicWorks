@@ -1,17 +1,10 @@
 {
-	"compilerOptions": {
-		"target": "ES2015",
-		"module": "ES2015",
-		"outDir": "build",
-		"strict": true,
-		"moduleResolution": "node",
-		"esModuleInterop": true,
-		"allowJs": true,
-	},
-	"include": [
-		"ts/**/*"
-	],
-	"exclude": [
-		"node_modules"
-	]
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "allowJs": true
+  },
+  "files": ["src/index.ts"]
 }
