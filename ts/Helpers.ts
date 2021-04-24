@@ -2,7 +2,15 @@ import { subscribe } from "../js/minpubsub";
 import { LoopyTool } from "./Loopy";
 
 export function _getParameterByName(param_name: string): string | null {
-	return "";
+	let url = window.location.href;
+	param_name = param_name.replace(/[\[\]]/g, "\\$&");
+
+	let regex = new RegExp("[?&]" + param_name + "(=([^&#]*)|&|#|$)");
+	let results = regex.exec(url);
+	if (!results) return null;
+	if (!results[2]) return '';
+
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 export interface Dictionary<Type> {
