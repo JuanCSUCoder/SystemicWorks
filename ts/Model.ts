@@ -144,7 +144,7 @@ export default class Model {
 		return this.nodeByID[id];
 	}
 
-	addNode(config: BasicNodeConfig): Node {
+	addNode(config: NodeConfig): Node {
 		// Event that says that the model has changed
 		publish("model/changed");
 
