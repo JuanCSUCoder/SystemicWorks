@@ -3,9 +3,11 @@ import Model from "../Model";
 import { EdgeElement } from "./ElemType";
 import Node from "./Node";
 
+// NOT IMPLEMENTED
+
 export interface EdgeConfig {
-	from: Node;
-	to: Node;
+	from: number;
+	to: number;
 	arc: number;
 	strength: number;
 	rotation: number;
@@ -38,8 +40,8 @@ export default class Edge implements EdgeElement {
 		this.model = model;
 
 		// Configure
-		this.from = config.from;
-		this.to = config.to;
+		this.from = model.nodeByID[config.from];
+		this.to = model.nodeByID[config.to];
 		this.arc = config.arc;
 		this.strength = config.strength;
 		this.thickness = config.thickness;

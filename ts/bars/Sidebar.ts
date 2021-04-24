@@ -2,6 +2,8 @@ import { EdgeElement, SimpleElement } from "../elements/ElemType";
 import Node from "../elements/Node";
 import Loopy from "../Loopy";
 
+// NOT IMPLEMENTED
+
 export default class Sidebar {
 	dom: HTMLElement | null;
 

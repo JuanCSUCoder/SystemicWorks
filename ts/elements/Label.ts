@@ -1,6 +1,8 @@
 import Model from "../Model";
 import { SimpleElement } from "./ElemType";
 
+// NOT IMPLEMENTED
+
 export interface LabelConfig {
 	x: number;
 	y: number;

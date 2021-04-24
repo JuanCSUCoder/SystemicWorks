@@ -1,5 +1,7 @@
 import Loopy from "../Loopy";
 
+// NOT IMPLEMENTED
+
 export default class Playbar {
 	dom: HTMLElement | null;
 

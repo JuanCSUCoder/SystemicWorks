@@ -1,6 +1,8 @@
 import { Dictionary } from "../Helpers";
 import Loopy, { LoopyTool } from "../Loopy";
 
+// NOT IMPLEMENTED
+
 type ButtonConfig = {
 	id: string,
 	icon: string,

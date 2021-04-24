@@ -1,6 +1,8 @@
 import Model from "../Model";
 import { SimpleElement } from "./ElemType";
 
+// NOT IMPLEMENTED
+
 export type BasicNodeConfig = {
 	x: number,
 	y: number,
