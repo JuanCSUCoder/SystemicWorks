@@ -12,8 +12,8 @@ import Modal from "../js/Modal";
 
 import Model from "./Model";
 import { _getParameterByName, _tool2String } from "./Helpers";
-import * as MinPubSub from "./../js/minpubsub";
-import { publish, subscribe } from "./../js/minpubsub";
+import * as MinPubSub from "../js/minpubsub";
+import { publish, subscribe } from "../js/minpubsub";
 
 export enum LoopyMode {
 	Edit = 0,
