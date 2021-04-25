@@ -5,11 +5,23 @@ that I couldn't be arsed to put into separate classes
 
 *****************************/
 
+export var Loopy = {
+	MODE_EDIT: 0,
+	MODE_PLAY: 1,
+
+	TOOL_INK: 0,
+	TOOL_DRAG: 1,
+	TOOL_ERASE: 2,
+	TOOL_LABEL: 3,
+	TOOL_PAN: 4,
+	TOOL_LOOP: 5,
+};
+
 Math.TAU = Math.PI*2;
 
 window.HIGHLIGHT_COLOR = "rgba(193, 220, 255, 0.6)";
 
-var isMacLike = navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i)?true:false;
+export var isMacLike = navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i)?true:false;
 
 var _PADDING = 25;
 var _PADDING_BOTTOM = 110;
@@ -26,7 +38,7 @@ window.onbeforeunload = function(e) {
 	}
 };
 
-function _createCanvas(){
+export function _createCanvas(){
 
 	var canvasses = document.getElementById("canvasses");
 	var canvas = document.createElement("canvas");
@@ -79,7 +91,7 @@ export function _createInput(className, textarea){
 	return input;
 }
 
-function _createPicker(className){
+export function _createPicker(className){
 	var input = document.createElement("input");
 
 	input.setAttribute("class", className);
@@ -92,7 +104,7 @@ function _createPicker(className){
 	return input;
 }
 
-function _createNumberInput(onUpdate){
+export function _createNumberInput(onUpdate){
 
 	var self = {};
 
@@ -132,11 +144,11 @@ function _createNumberInput(onUpdate){
 
 }
 
-function _blank(){
+export function _blank(){
 	// just a blank function to toss in.
 }
 
-function _getTotalOffset(target){
+export function _getTotalOffset(target){
 	var bounds = target.getBoundingClientRect();
 	return {
 		left: bounds.left,
@@ -189,7 +201,7 @@ export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup){
 
 }
 
-function _getBounds(points){
+export function _getBounds(points){
 
 	// Bounds
 	var left=Infinity, top=Infinity, right=-Infinity, bottom=-Infinity;
@@ -213,7 +225,7 @@ function _getBounds(points){
 	
 }
 
-function _translatePoints(points, dx, dy){
+export function _translatePoints(points, dx, dy){
 	points = JSON.parse(JSON.stringify(points));
 	for(var i=0;i<points.length;i++){
 		var p = points[i];
@@ -223,7 +235,7 @@ function _translatePoints(points, dx, dy){
 	return points;
 }
 
-function _rotatePoints(points, angle){
+export function _rotatePoints(points, angle){
 	points = JSON.parse(JSON.stringify(points));
 	for(var i=0;i<points.length;i++){
 		var p = points[i];
@@ -235,7 +247,7 @@ function _rotatePoints(points, angle){
 	return points;
 }
 
-function _configureProperties(self, config, properties){
+export function _configureProperties(self, config, properties){
 
 	for(var propName in properties){
 
@@ -253,7 +265,7 @@ function _configureProperties(self, config, properties){
 
 }
 
-function _isPointInCircle(x, y, cx, cy, radius){
+export function _isPointInCircle(x, y, cx, cy, radius){
 	
 	// Point distance
 	var dx = cx-x;
@@ -268,7 +280,7 @@ function _isPointInCircle(x, y, cx, cy, radius){
 
 }
 
-function _isPointInBox(x, y, box){
+export function _isPointInBox(x, y, box){
 
 	if(x<box.x) return false;
 	if(x>box.x+box.width) return false;
@@ -280,13 +292,13 @@ function _isPointInBox(x, y, box){
 }
 
 // TODO: Make more use of this???
-function _makeErrorFunc(msg){
+export function _makeErrorFunc(msg){
 	return function(){
 		throw Error(msg);
 	};
 }
 
-function _getParameterByName(name){
+export function _getParameterByName(name){
 	var url = window.location.href;
 	name = name.replace(/[\[\]]/g, "\\$&");
 	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -297,7 +309,7 @@ function _getParameterByName(name){
 };
 
 
-function _blendColors(hex1, hex2, blend){
+export function _blendColors(hex1, hex2, blend){
 	
 	var color = "#";
 	for(var i=0; i<3; i++) {
@@ -322,7 +334,7 @@ function _blendColors(hex1, hex2, blend){
 
 }
 
-function _shiftArray(array, shiftIndex){
+export function _shiftArray(array, shiftIndex){
 	var moveThisAround = array.splice(-shiftIndex);
 	var shifted = moveThisAround.concat(array);
 	return shifted;
