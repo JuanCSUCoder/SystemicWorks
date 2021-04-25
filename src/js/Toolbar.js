@@ -24,7 +24,7 @@ function Toolbar(loopy){
 		// Add the button
 		var button = new ToolbarButton(self,{
 			id: id,
-			icon: "css/icons/"+id+".png",
+			icon: "assets/icons/"+id+".png",
 			tooltip: tooltip,
 			callback: callback
 		});
@@ -45,7 +45,7 @@ function Toolbar(loopy){
 	self.addSeparator = function() {
     var separator = document.createElement("div");
     separator.setAttribute("class", "toolbar_separator");
-    separator.style.backgroundImage = "url('css/icons/separator.png')";
+    separator.style.backgroundImage = "url('assets/icons/separator.png')";
 
     self.dom.appendChild(separator);
   }

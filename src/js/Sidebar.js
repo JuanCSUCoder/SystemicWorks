@@ -234,14 +234,17 @@ function Sidebar(loopy){
 		page.addComponent(new ComponentHTML({
 			html: ""+
 			
-			"<b style='font-size:1.4em'>SystemicWorks</b> <br>(v1.0 - <strong>BETA</strong>)<br>an advanced and free tool for thinking in systems<br><br>"+
-			"<font size='3'>License: GPLv3</font>"+
+			"<b style='font-size:1.4em'>SystemicWorks</b> <br>(v1.1 - <strong>ALPHA Hybrid</strong>)<br>an advanced and free tool for thinking in systems<br><br>"+
+			"<font size='3'><strong>License:</strong> GPLv3</font>"+
 
 			"<hr/><br>"+
 
-			"<span class='mini_button' onclick='window.publish(\"modal\",[\"save_link\"])'>save as link</span> <br><br>"+
-			"<span class='mini_button' onclick='window.publish(\"export/file\")'>save as file</span> <br><br>"+
-			"<span class='mini_button' onclick='window.publish(\"import/file\")'>load from file</span> <br><br>"+
+			"<span class='mini_button' onclick='window.publish(\"modal\",[\"save_link\"])'>Save as Link</span> <br><br>"+
+			"<span class='mini_button' onclick='window.publish(\"export/file\")'>Save as File</span> <br><br>"+
+			"<span class='mini_button' onclick='window.publish(\"import/file\")'>Load from File</span> <br><br>" +
+			"<a class='mini_button' href='./report'>Report a Bug</a> <br><br>" +
+			"<a class='mini_button' href='https://github.com/JCSUCoder/SystemicWorks'>Source Code</a> <br><br>" +
+			"<a class='mini_button' href='https://github.com/JCSUCoder/SystemicWorks/blob/main/LICENSE'>License</a> <br><br>" +
 
 			"<hr/><br>"+
 				
@@ -431,7 +434,7 @@ export function ComponentSlider(config){
 	// Slider DOM: graphic + pointer
 	var slider = new Image();
 	slider.draggable = false;
-	slider.src = "css/sliders/"+config.bg+".png";
+	slider.src = "assets/sliders/"+config.bg+".png";
 	slider.setAttribute("class","component_slider_graphic");
 	var pointer = new Image();
 	pointer.draggable = false;

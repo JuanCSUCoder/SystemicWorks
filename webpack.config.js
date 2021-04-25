@@ -1,6 +1,7 @@
 // Generated using webpack-cli http://github.com/webpack-cli
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
@@ -14,9 +15,17 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'index.html',
+			template: 'pages/index.html',
 		}),
-
+		new HtmlWebpackPlugin({
+			template: 'pages/report.html',
+			filename: 'report/index.html'
+		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{ from: "pages/assets", to: "assets" },
+			],
+		}),
 		// Add your plugins here
 		// Learn more obout plugins from https://webpack.js.org/configuration/plugins/
 	],
