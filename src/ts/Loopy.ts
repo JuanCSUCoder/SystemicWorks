@@ -78,6 +78,7 @@ export default class Loopy {
 		this.pan = Pan(this);
 		this.loop = Loop(this);
 
+		this.sidebar.showPage("Edit");
 		this.playbar.showPage("Editor");
 
 		subscribe("model/changed", () => {
