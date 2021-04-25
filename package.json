@@ -1,32 +1,36 @@
 {
-  "name": "systemic-works",
-  "version": "1.0.0",
-  "description": "**This repository contains only the webapp**",
-	"private":"true",
-  "scripts": {
-    "build": "npx tsc",
-    "start": "npx live-server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JCSUCoder/SystemicWorks.git"
-  },
-  "author": "Juan Camilo Sánchez Urrego <jcsu2019369@gmail.com>",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/JCSUCoder/SystemicWorks/issues"
-  },
-  "homepage": "https://github.com/JCSUCoder/SystemicWorks#readme",
-  "devDependencies": {
-    "@webpack-cli/generators": "^2.0.0",
-    "css-loader": "^5.2.4",
-    "html-webpack-plugin": "^5.3.1",
-    "live-server": "^1.2.1",
-    "style-loader": "^2.0.0",
-    "ts-loader": "^9.1.1",
-    "typescript": "^4.2.4",
-    "webpack": "^5.35.1",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
-  }
+	"name": "systemic-works",
+	"version": "1.0.0",
+	"description": "Systemic Works",
+	"private": "true",
+	"scripts": {
+		"build": "webpack --mode=production",
+		"start": "npx live-server",
+		"build:dev": "webpack --mode=development",
+		"build:prod": "webpack --mode=production",
+		"watch": "webpack --watch",
+		"serve": "webpack serve"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JCSUCoder/SystemicWorks.git"
+	},
+	"author": "Juan Camilo Sánchez Urrego <jcsu2019369@gmail.com>",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/JCSUCoder/SystemicWorks/issues"
+	},
+	"homepage": "https://github.com/JCSUCoder/SystemicWorks#readme",
+	"devDependencies": {
+		"@webpack-cli/generators": "^2.0.0",
+		"css-loader": "^5.2.4",
+		"html-webpack-plugin": "^5.3.1",
+		"live-server": "^1.2.1",
+		"style-loader": "^2.0.0",
+		"ts-loader": "^9.1.1",
+		"typescript": "^4.2.4",
+		"webpack": "^5.35.1",
+		"webpack-cli": "^4.6.0",
+		"webpack-dev-server": "^3.11.2"
+	}
 }
