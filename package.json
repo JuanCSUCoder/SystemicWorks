@@ -8,7 +8,8 @@
 		"build:dev": "webpack --mode=development",
 		"build:prod": "webpack --mode=production",
 		"watch": "webpack --watch",
-		"serve": "webpack serve"
+		"serve": "webpack serve",
+		"deploy": "gh-pages -d build -b stable"
 	},
 	"repository": {
 		"type": "git",
@@ -24,6 +25,7 @@
 		"@webpack-cli/generators": "^2.0.0",
 		"copy-webpack-plugin": "^8.1.1",
 		"css-loader": "^5.2.4",
+		"gh-pages": "^3.1.0",
 		"html-webpack-plugin": "^5.3.1",
 		"live-server": "^1.2.1",
 		"style-loader": "^2.0.0",
