@@ -5,6 +5,8 @@ that I couldn't be arsed to put into separate classes
 
 *****************************/
 
+import { subscribe, publish } from './minpubsub';
+
 export var Loopy = {
 	MODE_EDIT: 0,
 	MODE_PLAY: 1,

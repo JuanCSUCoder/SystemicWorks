@@ -1,3 +1,5 @@
+import { subscribe, publish } from './minpubsub';
+
 function Loop(loopy) {
 	var self = this;
 	
@@ -14,4 +16,4 @@ function Loop(loopy) {
 	return self;
 }
 
-module.exports = Loop;
+export default Loop;

@@ -1,14 +1,13 @@
+import { subscribe, publish } from './minpubsub';
+
 function Pan(loopy) {
-	var self = this;
+	var self = {};
 	self.loopy = loopy;
 
 	self.active = false;
 
 	self.mouseXRef = 0;
 	self.mouseYRef = 0;
-
-	var canvas = _createCanvas();
-	var ctx = canvas.getContext("2d");
 
 	subscribe("mousedown", function () {
 		self.active = true;
@@ -39,4 +38,4 @@ function Pan(loopy) {
 	return self;
 }
 
-module.exports = Pan;
+export default Pan;

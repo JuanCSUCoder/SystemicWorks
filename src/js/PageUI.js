@@ -4,7 +4,7 @@ PAGE UI: to extend to Sidebar, Play Controls, Modal.
 
 **********************************/
 
-function PageUI(dom){
+export default function PageUI(dom){
 
 	var self = this;
 	self.dom = dom;
@@ -33,7 +33,7 @@ function PageUI(dom){
 
 }
 
-function Page(){
+export function Page(){
 
 	var self = this;
 
@@ -49,5 +49,3 @@ function Page(){
 	};
 
 }
-
-module.exports = PageUI;

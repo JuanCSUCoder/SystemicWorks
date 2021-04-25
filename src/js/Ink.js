@@ -8,12 +8,15 @@ TODO: when switch away tool, clear the Ink canvas
 
 **********************************/
 
+import { _createCanvas } from './helpers';
+import { subscribe, publish } from './minpubsub';
+
 Ink.MINIMUM_RADIUS = Node.DEFAULT_RADIUS;
 Ink.SNAP_TO_RADIUS = 25;
 
 function Ink(loopy){
 
-	var self = this;
+	var self = {};
 	self.loopy = loopy;
 
 	// Create canvas & context
@@ -259,4 +262,4 @@ function Ink(loopy){
 	return self;
 }
 
-module.exports = Ink;
+export default Ink;

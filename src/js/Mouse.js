@@ -73,7 +73,7 @@ Mouse.init = function(loopy, target){
 		Mouse.showCursor("");
 	};
 
-	return self;
+	return Mouse;
 };
 
 export default Mouse;

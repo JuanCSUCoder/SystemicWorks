@@ -50,13 +50,13 @@ export default class Loopy {
 	sidebar: any;
 	toolbar: any;
 	playbar: any;
-	modal: Modal;
+	modal: any;
 
-	ink: Ink;
-	drag: Drag;
-	erase: Erase;
-	labeller: Labeller;
-	pan: Pan;
+	ink: any;
+	drag: any;
+	erase: any;
+	labeller: any;
+	pan: any;
 	loop: any;
 
 	_blankData =

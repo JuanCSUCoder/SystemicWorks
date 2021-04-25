@@ -4,9 +4,11 @@ ERASER
 
 **********************************/
 
+import { subscribe, publish } from './minpubsub';
+
 function Eraser(loopy){
 
-	var self = this;
+	var self = {};
 	self.loopy = loopy;
 
 	self.erase = function(clicked){
@@ -51,4 +53,4 @@ function Eraser(loopy){
 	return self;
 }
 
-module.exports = Eraser;
+export default Eraser;

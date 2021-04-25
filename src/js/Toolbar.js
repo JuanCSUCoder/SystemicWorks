@@ -4,9 +4,12 @@ TOOLBAR CODE
 
 **********************************/
 
+import { publish, subscribe } from "../js/minpubsub";
+import { Loopy } from "../js/helpers";
+
 function Toolbar(loopy){
 
-	var self = this;
+	var self = {};
 
 	// Tools & Buttons
 	var buttons = [];
@@ -184,4 +187,4 @@ function ToolbarButton(toolbar, config){
 
 }
 
-module.exports = Toolbar;
+export default Toolbar;

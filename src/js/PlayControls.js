@@ -6,9 +6,14 @@ PLAY CONTROLS CODE:
 
 **********************************/
 
+import PageUI from './PageUI';
+import { Page } from './PageUI';
+import { publish, subscribe } from "./minpubsub";
+import { _createButton, _createLabel, _createInput, _createPicker, _addMouseEvents, isMacLike } from "./helpers";
+
 function PlayControls(loopy){
 
-	var self = this;
+	var self = {};
 	PageUI.call(self, document.getElementById("toolbar"));
 
 	self.loopy = loopy;
@@ -192,4 +197,4 @@ function PlaySlider(config){
 
 }
 
-module.exports = PlayControls;
+export default PlayControls;

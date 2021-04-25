@@ -4,9 +4,11 @@ DRAGGER
 
 **********************************/
 
+import { subscribe, publish } from './minpubsub';
+
 function Dragger(loopy){
 
-	var self = this;
+	var self = {};
 	self.loopy = loopy;
 
 	// Dragging anything?
@@ -175,4 +177,4 @@ function Dragger(loopy){
 	return self;
 }
 
-module.exports = Dragger;
+export default Dragger;

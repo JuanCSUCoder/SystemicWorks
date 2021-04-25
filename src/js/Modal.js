@@ -4,9 +4,15 @@ Use the same PAGE UI thing
 
 ************************/
 
+import PageUI from './PageUI';
+import { Page } from './PageUI';
+import { publish, subscribe } from './minpubsub';
+import { ComponentHTML, ComponentOutput } from './Sidebar';
+import { _createNumberInput } from './helpers';
+
 function Modal(loopy){
 
-	var self = this;
+	var self = {};
 	self.loopy = loopy;
 	PageUI.call(self, document.getElementById("modal_page"));
 
@@ -266,4 +272,4 @@ function ModalIframe(config){
 
 }
 
-module.exports = Modal;
+export default Modal;

@@ -6,7 +6,7 @@ SIDEBAR CODE
 
 import PageUI from './PageUI';
 import { publish, subscribe } from "../js/minpubsub";
-import { _createButton, _createLabel, _createInput } from "./helpers";
+import { _createButton, _createLabel, _createInput, _createPicker, _addMouseEvents } from "./helpers";
 
 function Sidebar(loopy){
 
@@ -355,7 +355,7 @@ function Component(){
 	};
 }
 
-function ComponentInput(config){
+export function ComponentInput(config){
 
 	// Inherit
 	var self = this;
@@ -384,7 +384,7 @@ function ComponentInput(config){
 
 }
 
-function ComponentColorPicker(config) {
+export function ComponentColorPicker(config) {
 
 	// Inherit
 	var self = this;
@@ -411,7 +411,7 @@ function ComponentColorPicker(config) {
 	};
 }
 
-function ComponentSlider(config){
+export function ComponentSlider(config){
 
 	// Inherit
 	var self = this;
@@ -489,7 +489,7 @@ function ComponentSlider(config){
 
 }
 
-function ComponentButton(config){
+export function ComponentButton(config){
 
 	// Inherit
 	var self = this;
@@ -509,7 +509,7 @@ function ComponentButton(config){
 
 }
 
-function ComponentHTML(config){
+export function ComponentHTML(config){
 
 	// Inherit
 	var self = this;
@@ -521,7 +521,7 @@ function ComponentHTML(config){
 
 }
 
-function ComponentOutput(config){
+export function ComponentOutput(config){
 
 	// Inherit
 	var self = this;
