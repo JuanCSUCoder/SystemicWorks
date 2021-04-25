@@ -30,7 +30,7 @@ export default class Grid {
 	}
 
 	getImg(): HTMLImageElement {
-		let DOMURL = window.URL || window.webkitURL || window;
+		let DOMURL = window.URL || window.webkitURL;
 
 		let grid_img = new Image();
 		let grid_svg = new Blob([this.getSvg()], { type: 'image/svg+xml;charset=utf-8' });
