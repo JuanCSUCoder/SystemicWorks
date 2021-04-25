@@ -438,7 +438,7 @@ export function ComponentSlider(config){
 	slider.setAttribute("class","component_slider_graphic");
 	var pointer = new Image();
 	pointer.draggable = false;
-	pointer.src = "css/sliders/slider_pointer.png";
+	pointer.src = "assets/sliders/slider_pointer.png";
 	pointer.setAttribute("class","component_slider_pointer");
 	sliderDOM.appendChild(slider);
 	sliderDOM.appendChild(pointer);
