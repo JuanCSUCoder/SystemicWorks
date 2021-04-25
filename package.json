@@ -9,7 +9,8 @@
 		"build:prod": "webpack --mode=production",
 		"watch": "webpack --watch",
 		"serve": "webpack serve",
-		"deploy": "gh-pages -d build -b stable"
+		"deploy": "gh-pages -d build -b stable",
+		"test": "echo No test defined"
 	},
 	"repository": {
 		"type": "git",
