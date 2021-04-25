@@ -49,3 +49,5 @@ function Page(){
 	};
 
 }
+
+module.exports = PageUI;

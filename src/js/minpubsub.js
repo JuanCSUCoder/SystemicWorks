@@ -92,4 +92,4 @@
     context.unsubscribe = MinPubSub.unsubscribe;
   }
 
-})(this.window);
+})(window);

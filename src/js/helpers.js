@@ -55,14 +55,14 @@ function _createCanvas(){
 
 }
 
-function _createLabel(message){
+export function _createLabel(message){
 	var label = document.createElement("div");
 	label.innerHTML = message;
 	label.setAttribute("class","component_label");
 	return label;
 }
 
-function _createButton(label, onclick){
+export function _createButton(label, onclick){
 	var button = document.createElement("div");
 	button.innerHTML = label;
 	button.onclick = onclick;
@@ -70,7 +70,7 @@ function _createButton(label, onclick){
 	return button;
 }
 
-function _createInput(className, textarea){
+export function _createInput(className, textarea){
 	var input = textarea ? document.createElement("textarea") : document.createElement("input");
 	input.setAttribute("class",className);
 	input.addEventListener("keydown",function(event){
@@ -144,7 +144,7 @@ function _getTotalOffset(target){
 	};
 }
 
-function _addMouseEvents(target, onmousedown, onmousemove, onmouseup){
+export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup){
 
 	// WRAP THEM CALLBACKS
 	var _onmousedown = function(event){

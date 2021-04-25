@@ -1,5 +1,7 @@
+import { _addMouseEvents } from "./helpers";
+
 window.Mouse = {};
-Mouse.init = function(target){
+Mouse.init = function(loopy, target){
 
 	// Events!
 	var _onmousedown = function(event){
@@ -74,4 +76,4 @@ Mouse.init = function(target){
 	return self;
 };
 
-module.exports = Mouse;
+export default Mouse;

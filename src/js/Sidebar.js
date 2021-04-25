@@ -4,9 +4,13 @@ SIDEBAR CODE
 
 **********************************/
 
+import PageUI from './PageUI';
+import { publish, subscribe } from "../js/minpubsub";
+import { _createButton, _createLabel, _createInput } from "./helpers";
+
 function Sidebar(loopy){
 
-	var self = this;
+	var self = {};
 	PageUI.call(self, document.getElementById("sidebar"));
 
 	// Edit
@@ -537,4 +541,4 @@ function ComponentOutput(config){
 
 }
 
-module.exports = Sidebar;
+export default Sidebar;
