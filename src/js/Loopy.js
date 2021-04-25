@@ -5,6 +5,8 @@ LOOPY!
 
 **********************************/
 
+// DEPRECATED
+
 Loopy.MODE_EDIT = 0;
 Loopy.MODE_PLAY = 1;
 

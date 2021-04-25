@@ -4,6 +4,8 @@ MODEL!
 
 **********************************/
 
+// DEPRECATED
+
 function Model(loopy){
 
 	var self = this;
