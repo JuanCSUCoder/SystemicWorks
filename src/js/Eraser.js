@@ -5,6 +5,7 @@ ERASER
 **********************************/
 
 import { subscribe, publish } from './minpubsub';
+import { Loopy } from './helpers';
 
 function Eraser(loopy){
 

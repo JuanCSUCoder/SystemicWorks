@@ -1,4 +1,5 @@
 import { subscribe, publish } from './minpubsub';
+import { Loopy } from './helpers';
 
 function Pan(loopy) {
 	var self = {};

@@ -79,7 +79,6 @@ export default class Loopy {
 		this.loop = Loop(this);
 
 		this.playbar.showPage("Editor");
-		setInterval(this.update, 1000 / 30);
 
 		subscribe("model/changed", () => {
 			this.dirty = true;
@@ -116,6 +115,16 @@ export default class Loopy {
 
 			input.click();
 		});
+
+		// Bind this to functions
+		this.init = this.init.bind(this);
+		this.update = this.update.bind(this);
+		this.draw = this.draw.bind(this);
+		this.setMode = this.setMode.bind(this);
+		this.saveToURL = this.saveToURL.bind(this);
+
+		// Start Application Modules
+		setInterval(this.update, 1000 / 30);
 
 		this.init();
 		this.dirty = false;

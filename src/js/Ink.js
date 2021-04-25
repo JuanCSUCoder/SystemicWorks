@@ -10,6 +10,8 @@ TODO: when switch away tool, clear the Ink canvas
 
 import { _createCanvas } from './helpers';
 import { subscribe, publish } from './minpubsub';
+import { Loopy, _getBounds } from './helpers';
+import { _PADDING, _PADDING_BOTTOM } from '../ts/Helpers';
 
 Ink.MINIMUM_RADIUS = Node.DEFAULT_RADIUS;
 Ink.SNAP_TO_RADIUS = 25;
