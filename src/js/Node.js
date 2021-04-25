@@ -29,7 +29,7 @@ export default function Node(model, config){
 		y: 0,
 		init: Node.defaultValue, // initial value!
 		label: "?",
-		hue: Node.defaultHue,
+		hue: config.color,
 		radius: Node.DEFAULT_RADIUS
 	});
 
