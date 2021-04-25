@@ -12,9 +12,8 @@ import { _createNumberInput } from './helpers';
 
 function Modal(loopy){
 
-	var self = {};
+	var self = PageUI(document.getElementById("modal_page"));
 	self.loopy = loopy;
-	PageUI.call(self, document.getElementById("modal_page"));
 
 	// Is showing?
 	self.isShowing = false;

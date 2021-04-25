@@ -10,8 +10,7 @@ import { _createButton, _createLabel, _createInput, _createPicker, _addMouseEven
 
 function Sidebar(loopy){
 
-	var self = {};
-	PageUI.call(self, document.getElementById("sidebar"));
+	var self = PageUI(document.getElementById("sidebar"));
 
 	// Edit
 	self.edit = function(object){

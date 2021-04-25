@@ -13,8 +13,7 @@ import { _createButton, _createLabel, _createInput, _createPicker, _addMouseEven
 
 function PlayControls(loopy){
 
-	var self = {};
-	PageUI.call(self, document.getElementById("toolbar"));
+	var self = PageUI(document.getElementById("toolbar"));
 
 	self.loopy = loopy;
 
