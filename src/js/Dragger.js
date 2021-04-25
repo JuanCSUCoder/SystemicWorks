@@ -5,7 +5,7 @@ DRAGGER
 **********************************/
 
 import { subscribe, publish } from './minpubsub';
-import { Loopy } from './helpers';
+import { Loopy, _translatePoints, _rotatePoints } from './helpers';
 
 function Dragger(loopy){
 

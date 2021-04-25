@@ -4,11 +4,14 @@ LoopMark!
 
  *************************************/
 
+import { subscribe, publish } from './minpubsub';
+import { _configureProperties, Loopy } from './helpers';
+
 LoopMark.defaultOrientation = 1;
 LoopMark.defaultType = 1;
 LoopMark.defaultColor = "#666666";
 
-function LoopMark(model, config) {
+export default function LoopMark(model, config) {
 	var self = this;
 	self._CLASS_ = "LoopMark";
 
@@ -69,7 +72,7 @@ function LoopMark(model, config) {
 
 		ctx.stroke();
 
-		ctx.font = "100 " + Label.FONTSIZE + "px sans-serif";
+		ctx.font = "100 40px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = self.color;

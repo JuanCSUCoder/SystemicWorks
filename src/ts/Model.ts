@@ -1,10 +1,9 @@
 import { publish, subscribe } from "../js/minpubsub";
-import Edge, { EdgeConfig } from "./elements/Edge";
-import { EdgeElement, SimpleElement } from "./elements/ElemType";
+import Edge from "../js/Edge";
 import Grid from "./elements/Grid";
-import Label, { LabelConfig } from "./elements/Label";
-import LoopMark, { LoopMarkConfig } from "./elements/LoopMark";
-import Node, { BasicNodeConfig, NodeConfig } from "./elements/Node";
+import Label from "../js/Label";
+import LoopMark from "../js/LoopMark";
+import Node from "../js/Node";
 import { Bounds, Dictionary, _createCanvas, _PADDING, _PADDING_BOTTOM } from "./Helpers";
 import Loopy, { LoopyMode, LoopyTool } from "./Loopy";
 import Mouse from "./Mouse";
@@ -27,18 +26,18 @@ export default class Model {
 	drawCountdown: number = this.drawCountdownFull;
 
 	// Nodes
-	nodes: Node[] = [];
-	nodeByID: Dictionary<Node> = {};
+	nodes: any[] = [];
+	nodeByID: Dictionary<any> = {};
 	nodeUID: number = 0;
 
 	// Edges
-	edges: Edge[] = [];
+	edges: any[] = [];
 
 	// Labels
-	labels: Label[] = [];
+	labels: any[] = [];
 
 	// LoopMarks
-	loop_marks: LoopMark[] = [];
+	loop_marks: any[] = [];
 
 	// Grid
 	grid: Grid;
@@ -144,16 +143,16 @@ export default class Model {
 		return this.nodeByID[id];
 	}
 
-	addNode(config: NodeConfig): Node {
+	addNode(config: any): Node {
 		// Event that says that the model has changed
 		publish("model/changed");
 
 		// Add ID
-		let completeConfig: unknown = config;
-		(completeConfig as NodeConfig).id = this.getUID();
+		let completeConfig: any = config;
+		if (!completeConfig.id) completeConfig.id = this.getUID();
 
 		// Add Node
-		let node: Node = new Node(this, config as NodeConfig);
+		let node: any = new Node(this, config);
 		this.nodeByID[node.id] = node;
 		this.nodes.push(node);
 
@@ -162,7 +161,7 @@ export default class Model {
 		return node;
 	}
 
-	removeNode(node: Node) {
+	removeNode(node: any) {
 		// Event that says that model has changed
 		publish("model/changed");
 
@@ -190,7 +189,7 @@ export default class Model {
 
 	// Edges
 
-	addEdge(config: EdgeConfig) {
+	addEdge(config: any) {
 		// Event that says that model has changed
 		publish("model/changed");
 
@@ -220,7 +219,7 @@ export default class Model {
 
 	// Labels
 
-	addLabel(config: LabelConfig) {
+	addLabel(config: any) {
 		// Event that says that the model has changed
 		publish("model/changed");
 
@@ -234,7 +233,7 @@ export default class Model {
 		return label;
 	}
 
-	removeLabel(label: Label) {
+	removeLabel(label: any) {
 		// Event that says that the model has changed
 		publish("model/changed");
 
@@ -244,7 +243,7 @@ export default class Model {
 
 	// LoopMarks
 
-	addLoopMark(config: LoopMarkConfig) {
+	addLoopMark(config: any) {
 		// Event of model changed
 		publish("model/changed");
 
@@ -404,7 +403,7 @@ export default class Model {
 			let top = Infinity;
 			let right = -Infinity;
 			let bottom = -Infinity;
-			let _testObjects = function (objects: SimpleElement[] | EdgeElement[]) {
+			let _testObjects = function (objects: any) {
 				for (let i = 0; i < objects.length; i++) {
 					let obj = objects[i];
 					let bounds = obj.getBoundingBox();

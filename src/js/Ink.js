@@ -8,7 +8,7 @@ TODO: when switch away tool, clear the Ink canvas
 
 **********************************/
 
-import { _createCanvas } from './helpers';
+import { _createCanvas, _translatePoints, _rotatePoints } from './helpers';
 import { subscribe, publish } from './minpubsub';
 import { Loopy, _getBounds } from './helpers';
 import { _PADDING, _PADDING_BOTTOM } from '../ts/Helpers';

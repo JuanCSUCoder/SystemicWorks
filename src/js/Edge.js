@@ -4,6 +4,9 @@ EDGE!
 
 **********************************/
 
+import { subscribe, publish, unsubscribe } from './minpubsub';
+import { _configureProperties, Loopy, _makeErrorFunc, _isPointInCircle } from './helpers';
+
 Edge.allSignals = [];
 Edge.MAX_SIGNALS = 100;
 Edge.MAX_SIGNALS_PER_EDGE = 10;
@@ -12,7 +15,7 @@ Edge.defaultColor = "#666";
 Edge.defaultThickness = 3;
 Edge.defaultDelay = 0;
 
-function Edge(model, config){
+export default function Edge(model, config){
 
 	var self = this;
 	self._CLASS_ = "Edge";

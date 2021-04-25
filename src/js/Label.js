@@ -4,9 +4,12 @@ LABEL!
 
 **********************************/
 
+import { subscribe, publish } from './minpubsub';
+import { _configureProperties, Loopy, _isPointInBox } from './helpers';
+
 Label.FONTSIZE = 40;
 
-function Label(model, config){
+export default function Label(model, config){
 
 	var self = this;
 	self._CLASS_ = "Label";
@@ -94,7 +97,7 @@ function Label(model, config){
 
 	self.getBounds = function(){
 
-		var ctx = self.model.context;
+		var ctx = self.model.ctx;
 
 		// Get MAX width...
 		var lines = self.breakText();

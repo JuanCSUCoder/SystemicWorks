@@ -7,6 +7,8 @@ SIDEBAR CODE
 import PageUI from './PageUI';
 import { publish, subscribe } from "../js/minpubsub";
 import { _createButton, _createLabel, _createInput, _createPicker, _addMouseEvents } from "./helpers";
+import LoopMark from './LoopMark';
+import Edge from './Edge';
 
 function Sidebar(loopy){
 
@@ -237,9 +239,9 @@ function Sidebar(loopy){
 
 			"<hr/><br>"+
 
-			"<span class='mini_button' onclick='publish(\"modal\",[\"save_link\"])'>save as link</span> <br><br>"+
-			"<span class='mini_button' onclick='publish(\"export/file\")'>save as file</span> <br><br>"+
-			"<span class='mini_button' onclick='publish(\"import/file\")'>load from file</span> <br><br>"+
+			"<span class='mini_button' onclick='window.publish(\"modal\",[\"save_link\"])'>save as link</span> <br><br>"+
+			"<span class='mini_button' onclick='window.publish(\"export/file\")'>save as file</span> <br><br>"+
+			"<span class='mini_button' onclick='window.publish(\"import/file\")'>load from file</span> <br><br>"+
 
 			"<hr/><br>"+
 				

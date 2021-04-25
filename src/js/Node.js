@@ -4,12 +4,15 @@ NODE!
 
 **********************************/
 
+import { subscribe, publish, unsubscribe } from './minpubsub';
+import { _configureProperties, Loopy, _isPointInCircle } from './helpers';
+
 Node.defaultValue = 0.5;
 Node.defaultHue = "#00EE00";
 
 Node.DEFAULT_RADIUS = 60;
 
-function Node(model, config){
+export default function Node(model, config){
 
 	var self = this;
 	self._CLASS_ = "Node";

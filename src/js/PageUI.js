@@ -15,7 +15,9 @@ export default function PageUI(dom){
 		self.dom.appendChild(page.dom);
 		self.pages.push(page);
 	};
-	self.currentPage = null;
+	self.currentPage = {
+		edit: () => { }
+	};
 	self.showPage = function(id){
 		var shownPage = {
 			edit: () => {}

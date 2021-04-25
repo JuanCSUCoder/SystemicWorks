@@ -4,9 +4,11 @@ LABELLER
 
 **********************************/
 
+import { Loopy } from './helpers';
+
 function Labeller(loopy){
 
-	var self = this;
+	var self = {};
 	self.loopy = loopy;
 
 	self.tryMakingLabel = function(){
@@ -34,4 +36,4 @@ function Labeller(loopy){
 	return self;
 }
 
-module.exports = Labeller;
+export default Labeller;
