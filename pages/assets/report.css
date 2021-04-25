@@ -1,0 +1,21 @@
+html {
+	font-size: 62.5%;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+	font-size: 1.4rem;
+}
+
+.main-container {
+	margin: 2rem;
+}
+
+textarea {
+	width: 50rem;
+}
+
+label {
+	display: block;
+	margin-bottom: 1rem;
+}
