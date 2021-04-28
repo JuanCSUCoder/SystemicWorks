@@ -5,7 +5,7 @@ ARG VARIANT="14-buster"
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 
 # Install Aditional Packages
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends software-properties-common
 
 # Add GitHub Repository
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
