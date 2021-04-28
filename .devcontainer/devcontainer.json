@@ -12,12 +12,28 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"editor.wordWrap": "on",
+		"files.autoSave": "afterDelay",
+		"editor.tabSize": 2,
+		"editor.detectIndentation": false,
+		"editor.insertSpaces": false,
+		"diffEditor.ignoreTrimWhitespace": false,
+		"editor.formatOnSave": true,
+		"editor.formatOnPaste": true,
+		"editor.formatOnType": true,
+		"emmet.triggerExpansionOnTab": true,
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint", // ESLint
+		"ms-azuretools.vscode-docker", // Docker
+		"mhutchie.git-graph", // Git Graph
+		"donjayamanne.githistory", // Git History
+		"github.vscode-pull-request-github", // GitHub Pull Requests and Issues
+		"eamodio.gitlens", // Git Lens
+		"esbenp.prettier-vscode", // Prettier
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
