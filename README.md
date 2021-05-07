@@ -9,30 +9,41 @@ This repository contains the webapp of SystemicWorks, which will be an **advance
 
 ## Clone Project
 
-	git clone https://github.com/JCSUCoder/SystemicWorks.git
-	cd SystemicWorks
-	# Open VSCode or your prefered editor
-	code .
+```bash
+git clone https://github.com/JCSUCoder/SystemicWorks.git
+cd SystemicWorks
+# Open VSCode or your prefered editor
+code .
+```
 
 This git repository is configured with a **devcontainer** so you can open it to get all the development environment correctly configured
 
 ## Develop
 To watch live changes of the project in the browser use:
 
-	npm run serve
+```bash
+npm run serve
+```
 
 ## Build
 To build for production use:
 
-	npm run build
+```bash
+npm run build
+```
 
 Or
 
-	npm run build:prod
+```bash
+# The same effect as above but a more specific and descriptive name
+npm run build:prod
+```
 
 For development use:
 
-	npm run build:dev
+```bash
+npm run build:dev
+```
 
 ## Deploy
 To deploy in GitHub Pages use:
