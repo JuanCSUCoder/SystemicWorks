@@ -144,9 +144,6 @@ canvas{
 	-ms-user-select: none;
 	user-select: none;
 }
-#sidebar > div{
-	margin: 25px;
-}
 #sidebar > div > div{
 	margin-bottom: 20px;
 }
@@ -182,6 +179,9 @@ canvas{
 	position: relative;
 	left:-25px;
 	margin: 10px 0;
+}
+.form_container {
+	margin: 25px;
 }
 .component_input{
 	border: none;
@@ -229,6 +229,7 @@ canvas{
 	height: 10px;
 }
 .component_label{
+	margin-top: 15px;
 	margin-bottom: 5px;
 }
 .component_button{
@@ -251,12 +252,12 @@ canvas{
 	background: #999;
 }
 .component_button[header=yes]{
-	position: absolute;
-	top:0; left:0;
-	width: 280px;
+	width: 100%;
+	margin: 0;
+
 	background: #222;
-    border-radius: 0px;
-    color: #888;
+  border-radius: 0px;
+  color: #888;
 }
 .component_button[header=yes]:hover{
 	background: #333;
