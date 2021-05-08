@@ -9,11 +9,11 @@ PLAY CONTROLS CODE:
 import PageUI from './PageUI';
 import { Page } from './PageUI';
 import { publish, subscribe } from "./minpubsub";
-import { _createButton, _createLabel, _createInput, _createPicker, _addMouseEvents, isMacLike } from "./helpers";
+import { _createButton, _createLabel, _createInput, _createPicker, _addMouseEvents, isMacLike, Loopy } from "./helpers";
 
 function PlayControls(loopy){
 
-	var self = PageUI(document.getElementById("toolbar"));
+	var self = PageUI(document.getElementById("playbar"));
 
 	self.loopy = loopy;
 
@@ -44,7 +44,6 @@ function PlayControls(loopy){
       })
     ).dom;
 		buttonDOM.style.backgroundColor = "green";
-		buttonDOM.style.marginLeft = "25px";
 
 		self.addPage("Editor", page);
 	})();
@@ -98,9 +97,6 @@ function PlayControls(loopy){
 				}
 			})).dom;
 			buttonDOM.style.backgroundColor = "red";
-			buttonDOM.style.width = "100px";
-			buttonDOM.style.left = "0px";
-			buttonDOM.style.top = "0px";
 
 			// RESET BUTTON
 			var buttonDOM = page.addComponent(new PlayButton({
@@ -111,9 +107,6 @@ function PlayControls(loopy){
 				}
 			})).dom;
 			buttonDOM.style.backgroundColor = "#d49b00";
-			buttonDOM.style.width = "100px";
-			buttonDOM.style.right = "0px";
-			buttonDOM.style.top = "0px";
 
 		}
 
@@ -156,32 +149,28 @@ function PlaySlider(config){
 
 	var self = this;
 	self.dom = document.createElement("div");
-	self.dom.style.bottom = "0px";
-    self.dom.style.position = "absolute";
-    self.dom.style.width = "100%";
-    self.dom.style.height = "20px";
+	self.dom.classList.add("play_slider");
+
+	// Slow Icon
+	var img = new Image();
+	img.src = "assets/icons/speed_slow.png";
+	img.width = 20;
+	img.height = 15;
+
+	self.dom.appendChild(img);
 
 	// Input
 	var input = document.createElement("input");
 	input.setAttribute("class","play_slider");
+
 	self.dom.appendChild(input);
 
-	// Slow & Fast Icons
+	// Fast Icon
 	var img = new Image();
-	img.src = "css/icons/speed_slow.png";
+	img.src = "assets/icons/speed_fast.png";
 	img.width = 20;
 	img.height = 15;
-	img.style.position = "absolute";
-	img.style.left = "5px";
-	img.style.top = "-2px";
-	self.dom.appendChild(img);
-	var img = new Image();
-	img.src = "css/icons/speed_fast.png";
-	img.width = 20;
-	img.height = 15;
-	img.style.position = "absolute";
-	img.style.right = "5px";
-	img.style.top = "-2px";
+
 	self.dom.appendChild(img);
 
 	// Properties

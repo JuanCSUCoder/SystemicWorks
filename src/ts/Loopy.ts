@@ -178,6 +178,7 @@ export default class Loopy {
 			this.playbar.showPage("Player");
 
 			this.sidebar.dom?.setAttribute("mode", "play");
+			this.toolbar.dom?.setAttribute("mode", "play")
 			this.playbar.dom?.setAttribute("mode", "play");
 
 			document.getElementById("canvasses")?.removeAttribute("cursor");
@@ -192,6 +193,7 @@ export default class Loopy {
 			this.playbar.showPage("Editor");
 
 			this.sidebar.dom?.setAttribute("mode", "edit");
+			this.toolbar.dom?.setAttribute("mode", "edit");
 			this.playbar.dom?.setAttribute("mode", "edit");
 
 			document.getElementById("canvasses")?.setAttribute("cursor", _tool2String(this.toolbar.currentTool) as string);

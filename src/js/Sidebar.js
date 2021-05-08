@@ -33,16 +33,9 @@ function Sidebar(loopy){
 
 	// Node!
 	(function(){
-		var page = new SidebarPage();
-		page.addComponent(new ComponentButton({
-			header: true,
-			label: "back to top",
-			onclick: function(){
-				self.showPage("Edit");
-			}
-		}));
+		var page = new SidebarPage(self);
 		page.addComponent("label", new ComponentInput({
-			label: "<br><br>Name:"
+			label: "Name:"
 			//label: "Name:"
 		}));
 		page.addComponent("hue", new ComponentColorPicker({
@@ -82,17 +75,10 @@ function Sidebar(loopy){
 
 	// Edge!
 	(function(){
-		var page = new SidebarPage();
-		page.addComponent(new ComponentButton({
-			header: true,
-			label: "back to top",
-			onclick: function(){
-				self.showPage("Edit");
-			}
-		}));
+		var page = new SidebarPage(self);
 		page.addComponent("strength", new ComponentSlider({
 			bg: "strength",
-			label: "<br><br>Relationship:",
+			label: "Relationship:",
 			//label: "Relationship:",
 			options: [1, -1],
 			oninput: function(value){
@@ -141,21 +127,14 @@ function Sidebar(loopy){
 
 	// Label!
 	(function(){
-		var page = new SidebarPage();
-		page.addComponent(new ComponentButton({
-			header: true,
-			label: "back to top",
-			onclick: function(){
-				self.showPage("Edit");
-			}
-		}));
+		var page = new SidebarPage(self);
 		page.addComponent("text", new ComponentInput({
-			label: "<br><br>Label:",
+			label: "Label:",
 			//label: "Label:",
 			textarea: true
 		}));
 		page.addComponent("color", new ComponentColorPicker({
-			label: "<br>Color:",
+			label: "Color:",
 		}));
 		page.onshow = function(){
 			// Focus on the text field
@@ -188,21 +167,11 @@ function Sidebar(loopy){
 
 	// LoopMark
 	(function () {
-		var page = new SidebarPage();
-
-		page.addComponent(
-      new ComponentButton({
-        header: true,
-        label: "back to top",
-        onclick: function () {
-          self.showPage("Edit");
-        },
-      })
-    );
+		var page = new SidebarPage(self);
 
 		page.addComponent("clockwise", new ComponentSlider({
 			bg: "delay",
-			label: "<br> <br> Clockwise: ",
+			label: "Clockwise: ",
 			options: [0, 1],
 			oninput: function (value) {
 				LoopMark.defaultOrientation = value;
@@ -265,17 +234,17 @@ function Sidebar(loopy){
 	return self;
 }
 
-function SidebarPage(){
+function SidebarPage(pageui){
 
 	// TODO: be able to focus on next component with an "Enter".
-
 	var self = this;
 	self.target = null;
 
 	// DOM
 	self.dom = document.createElement("div");
 	self.show = function(){ self.dom.style.display="block"; self.onshow(); };
-	self.hide = function(){ self.dom.style.display="none"; self.onhide(); };
+	self.hide = function () { self.dom.style.display = "none"; self.onhide(); };
+	var append_to = self.dom;
 
 	// Components
 	self.components = [];
@@ -290,7 +259,7 @@ function SidebarPage(){
 
 		component.page = self; // tie to self
 		component.propName = propName; // tie to propName
-		self.dom.appendChild(component.dom); // add to DOM
+		append_to.appendChild(component.dom); // add to DOM
 
 		// remember component
 		self.components.push(component);
@@ -317,8 +286,23 @@ function SidebarPage(){
 
 		// Callback!
 		self.onedit();
-
 	};
+
+	if (pageui) {
+		// Return Button
+		self.addComponent(new ComponentButton({
+			header: true,
+			label: "back to top",
+			onclick: function () {
+				pageui.showPage("Edit");
+			}
+		}));
+	}
+
+	// Create Form Container
+	append_to = document.createElement("div");
+	append_to.classList.add("form_container");
+	self.dom.appendChild(append_to);
 
 	// TO IMPLEMENT: callbacks
 	self.onedit = function(){};
