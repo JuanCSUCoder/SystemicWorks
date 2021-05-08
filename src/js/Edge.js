@@ -294,6 +294,10 @@ export default function Edge(model, config){
 			dmr = end + dmm;
 		}
 
+		if (self.from==self.to) {
+			dmr -= Math.PI/2
+		}
+
 		// if (self.arc > 0) {
 		// 	dmr = Math.abs(end - begin) / dmm + begin;
 		// } else {
