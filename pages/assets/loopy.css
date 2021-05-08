@@ -49,6 +49,8 @@ canvas{
 	left: 0;
 	top: 0;
 
+	width: 100%;
+
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -61,6 +63,10 @@ canvas{
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+#bar h4 {
+	margin: 0;
+	margin-right: 10px;
 }
 
 /**********

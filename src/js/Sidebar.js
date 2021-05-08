@@ -203,7 +203,9 @@ function Sidebar(loopy){
 		page.addComponent(new ComponentHTML({
 			html: ""+
 			
-			"<b style='font-size:1.4em'>SystemicWorks</b> <br>(v1.1.2 - <strong>ALPHA Hybrid</strong>)<br>an advanced and free tool for thinking in systems<br><br>"+
+			"<b style='font-size:1.4em'>About ...</b> <br>"+
+			"Build: v1.1.2 - <strong>ALPHA Hybrid</strong><br>" +
+			"an advanced and free tool for thinking in systems<br><br>" +
 			"<font size='3'><strong>License:</strong> GPLv3</font>"+
 
 			"<hr/><br>"+
