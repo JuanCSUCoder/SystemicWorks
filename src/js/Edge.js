@@ -5,7 +5,7 @@ EDGE!
 **********************************/
 
 import { subscribe, publish, unsubscribe } from './minpubsub';
-import { _configureProperties, Loopy, _makeErrorFunc, _isPointInCircle } from './helpers';
+import { _configureProperties, Loopy, _makeErrorFunc, _isPointInCircle, _blendColors } from './helpers';
 
 Edge.allSignals = [];
 Edge.MAX_SIGNALS = 100;

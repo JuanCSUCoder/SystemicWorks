@@ -5,7 +5,7 @@ NODE!
 **********************************/
 
 import { subscribe, publish, unsubscribe } from './minpubsub';
-import { _configureProperties, Loopy, _isPointInCircle } from './helpers';
+import { _configureProperties, Loopy, _isPointInCircle, _shiftArray } from './helpers';
 
 Node.defaultValue = 0.5;
 Node.defaultHue = "#00EE00";

@@ -41,70 +41,10 @@ canvas{
 	cursor: url('cursors/loop.png') 15 15, auto;
 }
 
-
-
 /**********
- PLAY CONTROLS
+ APP BAR
 **********/
-
-#playbar{
-	position: absolute;
-	bottom: 15px;
-	left: calc(50% - 275px); /* 50% - half of (playbar width + sidebar width)*/
-
-	width: 250px;
-	height: 75px;
-
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-#playbar[fullscreen=yes]{
-	left: calc(50% - 125px); /* 50% - half of (playbar width)*/
-}
-#playbar .component_button{
-	position: absolute;
-	bottom: 0;
-	width: 230px;
-	height: 25px;
-	background: #444;
-}
-#playbar .component_button:hover{
-	background: #555;
-}
-#playbar .play_slider{
-	width: 190px;
-    position: absolute;
-    left: 30px;
-    margin: 0;
-}
-.play_button_icon{
-	width: 10px;
-	height: 10px;
-	margin: 5px;
-	background-image: url(icons/controls.png);
-	background-size: 400% 100%;
-}
-.play_button_icon[icon="0"]{ background-position: 0 0; }
-.play_button_icon[icon="1"]{ background-position: -10px 0; }
-.play_button_icon[icon="2"]{ background-position: -20px 0; }
-.play_button_icon[icon="3"]{ background-position: -30px 0; }
-div[big=yes] .play_button_icon{
-	width: 30px;
-	height: 30px;
-}
-div[big=yes] .play_button_label{
-	top: -3px;
-}
-
-
-
-/**********
- TOOLBAR 
-**********/
-
-#toolbar{
+#bar{
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -114,6 +54,46 @@ div[big=yes] .play_button_label{
 	align-items: center;
 
 	padding: 5px;
+	padding-right: 8px;
+	background-color: #ddd;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/**********
+ PLAY CONTROLS
+**********/
+#playbar {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.play_slider {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 5px;
+}
+
+.component_button {
+	position: static !important; 
+	margin: 5px;
+}
+
+
+/**********
+ TOOLBAR 
+**********/
+#toolbar{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
 	background-color: #ddd;
 
 	-webkit-user-select: none;
