@@ -63,12 +63,20 @@ export default class ProjectLoader {
 	}
 
 	// Deserializing Starting Function
-	deserializeAny(model: Model, raw_data: string) {
+	deserializeAny(model: Model, raw_data: string, filename: string) {
 		// Update Raw Data
 		this.raw_data = raw_data;
 
-		// TODO: Detect version and redirect process
-		this.deserializeV1(model, raw_data);
+		// Detect version and redirect process
+		let file_ext = filename.split('.').pop();
+
+		if (file_ext == "smwks") {
+			this.deserializeV1(model, raw_data);
+		} else if (file_ext == "loopy") {
+			this.deserializeVL(model, raw_data);
+		}
+
+		
 	}
 
 	// Helper for All Versions
@@ -207,6 +215,59 @@ export default class ProjectLoader {
 		});
 
 		// META
+		model.nodeUID = UID;
+	}
+
+	deserializeVL(model: Model, raw_string: string) {
+		model.clear();
+
+		alert("You are importing a .loopy file, some features are still uncompatible");
+
+		var data = JSON.parse(raw_string);
+
+		// Get from array!
+		let nodes = data[0];
+		let edges = data[1];
+		let labels = data[2];
+		let UID = data[3];
+
+		// Nodes
+		for(let i=0;i<nodes.length;i++){
+			let node = nodes[i];
+			model.addNode({
+				id: node[0],
+				x: node[1],
+				y: node[2],
+				init: node[3],
+				label: decodeURIComponent(node[4]),
+				hue: node[5]
+			});
+		}
+
+		// Edges
+		for(let i=0;i<edges.length;i++){
+			let edge = edges[i];
+			let edgeConfig = {
+				from: edge[0],
+				to: edge[1],
+				arc: edge[2],
+				strength: edge[3]
+			};
+			// if(edge[4]) edgeConfig.rotation=edge[4];
+			model.addEdge(edgeConfig);
+		}
+
+		// Labels
+		for(let i=0;i<labels.length;i++){
+			let label = labels[i];
+			model.addLabel({
+				x: label[0],
+				y: label[1],
+				text: decodeURIComponent(label[2])
+			});
+		}
+
+		// META.
 		model.nodeUID = UID;
 	}
 }
