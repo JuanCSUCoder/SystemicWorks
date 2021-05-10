@@ -35,7 +35,9 @@
 			"problemMatcher": [],
 			"label": "npm: deploy",
 			"detail": "gh-pages -d build -b stable",
-			"dependsOn":["npm: build"]
-		}
-	]
+			"dependsOn": [
+				"npm: build"
+			]
+		},
+	],
 }

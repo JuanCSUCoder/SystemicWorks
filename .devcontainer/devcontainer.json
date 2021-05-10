@@ -46,6 +46,7 @@
 		"github.vscode-pull-request-github", // GitHub Pull Requests and Issues
 		"eamodio.gitlens", // Git Lens
 		"esbenp.prettier-vscode", // Prettier
+		"msjsdiag.debugger-for-chrome", // Debugger for Chrome
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
