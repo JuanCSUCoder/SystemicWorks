@@ -1,3 +1,4 @@
+import { HueColors } from "./Helpers";
 import Model from "./Model";
 
 // Version 1.0 Types
@@ -221,7 +222,7 @@ export default class ProjectLoader {
 	deserializeVL(model: Model, raw_string: string) {
 		model.clear();
 
-		alert("You are importing a .loopy file, some features are still uncompatible");
+		alert("Auto importing loopy file");
 
 		var data = JSON.parse(raw_string);
 
@@ -240,7 +241,7 @@ export default class ProjectLoader {
 				y: node[2],
 				init: node[3],
 				label: decodeURIComponent(node[4]),
-				hue: node[5]
+				hue: HueColors[node[5]],
 			});
 		}
 
