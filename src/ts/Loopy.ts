@@ -104,13 +104,14 @@ export default class Loopy {
 
 			input.type = "file";
 			input.onchange = (e: Event) => {
-				let file = (e.target as HTMLInputElement).files![0];
+				let target = e.target as HTMLInputElement;
+				let file = target.files![0];
 
 				let reader = new FileReader();
 				reader.readAsText(file, "UTF-8");
 				reader.onload = readerEvent => {
 					var content = readerEvent.target?.result;
-					this.model.deserialize(content as string);
+					this.model.deserialize(content as string, target.value);
 				};
 			};
 
@@ -141,7 +142,7 @@ export default class Loopy {
 			data = decodeURIComponent(this._blankData);
 		}
 
-		this.model.deserialize(data);
+		this.model.deserialize(data, "default.smwks");
 	}
 
 	update() {

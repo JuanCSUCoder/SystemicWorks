@@ -75,7 +75,7 @@ export function _createCanvas() {
 	return canvas;
 }
 
-function _onResize(canvasses: HTMLDivElement, canvas: HTMLCanvasElement) {
+export function _onResize(canvasses: HTMLDivElement, canvas: HTMLCanvasElement) {
 	let width = canvasses.clientWidth;
 	let height = canvasses.clientHeight;
 
@@ -85,3 +85,12 @@ function _onResize(canvasses: HTMLDivElement, canvas: HTMLCanvasElement) {
 	canvas.style.width = width + "px";
 	canvas.style.height = height + "px";
 }
+
+export let HueColors = [
+	"#EA3E3E", // red
+	"#EA9D51", // orange
+	"#FEEE43", // yellow
+	"#BFEE3F", // green
+	"#7FD4FF", // blue
+	"#A97FFF" // purple
+];
