@@ -338,8 +338,8 @@ export default class Model {
 		return this.project.serializeV1(this);
 	}
 
-	deserialize(raw_data: string) {
-		this.project.deserializeAny(this, raw_data);
+	deserialize(raw_data: string, filename: string) {
+		this.project.deserializeAny(this, raw_data, filename);
 	}
 
 	clear() {
