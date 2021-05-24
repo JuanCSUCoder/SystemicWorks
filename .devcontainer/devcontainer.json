@@ -35,6 +35,9 @@
 		"[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
     },
+		"[typescript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
