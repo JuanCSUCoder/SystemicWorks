@@ -210,13 +210,16 @@ function Sidebar(loopy){
 
 			"<hr/><br>"+
 
+			"<div class='sidebar-buttons'>"+
 			"<span class='mini_button' onclick='window.publish(\"modal\",[\"save_link\"])'>Save as Link</span> <br><br>"+
 			"<span class='mini_button' onclick='window.publish(\"export/file\")'>Save as File</span> <br><br>"+
 			"<span class='mini_button' onclick='window.publish(\"import/file\")'>Load from File</span> <br><br>" +
-			"<a class='mini_button' href='./report'>Report a Bug</a> <br><br>" +
+			"<a class='mini_button' href='./report'>Report a Bug</a>" +
+			"<br><br>" +
 			"<a class='mini_button' href='https://github.com/JCSUCoder/SystemicWorks'>Source Code</a> <br><br>" +
 			"<a class='mini_button' href='https://github.com/JCSUCoder/SystemicWorks/blob/main/LICENSE'>License</a> <br><br>" +
-
+			"</div>" +
+	
 			"<hr/><br>"+
 				
 			"<span>SystemicWorks</span> is "+

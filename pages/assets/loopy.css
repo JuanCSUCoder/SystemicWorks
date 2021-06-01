@@ -189,6 +189,15 @@ footer {
 	height: 10px;
 }
 
+.mini_button {
+	font-size: 1.6rem;
+
+	border: 0.1rem black solid;
+	border-radius: 0.3em;
+	padding: .5em;
+	margin: .3em;
+}
+
 /* Play Buttons Icons */
 
 .play_button_icon {
@@ -233,4 +242,13 @@ footer {
 #sidebar[mode=play]{
 	background: #222;
 	color: #777;
+}
+
+.sidebar-buttons {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	align-items: center;
+	justify-content: space-between;
 }
