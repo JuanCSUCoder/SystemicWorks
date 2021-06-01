@@ -168,8 +168,11 @@ footer {
 }
 
 .component_slider {
+	font-size: 1.6rem;
+
 	position: relative;
 	width: 250px;
+	margin-bottom: 2em;
 }
 
 .component_slider_graphic {
