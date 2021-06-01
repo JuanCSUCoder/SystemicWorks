@@ -294,7 +294,7 @@ function SidebarPage(pageui){
 		// Return Button
 		self.addComponent(new ComponentButton({
 			header: true,
-			label: "back to top",
+			label: "Go Back",
 			onclick: function () {
 				pageui.showPage("Edit");
 			}
