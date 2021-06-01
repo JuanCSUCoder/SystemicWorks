@@ -58,7 +58,7 @@ footer {
 	border: 1px black solid;
 	overflow: hidden;
 
-	/* filter: blur(5px); */
+	filter: blur(5px);
 }
 
 .app::after {
@@ -69,7 +69,28 @@ footer {
 	width: 100%;
 	height: 100%;
 
-	background-color: rgba(0, 0, 0, 0.357);
+	background-color: rgba(0, 0, 0, 0.755);
+}
+
+.app::after:hover {
+	background-color: rgba(0, 0, 0, 0.94);
+}
+
+#goto {
+	font-size: 1.6rem;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	color: white;
+}
+
+#goto h2 {
+	margin: 2em;
+	text-decoration: underline;
 }
 
 #bar {
