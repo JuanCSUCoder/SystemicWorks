@@ -392,3 +392,21 @@ main p {
 main li {
 	margin-left: 2em;
 }
+
+/* Cursors */
+
+#canvasses[cursor=ink]{
+	cursor: url('cursors/ink.png') 0 30, auto;
+}
+#canvasses[cursor=pan]{
+	cursor: url('cursors/pan.png') 15 15, auto;
+}
+#canvasses[cursor=erase]{
+	cursor: url('cursors/erase.png') 5 25, auto;
+}
+#canvasses[cursor=label]{
+	cursor: url('cursors/label.png') 15 15, auto;
+}
+#canvasses[cursor=loop]{
+	cursor: url('cursors/loop.png') 15 15, auto;
+}

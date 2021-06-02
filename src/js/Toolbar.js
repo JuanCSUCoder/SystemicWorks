@@ -25,7 +25,7 @@ function Toolbar(loopy){
 		// Add the button
 		var button = new ToolbarButton(self,{
 			id: id,
-			icon: "assets/icons/"+id+".png",
+			icon: "assets/nicons/"+id+".svg",
 			tooltip: tooltip,
 			callback: callback
 		});
@@ -132,7 +132,7 @@ function Toolbar(loopy){
 	self.addSeparator();
 	self.addButton({
 		id: "fs",
-		tooltip: "Toggle Fullscreen",
+		tooltip: "Return to the Landing Page",
 		callback: function () {
 			toggleStylesheet("assets/fs.css")
 		}

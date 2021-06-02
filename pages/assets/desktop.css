@@ -7,6 +7,10 @@ body {
 	margin-top: 2rem;
 }
 
+.page-head_title {
+	font-size: 3em;
+}
+
 .app {
 	position: relative;
 }
