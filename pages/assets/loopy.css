@@ -31,7 +31,7 @@ footer {
 }
 
 .page-head {
-	max-height: 14rem;
+	max-height: 16rem;
 	overflow: hidden;
 
 	transition: max-height ease 1s;
