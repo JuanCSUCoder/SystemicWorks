@@ -2,6 +2,11 @@ html {
 	font-size: 70%;
 }
 
+body {
+	margin: 7rem;
+	margin-top: 2rem;
+}
+
 .app {
 	position: relative;
 }
