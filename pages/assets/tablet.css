@@ -50,3 +50,25 @@
 	width: 250px;
 	height: 50px;
 }
+
+.horizontal {
+	display: flex;
+
+	flex-direction: row;
+}
+
+.vertical {
+	display: flex;
+
+	flex-direction: column;
+}
+
+.vensim-text {
+	flex-grow: 2;
+	flex-basis: 1px;
+}
+
+.features {
+	flex-grow: 1;
+	flex-basis: 1px;
+}
