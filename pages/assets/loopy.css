@@ -53,6 +53,7 @@ footer {
 
 .app-container {
 	position: relative;
+	height: 100vh;
 }
 
 .app {
@@ -61,6 +62,7 @@ footer {
 	border: 1px black solid;
 	overflow: hidden;
 
+	height: 100%;
 	min-width: 322px;
 
 	filter: blur(5px);
@@ -272,7 +274,7 @@ footer {
 /* Canvases & Properties Box */
 
 #canvasses {
-	height: 50vh;
+	height: 60%;
 	overflow: hidden;
 	position: relative;
 }
@@ -286,7 +288,7 @@ footer {
 #sidebar {
 	font-size: 1.6rem;
 
-	height: 20vh;
+	height: 40%;
 	overflow-y: scroll;
 	overflow-x: hidden;
 
