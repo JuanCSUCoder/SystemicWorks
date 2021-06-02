@@ -63,10 +63,10 @@ footer {
 
 	min-width: 322px;
 
-	/* filter: blur(5px); */
+	filter: blur(5px);
 }
 
-/* .app::after {
+.app::after {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -74,11 +74,7 @@ footer {
 	width: 100%;
 	height: 100%;
 
-	background-color: rgba(0, 0, 0, 0.755);
-}
-
-.app::after:hover {
-	background-color: rgba(0, 0, 0, 0.94);
+	background-color: rgba(0, 0, 0, 0.549);
 }
 
 #goto {
@@ -91,15 +87,13 @@ footer {
 	height: 100%;
 
 	color: white;
+
+	cursor: pointer;
 }
 
 #goto h2 {
 	margin: 2em;
 	text-decoration: underline;
-} */
-
-#goto {
-	display: none;
 }
 
 #bar {
@@ -250,6 +244,8 @@ footer {
 
 	text-decoration: none;
 	color: black;
+
+	cursor: pointer;
 }
 
 /* Play Buttons Icons */
