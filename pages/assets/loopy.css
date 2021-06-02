@@ -360,3 +360,25 @@ footer {
 #modal iframe{
 	border: none;
 }
+
+/* Main */
+
+main {
+	font-size: 1.6rem;
+
+	margin: 1em;
+}
+
+main h2 {
+	font-size: 2rem;
+}
+
+main p {
+	font-size: 1.6rem;
+
+	margin-bottom: 1em;
+}
+
+main li {
+	margin-left: 2em;
+}
