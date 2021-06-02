@@ -21,11 +21,20 @@ body {
 	margin: 2em;
 
 	min-width: 324px;
+
+	transition: all ease 1s;
 }
 
 footer {
 	font-size: 1.3rem;
 	margin-top: 3rem;
+}
+
+.page-head {
+	max-height: 14rem;
+	overflow: hidden;
+
+	transition: max-height ease 1s;
 }
 
 .page-head_nav {
