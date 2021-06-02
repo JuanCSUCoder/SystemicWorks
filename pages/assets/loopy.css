@@ -19,9 +19,12 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 1rem;
 	margin: 2em;
+
+	min-width: 324px;
 }
 
 footer {
+	font-size: 1.3rem;
 	margin-top: 3rem;
 }
 
@@ -58,10 +61,12 @@ footer {
 	border: 1px black solid;
 	overflow: hidden;
 
-	filter: blur(5px);
+	min-width: 322px;
+
+	/* filter: blur(5px); */
 }
 
-.app::after {
+/* .app::after {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -91,6 +96,10 @@ footer {
 #goto h2 {
 	margin: 2em;
 	text-decoration: underline;
+} */
+
+#goto {
+	display: none;
 }
 
 #bar {
@@ -111,7 +120,7 @@ footer {
 	margin-right: 1em;
 }
 
-#bar img {
+.logo {
 	height: 3.5em;
 }
 
@@ -124,8 +133,8 @@ footer {
 }
 
 .toolbar_button {
-	width: 3.8em;
-	height: 3.8em;
+	width: 4em;
+	height: 4em;
 	background-position: center;
 	background-origin: content-box;
 	background-repeat: no-repeat;
@@ -150,6 +159,21 @@ footer {
 	background-size: contain;
 }
 
+/* Playbar */
+
+#playbar {
+	margin: .5rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.play_slider {
+	margin-left: 1em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 /* Components */
 
 .component_button {
@@ -159,10 +183,16 @@ footer {
 
 	font-size: 1.5rem;
 
+	width: fit-content;
+
+	background-color: #CCC;
+
 	padding: .5em;
-	color: white;
 	border-radius: .5em;
-	margin: .5em;
+}
+
+.component_button:hover {
+	background-color: lightgrey;
 }
 
 .component_button[header=yes] {
@@ -221,6 +251,10 @@ footer {
 
 /* Play Buttons Icons */
 
+.play_button_label {
+	color: white;
+}
+
 .play_button_icon {
 	font-size: .7em;
 
@@ -258,11 +292,6 @@ footer {
 	overflow-x: hidden;
 
 	margin: 1em;
-}
-
-#sidebar[mode=play]{
-	background: #222;
-	color: #777;
 }
 
 .sidebar-buttons {

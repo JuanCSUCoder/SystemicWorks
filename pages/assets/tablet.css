@@ -1,0 +1,21 @@
+body {
+	background-color: aqua;
+}
+
+#bar {
+	justify-content: flex-start;
+}
+
+#playbar {
+	margin: 0;
+	margin-left: 2em;
+	font-size: 1.3rem;
+}
+
+.component_button {
+	margin: 0;
+}
+
+.component_input {
+	width: 40%;
+}
