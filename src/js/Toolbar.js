@@ -6,6 +6,7 @@ TOOLBAR CODE
 
 import { publish, subscribe } from "../js/minpubsub";
 import { Loopy } from "../js/helpers";
+import { toggleStylesheet } from "../ts/Helpers";
 
 function Toolbar(loopy){
 
@@ -24,7 +25,7 @@ function Toolbar(loopy){
 		// Add the button
 		var button = new ToolbarButton(self,{
 			id: id,
-			icon: "assets/icons/"+id+".png",
+			icon: "assets/nicons/"+id+".svg",
 			tooltip: tooltip,
 			callback: callback
 		});
@@ -127,6 +128,14 @@ function Toolbar(loopy){
 				loopy.locked = true;
 			}
 		}
+	});
+	self.addSeparator();
+	self.addButton({
+		id: "fs",
+		tooltip: "Return to the Landing Page",
+		callback: function () {
+			toggleStylesheet("assets/fs.css")
+		}
 	})
 
 	// Select button
@@ -176,8 +185,12 @@ function ToolbarButton(toolbar, config){
 				self.deselect();
 			}
 		}
+	} else if (config.id == 'fs') {
+		self.callback = function () {
+			config.callback();
+		}
 	} else {
-		self.callback = function(){
+		self.callback = function () {
 			config.callback();
 			toolbar.selectButton(self);
 		};
