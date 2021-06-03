@@ -1,6 +1,6 @@
 {
 	"name": "systemic-works",
-	"version": "1.3.1",
+	"version": "1.4.0",
 	"description": "Systemic Works",
 	"private": "true",
 	"scripts": {
@@ -35,5 +35,8 @@
 		"webpack": "^5.38.1",
 		"webpack-cli": "^4.7.0",
 		"webpack-dev-server": "^3.11.2"
+	},
+	"dependencies": {
+		"ws": "^7.4.6"
 	}
 }
