@@ -63,12 +63,7 @@
 	flex-direction: column;
 }
 
-.vensim-text {
-	flex-grow: 2;
+.reset-basis {
 	flex-basis: 1px;
-}
-
-.features {
 	flex-grow: 1;
-	flex-basis: 1px;
 }

@@ -68,3 +68,8 @@ body {
 .component_button[header=yes] {
 	border-radius: 0;
 }
+
+.super-subtitle {
+	text-align: center;
+	margin-bottom: 1em;
+}
