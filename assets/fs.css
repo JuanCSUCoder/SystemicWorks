@@ -1,0 +1,31 @@
+body {
+	margin: 0;
+}
+
+.page-head {
+	max-height: 0;
+}
+
+#goto {
+	display: none;
+}
+
+.app {
+	border: none;
+
+	filter: blur(0);
+}
+
+.app::after {
+	display: none;
+}
+
+footer {
+	height: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+main {
+	display: none;
+}
