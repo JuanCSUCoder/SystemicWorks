@@ -120,7 +120,7 @@ function Modal(loopy){
 		label.style.fontSize = "15px";
 		label.style.marginTop = "6px";
 		label.style.color = "#888";
-		label.innerHTML = "(this is a long URL, so you may want to use a link-shortener like <a target='_blank' href='https://bitly.com/'>bit.ly</a>)";
+		label.innerHTML = "(this is a long URL, so you may want to use a link-shortener like <a target='_blank' rel='noreferrer' href='https://bitly.com/'>bit.ly</a>)";
 		page.dom.appendChild(label);
 
 		// chars left...
