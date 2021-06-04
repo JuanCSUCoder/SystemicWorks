@@ -1,7 +1,7 @@
 # SystemicWorks
 ### an advanced and free tool for thinking in systems
 
-![](https://img.shields.io/github/workflow/status/JCSUCoder/SystemicWorks/Node.js%20CI/main?label=Main%20Branch&style=flat-square)	![](https://img.shields.io/github/languages/code-size/JCSUCoder/SystemicWorks?style=flat-square)
+![](https://img.shields.io/github/workflow/status/JuanCSUCoder/SystemicWorks/Node.js%20CI/main?label=Main%20Branch&style=flat-square)	![](https://img.shields.io/github/languages/code-size/JuanCSUCoder/SystemicWorks?style=flat-square)
 
 This repository contains the webapp of SystemicWorks, which will be an **advanced and free tool for thinking in systems**, developed from the source code and concept of [Nicky Case](http://ncase.me), and improved to compete with proprietary software.
 
@@ -10,7 +10,7 @@ This repository contains the webapp of SystemicWorks, which will be an **advance
 ## Clone Project
 
 ```bash
-git clone https://github.com/JCSUCoder/SystemicWorks.git
+git clone https://github.com/JuanCSUCoder/SystemicWorks.git
 cd SystemicWorks
 # Open VSCode or your prefered editor
 code .

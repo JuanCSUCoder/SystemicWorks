@@ -14,14 +14,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/JCSUCoder/SystemicWorks.git"
+		"url": "git+https://github.com/JuanCSUCoder/SystemicWorks.git"
 	},
 	"author": "Juan Camilo Sánchez Urrego <jcsu2019369@gmail.com>",
 	"license": "GPL-3.0",
 	"bugs": {
-		"url": "https://github.com/JCSUCoder/SystemicWorks/issues"
+		"url": "https://github.com/JuanCSUCoder/SystemicWorks/issues"
 	},
-	"homepage": "https://github.com/JCSUCoder/SystemicWorks#readme",
+	"homepage": "https://github.com/JuanCSUCoder/SystemicWorks#readme",
 	"devDependencies": {
 		"@webpack-cli/generators": "^2.1.0",
 		"copy-webpack-plugin": "^9.0.0",

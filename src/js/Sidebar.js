@@ -214,15 +214,15 @@ function Sidebar(loopy){
 			"<span class='mini_button' onclick='window.publish(\"modal\",[\"save_link\"])'>Save as Link</span>"+
 			"<span class='mini_button' onclick='window.publish(\"export/file\")'>Save as File</span>"+
 			"<span class='mini_button' onclick='window.publish(\"import/file\")'>Load from File</span>" +
-			"<a class='mini_button' target='_blank' rel='noreferrer' href='https://jcsucoder.github.io/SystemicWorks/report'>Report a Bug</a>" +
-			"<a class='mini_button' target='_blank' rel='noreferrer' href='https://github.com/JCSUCoder/SystemicWorks'>Source Code</a>" +
-			"<a class='mini_button' target='_blank' rel='noreferrer' href='https://github.com/JCSUCoder/SystemicWorks/blob/main/LICENSE'>License</a>" +
+			"<a class='mini_button' target='_blank' rel='noreferrer' href='https://juancsucoder.github.io/SystemicWorks/report'>Report a Bug</a>" +
+			"<a class='mini_button' target='_blank' rel='noreferrer' href='https://github.com/JuanCSUCoder/SystemicWorks'>Source Code</a>" +
+			"<a class='mini_button' target='_blank' rel='noreferrer' href='https://github.com/JuanCSUCoder/SystemicWorks/blob/main/LICENSE'>License</a>" +
 			"</div>" +
 	
 			"<hr/><br>"+
 				
 			"<span>SystemicWorks</span> is "+
-			"made by <a target='_blank' rel='noreferrer' href='https://github.com/JCSUCoder'>JCSUCoder</a> based on the <a target='_blank' rel='noreferrer' href='https://ncase.me/loopy/'>LOOPY(v1.1)</a> project of <a target='_blank' rel='noreferrer' href='http://ncase.me'>nicky case</a> "
+			"made by <a target='_blank' rel='noreferrer' href='https://github.com/JuanCSUCoder'>JuanCSUCoder</a> based on the <a target='_blank' rel='noreferrer' href='https://ncase.me/loopy/'>LOOPY(v1.1)</a> project of <a target='_blank' rel='noreferrer' href='http://ncase.me'>nicky case</a> "
 
 		}));
 		self.addPage("Edit", page);
