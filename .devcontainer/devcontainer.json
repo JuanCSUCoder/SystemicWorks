@@ -50,6 +50,7 @@
 		"eamodio.gitlens", // Git Lens
 		"esbenp.prettier-vscode", // Prettier
 		"msjsdiag.debugger-for-chrome", // Debugger for Chrome
+		"humao.rest-client", // REST Client for VS Code
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
