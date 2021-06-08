@@ -8,12 +8,46 @@
 	<title>Report Bugs - Systemic Works</title>
 
 	<link rel="stylesheet" href="../assets/report.css">
+
+	<script>
+		window.addEventListener("load", () => {
+			let form = document.getElementById("report-form");
+
+			form.addEventListener("submit", (e) => {
+				e.preventDefault();
+
+				run_report();
+			})
+		});
+
+		function run_report() {
+			let title_elem = document.getElementById("title");
+			let desc = document.getElementById("description");
+			let steps = document.getElementById("steps");
+			let version = document.getElementById("browser");
+
+			let title = encodeURIComponent(title_elem.value);
+
+			let body = "**Bug description**\n";
+			body += desc.value;
+
+			body += "\n**Steps to Reproduce**\n";
+			body += steps.value;
+
+			body += "\n**Browser Version:** ";
+			body += version.value;
+
+			body = encodeURIComponent(body);
+			
+			window.location.href = "https://github.com/JuanCSUCoder/SystemicWorks/issues/new?assignees=&labels=&body="+body+"&title="+title;
+		}
+	</script>
 </head>
 
 <body>
 	<header>
 		<center>
-			<h1>Report Bugs of SystemicWorks</h1>
+			<h1>Report Bugs of SystemicWorks dvfbegd</h1>
 			<nav>
 				<a href="../">Go Back to SystemicWorks</a>
 			</nav>
@@ -23,7 +57,7 @@
 		<h2>Form</h2>
 		<p>Please don't include personal data since this information will be published in project development page at <a
 				href="https://github.com/JuanCSUCoder/SystemicWorks">GitHub</a></p>
-		<form>
+		<form id="report-form">
 			<label for="title">
 				<span>Title of Report: </span>
 				<input type="text" name="title" id="title" />
@@ -44,7 +78,7 @@
 				<input type="text" name="browser" id="browser" />
 			</label>
 			<br />
-			<input type="submit" value="Send Report" onclick="alert('Sorry, bug reporting is not enabled yet');">
+			<input type="submit" value="Send Report" />
 		</form>
 	</main>
 	<footer>
