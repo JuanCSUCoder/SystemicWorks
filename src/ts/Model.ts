@@ -3,7 +3,7 @@ import Edge from "../js/Edge";
 import Grid from "./elements/Grid";
 import Label from "../js/Label";
 import LoopMark from "../js/LoopMark";
-import Node from "../js/Node";
+import Node from "./elements/Node";
 import {
   Bounds,
   Dictionary,
