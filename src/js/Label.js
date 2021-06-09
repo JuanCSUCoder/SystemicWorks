@@ -9,7 +9,7 @@ import { _configureProperties, Loopy, _isPointInBox } from './helpers';
 
 Label.FONTSIZE = 40;
 
-export default function Label(model, config){
+export default function Label(model, config) {
 
 	var self = this;
 	self._CLASS_ = "Label";
@@ -19,27 +19,22 @@ export default function Label(model, config){
 	self.model = model;
 	self.config = config;
 
-	// Default values...
-	_configureProperties(self, config, {
-		x: 0,
-		y: 0,
-		text: "...",
-		color: "#000000"
-	});
+	// Add Configuration to the object
+	_configureProperties(self, config);
 
 	// Draw
 	var _circleRadius = 0;
-	self.draw = function(ctx){
+	self.draw = function (ctx) {
 
 		// Retina
-		var x = self.x*2;
-		var y = self.y*2;
+		var x = self.x * 2;
+		var y = self.y * 2;
 
 		// DRAW HIGHLIGHT???
-		if(self.loopy.sidebar.currentPage.target == self){
+		if (self.loopy.sidebar.currentPage.target == self) {
 			var bounds = self.getBounds();
 			ctx.save();
-			ctx.scale(2,2); // RETINA
+			ctx.scale(2, 2); // RETINA
 			ctx.beginPath();
 			ctx.rect(bounds.x, bounds.y, bounds.width, bounds.height);
 			ctx.fillStyle = HIGHLIGHT_COLOR;
@@ -49,20 +44,20 @@ export default function Label(model, config){
 
 		// Translate!
 		ctx.save();
-		ctx.translate(x,y);
+		ctx.translate(x, y);
 
 		// Text!
-		ctx.font = "100 "+Label.FONTSIZE+"px sans-serif";
+		ctx.font = "100 " + Label.FONTSIZE + "px sans-serif";
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
 		ctx.fillStyle = self.color;
 		ctx.shadowColor = "white";
-    ctx.shadowBlur = 7;
+		ctx.shadowBlur = 7;
 
 		// ugh new lines are a PAIN.
 		var lines = self.breakText();
-		ctx.translate(0, -(Label.FONTSIZE*lines.length)/2);
-		for(var i=0; i<lines.length; i++){
+		ctx.translate(0, -(Label.FONTSIZE * lines.length) / 2);
+		for (var i = 0; i < lines.length; i++) {
 			var line = lines[i];
 			ctx.fillText(line, 0, 0);
 			ctx.translate(0, Label.FONTSIZE);
@@ -77,13 +72,13 @@ export default function Label(model, config){
 	// KILL LABEL /////////////////////////
 	//////////////////////////////////////
 
-	self.kill = function(){
+	self.kill = function () {
 
 		// Remove from parent!
 		model.removeLabel(self);
 
 		// Killed!
-		publish("kill",[self]);
+		publish("kill", [self]);
 
 	};
 
@@ -91,42 +86,42 @@ export default function Label(model, config){
 	// HELPER METHODS ////////////////////
 	//////////////////////////////////////
 
-	self.breakText = function(){
+	self.breakText = function () {
 		return self.text.split(/\n/);
 	};
 
-	self.getBounds = function(){
+	self.getBounds = function () {
 
 		var ctx = self.model.ctx;
 
 		// Get MAX width...
 		var lines = self.breakText();
 		var maxWidth = 0;
-		for(var i=0; i<lines.length; i++){
+		for (var i = 0; i < lines.length; i++) {
 			var line = lines[i];
-			var w = (ctx.measureText(line).width + 10)*2;
-			if(maxWidth<w) maxWidth=w;
+			var w = (ctx.measureText(line).width + 10) * 2;
+			if (maxWidth < w) maxWidth = w;
 		}
 
 		// Dimensions, then:
 		var w = maxWidth;
-		var h = (Label.FONTSIZE*lines.length)/2;
+		var h = (Label.FONTSIZE * lines.length) / 2;
 
 		// Bounds, then:
 		return {
-			x: self.x-w/2,
-			y: self.y-h/2-Label.FONTSIZE/2,
+			x: self.x - w / 2,
+			y: self.y - h / 2 - Label.FONTSIZE / 2,
 			width: w,
-			height: h+Label.FONTSIZE/2
+			height: h + Label.FONTSIZE / 2
 		};
 
 	};
 
-	self.isPointInLabel = function(x, y){
-		return _isPointInBox(x,y, self.getBounds());
+	self.isPointInLabel = function (x, y) {
+		return _isPointInBox(x, y, self.getBounds());
 	};
 
-	self.getBoundingBox = function(){
+	self.getBoundingBox = function () {
 		var bounds = self.getBounds();
 		return {
 			left: bounds.x,

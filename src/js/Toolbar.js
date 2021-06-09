@@ -58,7 +58,11 @@ function Toolbar(loopy){
 		}
 
 		if (loopy.locked) {
-			buttons[buttons.length-1].select();
+			this.buttonsByID['lock'].select();
+		}
+
+		if (loopy.clonning) {
+			this.buttonsByID['clone'].select();
 		}
 
 		button.select();
@@ -119,6 +123,17 @@ function Toolbar(loopy){
 	});
 	self.addSeparator();
 	self.addButton({
+		id: "clone",
+		tooltip: "Press to Clone Previous Element",
+		callback: function () {
+			if (loopy.clonning) {
+				loopy.clonning = false;
+			} else {
+				loopy.clonning = true;
+			}
+		}
+	});
+	self.addButton({
 		id: "lock",
 		tooltip: "Press to Lock Edit Tools",
 		callback: function () {
@@ -176,8 +191,8 @@ function ToolbarButton(toolbar, config){
 	};
 
 	// On Click
-	if (config.id=='lock') {
-		self.callback = function() {
+	if (config.id == 'lock') {
+		self.callback = function () {
 			config.callback();
 			if (loopy.locked) {
 				self.select();
@@ -188,6 +203,15 @@ function ToolbarButton(toolbar, config){
 	} else if (config.id == 'fs') {
 		self.callback = function () {
 			config.callback();
+		}
+	} else if (config.id == 'clone') {
+		self.callback = function () {
+			config.callback();
+			if (loopy.clonning) {
+				self.select();
+			} else {
+				self.deselect();
+			}
 		}
 	} else {
 		self.callback = function () {

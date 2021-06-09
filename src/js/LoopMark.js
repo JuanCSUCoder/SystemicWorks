@@ -20,24 +20,18 @@ export default function LoopMark(model, config) {
 	self.model = model;
 	self.config = config;
 
-	_configureProperties(self, config, {
-		x: 0,
-		y: 0,
-		clockwise: LoopMark.defaultOrientation,
-		reinforcement: LoopMark.defaultType,
-		color: LoopMark.defaultColor,
-	});
+	_configureProperties(self, config);
 
 	var head = 3;
 	var r = 20;
 
 	self.kill = function () {
-    // Remove from parent!
-    model.removeLoopMark(self);
+		// Remove from parent!
+		model.removeLoopMark(self);
 
-    // Killed!
-    publish("kill", [self]);
-  }
+		// Killed!
+		publish("kill", [self]);
+	}
 
 	self.draw = function (ctx) {
 		// Retina
@@ -48,17 +42,17 @@ export default function LoopMark(model, config) {
 		ctx.translate(x, y);
 
 		if (self.loopy.sidebar.currentPage.target == self) {
-      ctx.beginPath();
-      ctx.arc(0, 0, r + 40, 0, Math.TAU, false);
-      ctx.fillStyle = HIGHLIGHT_COLOR;
-      ctx.fill();
-    }
+			ctx.beginPath();
+			ctx.arc(0, 0, r + 40, 0, Math.TAU, false);
+			ctx.fillStyle = HIGHLIGHT_COLOR;
+			ctx.fill();
+		}
 
 		ctx.beginPath();
 
 		ctx.strokeStyle = self.color;
 		ctx.lineWidth = 3 * 2;
-		
+
 		var headAngle;
 
 		if (self.clockwise) {
@@ -68,14 +62,14 @@ export default function LoopMark(model, config) {
 			ctx.arc(0, 0, r * 2, Math.PI * 1 / 4, -Math.PI * 7 / 5, !self.clockwise);
 			headAngle = -Math.PI * 7 / 5;
 		}
-		
+
 
 		ctx.stroke();
 
 		ctx.font = "100 40px sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = self.color;
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.fillStyle = self.color;
 
 		if (self.reinforcement) {
 			ctx.fillText("R", 0, 0);
@@ -84,7 +78,7 @@ export default function LoopMark(model, config) {
 		}
 
 		ctx.translate(Math.cos(headAngle) * r * 2, Math.sin(headAngle) * r * 2);
-		
+
 		if (self.clockwise) {
 			ctx.rotate(headAngle + Math.PI);
 		} else {

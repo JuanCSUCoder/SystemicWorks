@@ -28,6 +28,8 @@ export default class Node implements SimpleElement{
 	color: string;
 	radius: number;
 
+	_CLASS_: string = "Node";
+
 	constructor(model: Model, config: NodeConfig) {
 		this.id = config.id;
 

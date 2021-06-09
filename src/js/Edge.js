@@ -25,17 +25,8 @@ export default function Edge(model, config){
 	self.model = model;
 	self.config = config;
 
-	// Default values...
-	_configureProperties(self, config, {
-    from: _makeErrorFunc("CAN'T LEAVE 'FROM' BLANK"),
-    to: _makeErrorFunc("CAN'T LEAVE 'TO' BLANK"),
-    arc: 100,
-    rotation: 0,
-    strength: Edge.defaultStrength,
-    thickness: Edge.defaultThickness,
-    color: Edge.defaultColor,
-		delay: Edge.defaultDelay,
-  });
+	// Add Configuration to the object
+	_configureProperties(self, config);
 
 	// Get my NODES
 	self.from = model.getNode(self.from);

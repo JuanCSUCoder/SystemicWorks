@@ -1,12 +1,15 @@
 import Loopy from "./ts/Loopy";
 import { publish, subscribe } from "./js/minpubsub";
 import { toggleStylesheet } from "./ts/Helpers";
+import Key from './ts/tools/Key';
+import { KeysStatus } from './ts/tools/Key';
 
 declare global {
 	interface Window {
 		loopy: Loopy,
 		publish: Function,
 		subscribe: Function,
+		Key: KeysStatus,
 	}
 };
 
@@ -19,5 +22,7 @@ window.onload = function () {
 	var goto_element: HTMLElement = document.getElementById("goto");
 	goto_element.addEventListener("click", () => {
 		toggleStylesheet("assets/fs.css");
-	})
+	});
+
+	var KeysController = new Key(window, window.loopy);
 };
