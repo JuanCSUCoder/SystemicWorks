@@ -19,13 +19,8 @@ export default function Label(model, config){
 	self.model = model;
 	self.config = config;
 
-	// Default values...
-	_configureProperties(self, config, {
-		x: 0,
-		y: 0,
-		text: "...",
-		color: "#000000"
-	});
+	// Add Configuration to the object
+	_configureProperties(self, config);
 
 	// Draw
 	var _circleRadius = 0;

@@ -20,13 +20,7 @@ export default function LoopMark(model, config) {
 	self.model = model;
 	self.config = config;
 
-	_configureProperties(self, config, {
-		x: 0,
-		y: 0,
-		clockwise: LoopMark.defaultOrientation,
-		reinforcement: LoopMark.defaultType,
-		color: LoopMark.defaultColor,
-	});
+	_configureProperties(self, config);
 
 	var head = 3;
 	var r = 20;

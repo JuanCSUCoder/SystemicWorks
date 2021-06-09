@@ -41,6 +41,7 @@ export default class Loopy {
 	mode = LoopyMode.Edit;
 	tool = LoopyTool.Drag;
 	tools_locked = false;
+	clonning = false;
 	dirty = false;
 	wobbleControls = -1;
 

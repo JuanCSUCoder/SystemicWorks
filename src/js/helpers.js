@@ -258,22 +258,11 @@ export function _rotatePoints(points, angle){
 	return points;
 }
 
-export function _configureProperties(self, config, properties){
-
-	for(var propName in properties){
-
-		// Default values!
-		if(config[propName]===undefined){
-			var value = properties[propName];
-			if(typeof value=="function") value=value();
-			config[propName] = value;
-		}
-
+export function _configureProperties(self, config){
+	for(var propName in config){
 		// Transfer to "self".
 		self[propName] = config[propName];
-
 	}
-
 }
 
 export function _isPointInCircle(x, y, cx, cy, radius){

@@ -38,7 +38,7 @@ function Sidebar(loopy){
 			label: "Name:"
 			//label: "Name:"
 		}));
-		page.addComponent("hue", new ComponentColorPicker({
+		page.addComponent("color", new ComponentColorPicker({
 			label: "Color:",
 		}));
 		page.addComponent("init", new ComponentSlider({

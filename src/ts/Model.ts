@@ -43,99 +43,197 @@ export default class Model {
 	grid: Grid;
 	grid_img: HTMLImageElement;
 
+	// Default Configuration of New Elements
+	node_def: any;
+	edge_def: any;
+	label_def: any;
+	loopmark_def: any;
+
+	// Last Item Configuration (used for clone tool)
+	node_last: any;
+	edge_last: any;
+	label_last: any;
+	loopmark_last: any;
+
 	constructor(loopy: Loopy) {
-		this.loopy = loopy;
-		this.project = new ProjectLoader("[[],[],[],0,[]]");
+    this.loopy = loopy;
+    this.project = new ProjectLoader("[[],[],[],0,[]]");
 
-		// Canvas
-		this.canvas = _createCanvas();
-		this.ctx = this.canvas.getContext("2d")!;
+    // Canvas
+    this.canvas = _createCanvas();
+    this.ctx = this.canvas.getContext("2d")!;
 
-		// Grid
-		this.grid = new Grid(50, 50, 4, 5, 2);
-		this.grid_img = this.grid.getImg();
+    // Grid
+    this.grid = new Grid(50, 50, 4, 5, 2);
+    this.grid_img = this.grid.getImg();
 
-		// Render Triggers
-		// Mouse Events
-		subscribe("mousemove", () => {
-			this.drawCountdown = this.drawCountdownFull;
-		});
+    // Render Triggers
+    // Mouse Events
+    subscribe("mousemove", () => {
+      this.drawCountdown = this.drawCountdownFull;
+    });
 
-		subscribe("mousedown", () => {
-			this.drawCountdown = this.drawCountdownFull;
-		});
+    subscribe("mousedown", () => {
+      this.drawCountdown = this.drawCountdownFull;
+    });
 
-		// Info Changed
-		subscribe("model/changed", () => {
-			if (this.loopy.mode == LoopyMode.Edit) {
-				this.drawCountdown = this.drawCountdownFull;
-			}
-		});
+    // Info Changed
+    subscribe("model/changed", () => {
+      if (this.loopy.mode == LoopyMode.Edit) {
+        this.drawCountdown = this.drawCountdownFull;
+      }
+    });
 
-		// Canvas Moved
-		subscribe("canvas/moved", () => {
-			this.drawCountdown = this.drawCountdownFull;
-		});
+    // Canvas Moved
+    subscribe("canvas/moved", () => {
+      this.drawCountdown = this.drawCountdownFull;
+    });
 
-		// Resize or Reset
-		subscribe("resize", () => {
-			this.drawCountdown = this.drawCountdownFull;
-		});
+    // Resize or Reset
+    subscribe("resize", () => {
+      this.drawCountdown = this.drawCountdownFull;
+    });
 
-		subscribe("model/reset", () => {
-			this.drawCountdown = this.drawCountdownFull;
-		});
+    subscribe("model/reset", () => {
+      this.drawCountdown = this.drawCountdownFull;
+    });
 
-		subscribe("loopy/mode", () => {
-			if (this.loopy.mode == LoopyMode.Play) {
-				this.drawCountdown = this.drawCountdownFull * 2; // 4 seconds
-			} else {
-				this.drawCountdown = this.drawCountdownFull;
-			}
-		});
+    subscribe("loopy/mode", () => {
+      if (this.loopy.mode == LoopyMode.Play) {
+        this.drawCountdown = this.drawCountdownFull * 2; // 4 seconds
+      } else {
+        this.drawCountdown = this.drawCountdownFull;
+      }
+    });
 
-		subscribe("mouseclick", () => {
-			if (this.loopy.mode == LoopyMode.Edit && this.loopy.tool != LoopyTool.Erase) {
-				// Check what was clicked and open edit page
-				let clickedNode = this.getNodeByPoint(this.loopy.mouseControl.x, this.loopy.mouseControl.y, 2);
+    subscribe("mouseclick", () => {
+      if (
+        this.loopy.mode == LoopyMode.Edit &&
+        this.loopy.tool != LoopyTool.Erase
+      ) {
+        // Check what was clicked and open edit page
+        let clickedNode = this.getNodeByPoint(
+          this.loopy.mouseControl.x,
+          this.loopy.mouseControl.y,
+          2
+        );
 
-				if (clickedNode) {
-					this.loopy.sidebar.edit(clickedNode);
-					return;
-				}
+        if (clickedNode) {
+          this.loopy.sidebar.edit(clickedNode);
+          return;
+        }
 
-				let clickedLabel = this.getLabelByPoint(this.loopy.mouseControl.x, this.loopy.mouseControl.y);
+        let clickedLabel = this.getLabelByPoint(
+          this.loopy.mouseControl.x,
+          this.loopy.mouseControl.y
+        );
 
-				if (clickedLabel) {
-					this.loopy.sidebar.edit(clickedLabel);
-					return;
-				}
+        if (clickedLabel) {
+          this.loopy.sidebar.edit(clickedLabel);
+          return;
+        }
 
-				let clickedEdge = this.getEdgeByPoint(this.loopy.mouseControl.x, this.loopy.mouseControl.y);
+        let clickedEdge = this.getEdgeByPoint(
+          this.loopy.mouseControl.x,
+          this.loopy.mouseControl.y
+        );
 
-				if (clickedEdge) {
-					this.loopy.sidebar.edit(clickedEdge);
-					return;
-				}
+        if (clickedEdge) {
+          this.loopy.sidebar.edit(clickedEdge);
+          return;
+        }
 
-				let clickedLoopMark = this.getLoopMarkByPoint(this.loopy.mouseControl.x, this.loopy.mouseControl.y);
+        let clickedLoopMark = this.getLoopMarkByPoint(
+          this.loopy.mouseControl.x,
+          this.loopy.mouseControl.y
+        );
 
-				if (clickedLoopMark) {
-					this.loopy.sidebar.edit(clickedLoopMark);
-					return;
-				}
+        if (clickedLoopMark) {
+          this.loopy.sidebar.edit(clickedLoopMark);
+          return;
+        }
 
-				// Add a Label if nothing was clicked and Label Tool is Selected
-				if (this.loopy.tool == LoopyTool.Label) {
-					this.loopy.labeller.tryMakingLabel();
-					return;
-				}
+        // Add a Label if nothing was clicked and Label Tool is Selected
+        if (this.loopy.tool == LoopyTool.Label) {
+          this.loopy.labeller.tryMakingLabel();
+          return;
+        }
 
-				// If nothing of above is TRUE then go to main Edit Page
-				this.loopy.sidebar.showPage("Edit");
-			}
-		})
-	}
+        // If nothing of above is TRUE then go to main Edit Page
+        this.loopy.sidebar.showPage("Edit");
+      }
+    });
+
+    // Setup Default Configurations
+
+    this.node_def = {
+      x: 0,
+      y: 0,
+      init: 0.5,
+      color: "#00EE00",
+      label: "?",
+      radius: 60,
+    };
+
+    this.edge_def = {
+      arc: 100,
+      rotation: 0,
+      strength: 1,
+      thickness: 3,
+      color: "#666",
+      delay: 0,
+    };
+
+    this.label_def = {
+      x: 0,
+      y: 0,
+      text: "...",
+      color: "#000000",
+    };
+
+    this.loopmark_def = {
+      x: 0,
+      y: 0,
+      clockwise: 1,
+      reinforcement: 1,
+      color: "#141414",
+    };
+
+    // Setup Cloned Configurations
+
+    this.node_last = {
+      x: 0,
+      y: 0,
+      init: 0.5,
+      color: "#00EE00",
+      label: "?",
+      radius: 60,
+    };
+
+    this.edge_last = {
+      arc: 100,
+      rotation: 0,
+      strength: 1,
+      thickness: 3,
+      color: "#666",
+      delay: 0,
+    };
+
+    this.label_last = {
+      x: 0,
+      y: 0,
+      text: "...",
+      color: "#000000",
+    };
+
+    this.loopmark_last = {
+      x: 0,
+      y: 0,
+      clockwise: 1,
+      reinforcement: 1,
+      color: "#141414",
+    };
+  }
 
 	// Nodes
 
@@ -151,8 +249,23 @@ export default class Model {
 		let completeConfig: any = config;
 		if (!completeConfig.id) completeConfig.id = this.getUID();
 
+		// Add Defaults or Clone Previous Config
+		if (this.loopy.clonning) {
+			completeConfig = {
+        ...this.node_last,
+        ...completeConfig,
+      };
+		} else {
+			completeConfig = {
+        ...this.node_def,
+        ...completeConfig,
+      };
+		}
+
+		console.log(completeConfig);
+
 		// Add Node
-		let node: any = new Node(this, config);
+		let node: any = new Node(this, completeConfig);
 		this.nodeByID[node.id] = node;
 		this.nodes.push(node);
 
@@ -193,6 +306,19 @@ export default class Model {
 		// Event that says that model has changed
 		publish("model/changed");
 
+		// Add Defaults or Cloned Config
+		if (this.loopy.clonning) {
+			config = {
+				...this.edge_last,
+				...config,
+			};
+		} else {
+			config = {
+        ...this.edge_def,
+        ...config,
+      };
+		}
+
 		// Add Edge
 		let edge = new Edge(this, config);
 		this.edges.push(edge);
@@ -220,18 +346,31 @@ export default class Model {
 	// Labels
 
 	addLabel(config: any) {
-		// Event that says that the model has changed
-		publish("model/changed");
+    // Event that says that the model has changed
+    publish("model/changed");
 
-		// Add Label
-		let label = new Label(this, config);
+    // Add Defaults or Cloned Config
+    if (this.loopy.clonning) {
+			config = {
+        ...this.label_last,
+        ...config,
+      };
+    } else {
+			config = {
+        ...this.label_def,
+        ...config,
+      };
+    }
 
-		this.labels.push(label);
+    // Add Label
+    let label = new Label(this, config);
 
-		this.update();
+    this.labels.push(label);
 
-		return label;
-	}
+    this.update();
+
+    return label;
+  }
 
 	removeLabel(label: any) {
 		// Event that says that the model has changed
@@ -244,17 +383,30 @@ export default class Model {
 	// LoopMarks
 
 	addLoopMark(config: any) {
-		// Event of model changed
-		publish("model/changed");
+    // Event of model changed
+    publish("model/changed");
 
-		// Add LoopMark
-		let loop_mark = new LoopMark(this, config);
-		this.loop_marks.push(loop_mark);
+    // Add Defaults or Cloned Config
+    if (this.loopy.clonning) {
+			config = {
+        ...this.loopmark_last,
+        ...config,
+      };
+    } else {
+			config = {
+        ...this.loopmark_def,
+        ...config,
+      };
+    }
 
-		this.update();
+    // Add LoopMark
+    let loop_mark = new LoopMark(this, config);
+    this.loop_marks.push(loop_mark);
 
-		return loop_mark;
-	}
+    this.update();
+
+    return loop_mark;
+  }
 
 	removeLoopMark(loop_mark: LoopMark) {
 		// Event of model changed

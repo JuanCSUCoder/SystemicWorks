@@ -22,16 +22,8 @@ export default function Node(model, config){
 	self.model = model;
 	self.config = config;
 
-	// Default values...
-	_configureProperties(self, config, {
-		id: Node._getUID,
-		x: 0,
-		y: 0,
-		init: Node.defaultValue, // initial value!
-		label: "?",
-		hue: config.color,
-		radius: Node.DEFAULT_RADIUS
-	});
+	// Add Configuration to the object
+	_configureProperties(self, config);
 
 	// Value: from 0 to 1
 	self.value = self.init;
@@ -176,7 +168,7 @@ export default function Node(model, config){
 		var x = self.x*2;
 		var y = self.y*2;
 		var r = self.radius*2;
-		var color = self.hue;
+		var color = self.color;
 
 		// Translate!
 		ctx.save();
