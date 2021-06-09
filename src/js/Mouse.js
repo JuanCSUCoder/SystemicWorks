@@ -3,6 +3,10 @@ import { publish, subscribe } from "./minpubsub";
 import { _PADDING, _PADDING_BOTTOM } from '../ts/Helpers';
 
 window.Mouse = {};
+
+Mouse.x = 0;
+Mouse.y = 0;
+
 Mouse.init = function(loopy, target){
 
 	// Events!
