@@ -102,7 +102,7 @@ export default class ProjectLoader {
         Math.round(node.y),
         node.init,
         encodeURIComponent(encodeURIComponent(node.label)),
-        encodeURIComponent(encodeURIComponent(node.hue)),
+        encodeURIComponent(encodeURIComponent(node.color)),
         Math.round(node.radius),
       ]);
     });
