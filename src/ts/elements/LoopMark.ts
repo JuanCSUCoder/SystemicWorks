@@ -17,6 +17,7 @@ export default class LoopMark implements SimpleElement {
   clockwise: number;
   reinforcement: number;
   color: string;
+  _CLASS_ = "LoopMark";
 
   constructor(model: Model, config: LoopMarkConfig) {
     this.x = config.x;

@@ -16,6 +16,7 @@ function Sidebar(loopy) {
 
 	// Edit
 	self.edit = function (object) {
+		loopy.model.updateLasts(object);
 		self.showPage(object._CLASS_);
 		self.currentPage.edit(object);
 	};

@@ -14,6 +14,8 @@ import {
 import Loopy, { LoopyMode, LoopyTool } from "./Loopy";
 import Mouse from "./Mouse";
 import ProjectLoader from "./ProjectLoader";
+import { SimpleElement } from "./elements/ElemType";
+import { _makeErrorFunc } from "../js/helpers";
 
 export default class Model {
   loopy: Loopy;
@@ -416,7 +418,53 @@ export default class Model {
 
     // Remove LoopMark
     this.loop_marks.splice(this.loop_marks.indexOf(loop_mark), 1);
-  }
+	}
+	
+	// Update Lasts Configs
+	updateLasts(obj: any) {
+		switch (obj._CLASS_) {
+			case "Node":
+				this.node_last = {
+					x: 0,
+					y: 0,
+					init: obj.init,
+					color: obj.color,
+					label: obj.label,
+					radius: obj.radius,
+				};
+				break;
+			case "Edge":
+				this.edge_last = {
+          arc: obj.arc,
+          rotation: obj.rotation,
+          strength: obj.strength,
+					thickness: obj.thickness,
+					color: obj.color,
+					delay: obj.delay,
+        };
+				break;
+			case "Label":
+				this.label_last = {
+					x: 0,
+					y: 0,
+					text: obj.text,
+					color: obj.color,
+				};
+				break;
+			case "LoopMark":
+				this.loopmark_last = {
+          x: 0,
+          y: 0,
+          clockwise: obj.clockwise,
+					reinforcement: obj.reinforcement,
+					color: obj.color,
+        };
+				break;
+			default:
+				_makeErrorFunc("No valid object for configuration update");
+				break;
+		}
+	}
 
   // Update & Draw
 

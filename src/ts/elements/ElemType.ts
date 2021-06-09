@@ -8,9 +8,10 @@ type Bounds = {
 };
 
 export interface SimpleElement {
-	x: number;
-	y: number;
-	getBoundingBox(): Bounds;
+  x: number;
+  y: number;
+  getBoundingBox(): Bounds;
+  _CLASS_: string;
 }
 
 export interface EdgeElement {
