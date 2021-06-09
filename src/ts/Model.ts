@@ -266,8 +266,6 @@ export default class Model {
       };
     }
 
-    console.log(completeConfig);
-
     // Add Node
     let node: any = new Node(this, completeConfig);
     this.nodeByID[node.id] = node;
