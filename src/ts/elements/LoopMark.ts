@@ -4,49 +4,45 @@ import { SimpleElement } from "./ElemType";
 // NOT IMPLEMENTED
 
 export interface LoopMarkConfig {
-	x: number;
-	y: number;
-	clockwise: number;
-	reinforcement: number;
-	color: string;
+  x: number;
+  y: number;
+  clockwise: number;
+  reinforcement: number;
+  color: string;
 }
 
 export default class LoopMark implements SimpleElement {
-	x: number;
-	y: number;
-	clockwise: number;
-	reinforcement: number;
-	color: string;
+  x: number;
+  y: number;
+  clockwise: number;
+  reinforcement: number;
+  color: string;
 
-	constructor(model: Model, config: LoopMarkConfig) {
-		this.x = config.x;
-		this.y = config.y;
-		this.clockwise = config.clockwise;
-		this.reinforcement = config.reinforcement;
-		this.color = config.color;
-	}
+  constructor(model: Model, config: LoopMarkConfig) {
+    this.x = config.x;
+    this.y = config.y;
+    this.clockwise = config.clockwise;
+    this.reinforcement = config.reinforcement;
+    this.color = config.color;
+  }
 
-	// Draw
-	draw(ctx: CanvasRenderingContext2D) {
+  // Draw
+  draw(ctx: CanvasRenderingContext2D) {}
 
-	}
+  kill() {}
 
-	kill() {
-		
-	}
+  // Helpers
 
-	// Helpers
+  isPointInLoopMark(x: number, y: number) {
+    return false;
+  }
 
-	isPointInLoopMark(x: number, y: number) {
-		return false;
-	}
-	
-	getBoundingBox() {
-		return {
-			left: 0,
-			top: 0,
-			right: 0,
-			bottom: 0,
-		};
-	}
+  getBoundingBox() {
+    return {
+      left: 0,
+      top: 0,
+      right: 0,
+      bottom: 0,
+    };
+  }
 }
