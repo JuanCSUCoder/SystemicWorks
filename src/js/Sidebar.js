@@ -54,7 +54,7 @@ function Sidebar(loopy) {
 
 			// Set color of Slider
 			var node = page.target;
-			var color = node.hue;
+			var color = node.color;
 			page.getComponent("init").setBGColor(color);
 
 			// Focus on the name field IF IT'S "" or "?"
