@@ -1,3 +1,5 @@
+import { subscribe } from "../../js/minpubsub";
+import { LoopyMode } from "../Loopy";
 import Model from "../Model";
 import { SimpleElement } from "./ElemType";
 
@@ -9,7 +11,8 @@ export type BasicNodeConfig = {
 	init: number,
 	label: string,
 	color: string,
-	radius: number,
+	rx: number,
+	ry: number,
 }
 
 export interface NodeConfig extends BasicNodeConfig {
@@ -17,9 +20,6 @@ export interface NodeConfig extends BasicNodeConfig {
 }
 
 export default class Node implements SimpleElement{
-	defaultValue: number = 0.5;
-	defaultColor: string = "#00EE00";
-
 	id: number;
 	x: number;
 	y: number;
@@ -27,8 +27,18 @@ export default class Node implements SimpleElement{
 	label: string;
 	color: string;
 	radius: number;
+	rx: number;
+	ry: number;
 
 	_CLASS_: string = "Node";
+
+	value: number;
+
+	controls_visible: boolean;
+	controls_alpha: number;
+	controls_direction: number;
+	controls_selected: boolean;
+	controls_pressed: boolean;
 
 	constructor(model: Model, config: NodeConfig) {
 		this.id = config.id;
@@ -39,7 +49,48 @@ export default class Node implements SimpleElement{
 		this.init = config.init;
 		this.label = config.label;
 		this.color = config.color;
-		this.radius = config.radius;
+		this.rx = config.rx;
+		this.ry = config.ry;
+		
+		this.radius = 60;
+
+		// Setup Controls Variables
+		this.controls_visible = false;
+    this.controls_alpha = 0;
+    this.controls_direction = 0;
+    this.controls_selected = false;
+    this.controls_pressed = false;
+
+		// Make Element Interactive
+		subscribe("mousemove", () => {
+			if (model.loopy.mode == LoopyMode.Play) {
+				this.controls_selected = this.isPointInNode(window.Mouse.x, window.Mouse.y, 0);
+
+				if (this.controls_selected) {
+					this.controls_visible = true;
+					this.controls_direction = (window.Mouse.y < this.y) ? 1 : -1;
+				} else {
+					this.controls_visible = false;
+					this.controls_direction = 0;
+				}
+			}
+		});
+
+		subscribe("mousedown", () => {
+			if (model.loopy.mode == LoopyMode.Play) {
+				if (this.controls_selected) this.controls_pressed = true;
+
+				if (this.controls_pressed) {
+					let delta = this.controls_direction * 0.33;
+
+					this.value += delta;
+
+					// TODO: Propagate Delta
+				}
+			}
+		});
+
+		// TODO: Add the other listeners and complete signals logic
 	}
 
 	// Update & Draw
@@ -49,7 +100,42 @@ export default class Node implements SimpleElement{
 	}
 
 	draw(ctx: CanvasRenderingContext2D) {
+		let ax = 50*2;
+		let by = 20*2;
 
+		ctx.save();
+		ctx.translate(this.x*2, this.y*2);
+
+		// Draw Ellipse
+		ctx.beginPath();
+		ctx.lineWidth = 6;
+		ctx.strokeStyle = this.color;
+		ctx.fillStyle = "#fff";
+		ctx.ellipse(0, 0, Math.sqrt(ax * (ax + by)), Math.sqrt(ax * (ax + by)) * Math.sqrt(by / ax), 0, 0, Math.PI * 2, false);
+		ctx.fill();
+		ctx.stroke();
+
+		// Debugging
+		ctx.beginPath();
+		ctx.rect(-ax, -by, ax * 2, by * 2);
+		ctx.stroke();
+
+		// Draw Text
+		ctx.fillStyle = "#000";
+		ctx.font = "35px sans-serif";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.fillText(this.label, 0, 0, ax * 2);
+
+		// Draw Handle
+		ctx.beginPath();
+		ctx.strokeStyle = "#000";
+		ctx.fillStyle = "#fff";
+		ctx.arc(ax, by, 15, 0, Math.PI * 2);
+		ctx.fill();
+		ctx.stroke();
+
+		ctx.restore();
 	}
 
 	kill() {
@@ -59,7 +145,7 @@ export default class Node implements SimpleElement{
 	// Helpers
 
 	isPointInNode(x: number, y: number, buffer: number) {
-		return false;
+		return ((Math.pow(x - this.x, 2) / Math.pow(this.rx, 2)) + (Math.pow(y - this.y, 2) / Math.pow(this.ry, 2))) <= 1;
 	}
 
 	getBoundingBox() {
