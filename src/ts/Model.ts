@@ -537,7 +537,7 @@ export default class Model {
   // Serialize & Deserialize
 
   serialize(): string {
-    return this.project.serializeV1(this);
+    return this.project.serialize(this);
   }
 
   deserialize(raw_data: string, filename: string) {
