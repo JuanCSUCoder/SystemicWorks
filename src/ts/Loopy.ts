@@ -30,6 +30,8 @@ export enum LoopyTool {
 }
 
 export default class Loopy {
+	version = [2, 0, 0];
+
   offsetX = 0;
   offsetY = 0;
   offsetScale = 1;
