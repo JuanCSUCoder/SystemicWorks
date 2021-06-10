@@ -51,14 +51,16 @@ export default class Node implements SimpleElement{
 		this.init = config.init;
 		this.label = config.label;
 		this.color = config.color;
-
 		this.w = config.w;
 		this.h = config.h;
 		
+		// Pre calculations
 		this.rx = Math.sqrt(this.w * (this.w + this.h));
 		this.ry = this.rx * Math.sqrt(this.h / this.w);
 		
 		this.radius = (this.w + this.h) / 2;
+
+		this.value = this.init;
 
 		// Setup Controls Variables
 		this.controls_visible = false;
@@ -102,7 +104,12 @@ export default class Node implements SimpleElement{
 	// Update & Draw
 
 	update(speed: number) {
+		this.rx = Math.sqrt(this.w * (this.w + this.h));
+    this.ry = this.rx * Math.sqrt(this.h / this.w);
 
+    this.radius = (this.w + this.h) / 2;
+
+    this.value = this.init;
 	}
 
 	draw(ctx: CanvasRenderingContext2D) {
@@ -118,6 +125,13 @@ export default class Node implements SimpleElement{
 		ctx.fill();
 		ctx.stroke();
 
+		// Draw Value
+		ctx.beginPath();
+		ctx.fillStyle = this.color;
+    ctx.ellipse(0, 0, this.rx * 2 * this.value, this.ry * 2 * this.value, 0, 0, Math.PI * 2, false);
+    ctx.fill();
+    ctx.stroke();
+
 		// Debugging
 		// ctx.beginPath();
 		// ctx.rect(-ax, -by, ax * 2, by * 2);
@@ -128,6 +142,8 @@ export default class Node implements SimpleElement{
 		ctx.font = "35px sans-serif";
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
+		ctx.shadowColor = "white";
+    ctx.shadowBlur = 7;
 		ctx.fillText(this.label, 0, 0, this.w * 4);
 
 		// Draw Handle

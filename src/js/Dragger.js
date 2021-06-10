@@ -17,11 +17,22 @@ function Dragger(loopy){
 	self.offsetX = 0;
 	self.offsetY = 0;
 
+	self.handling = null;
+
 	subscribe("mousedown",function(){
 
 		// ONLY WHEN EDITING w DRAG
 		if(self.loopy.mode!=Loopy.MODE_EDIT) return;
-		if(self.loopy.tool!=Loopy.TOOL_DRAG) return;
+		if (self.loopy.tool != Loopy.TOOL_DRAG) return;
+		
+		var handler = loopy.model.getHandlerByPoint(Mouse.x, Mouse.y);
+		if (handler) {
+			self.handling = handler;
+			self.offsetX = Mouse.x - handler.w;
+			self.offsetY = Mouse.y - handler.h;
+			loopy.sidebar.edit(handler);
+			return;
+		}
 
 		// Any node under here? If so, start dragging!
 		var dragNode = loopy.model.getNodeByPoint(Mouse.x, Mouse.y);
@@ -68,7 +79,23 @@ function Dragger(loopy){
 
 		// ONLY WHEN EDITING w DRAG
 		if(self.loopy.mode!=Loopy.MODE_EDIT) return;
-		if(self.loopy.tool!=Loopy.TOOL_DRAG) return;
+		if (self.loopy.tool != Loopy.TOOL_DRAG) return;
+		
+		// If you are moving a node size handler
+		if (self.handling) {
+			// Model has changed
+			publish("model/changed");
+
+			var n = self.handling;
+
+			n.w = Math.abs(Mouse.x - self.offsetX);
+			n.h = Math.abs(Mouse.y - self.offsetY);
+
+			if (n.w < 20) n.w = 20;
+			if (n.h < 20) n.h = 20;
+
+			loopy.model.update();
+		}
 
 		// If you're dragging a NODE, move it around!
 		if(self.dragging && self.dragging._CLASS_=="Node"){
@@ -170,6 +197,7 @@ function Dragger(loopy){
 
 		// Let go!
 		self.dragging = null;
+		self.handling = null;
 		self.offsetX = 0;
 		self.offsetY = 0;
 
