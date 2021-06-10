@@ -51,6 +51,23 @@ type LoopMarkV1 = [
 
 // Version 2.0 Types
 
+type ProjectV2 = [Version, NodeV2[], EdgeV1[], LabelV1[], number, LoopMarkV1[]];
+
+type DraftProjectV2 = [
+	Version?,
+  NodeV2[]?,
+  EdgeV1[]?,
+  LabelV1[]?,
+  number?,
+  LoopMarkV1[]?
+];
+
+type Version = [
+	number, // Major
+	number, // Minor
+	number, // Patch
+];
+
 type NodeV2 = [
   number, // ID
   number, // X
@@ -76,7 +93,9 @@ export default class ProjectLoader {
 
     // Detect version and redirect process
     let file_ext = filename.split(".").pop();
-    let has_version = raw_data.includes("'");
+		let has_version = raw_data.includes("'");
+		
+		console.log("Data: ", raw_data);
 
     switch (file_ext) {
       case "smwks":
@@ -99,20 +118,26 @@ export default class ProjectLoader {
 
   // Helper for All Versions
 
-  stringify(project: ProjectV1) {
+	stringify(project: ProjectV2) {
+		let version_str = JSON.stringify(project[0]);
+
+		project.splice(0, 1);
+		
     let dataString = JSON.stringify(project);
     dataString = dataString.replace(/"/gi, "%22"); // and ONLY URIENCODE THE QUOTES
     dataString = dataString.substr(0, dataString.length - 1) + "%5D"; // also replace THE LAST CHARACTER
-    return dataString;
+		return version_str + "'" + dataString;
   }
 
   // Version 1
 
-  serializeV1(model: Model): string {
-    let data: DraftProjectV1 = [];
+  serialize(model: Model): string {
+		let data: DraftProjectV2 = [];
+		
+		data.push(model.loopy.version as Version);
 
     // Nodes
-    let nodes: NodeV1[] = [];
+    let nodes: NodeV2[] = [];
     model.nodes.forEach((node) => {
       nodes.push([
         node.id,
@@ -121,7 +146,8 @@ export default class ProjectLoader {
         node.init,
         encodeURIComponent(encodeURIComponent(node.label)),
         encodeURIComponent(encodeURIComponent(node.color)),
-        Math.round(node.radius),
+				Math.round(node.w),
+				Math.round(node.h),
       ]);
     });
     data.push(nodes);
@@ -169,7 +195,7 @@ export default class ProjectLoader {
     });
     data.push(loop_marks);
 
-    return this.stringify(data as ProjectV1);
+    return this.stringify(data as ProjectV2);
   }
 
   deserializeV1(model: Model, raw_data: string) {
@@ -193,7 +219,8 @@ export default class ProjectLoader {
         init: node[3],
         label: decodeURIComponent(node[4]),
         color: decodeURIComponent(node[5]),
-        radius: node[6],
+				w: node[6],
+				h: node[6],
       });
     });
 
