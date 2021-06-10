@@ -11,8 +11,8 @@ export type BasicNodeConfig = {
 	init: number,
 	label: string,
 	color: string,
-	rx: number,
-	ry: number,
+	w: number,
+	h: number,
 }
 
 export interface NodeConfig extends BasicNodeConfig {
@@ -27,6 +27,8 @@ export default class Node implements SimpleElement{
 	label: string;
 	color: string;
 	radius: number;
+	w: number;
+	h: number;
 	rx: number;
 	ry: number;
 
@@ -49,10 +51,14 @@ export default class Node implements SimpleElement{
 		this.init = config.init;
 		this.label = config.label;
 		this.color = config.color;
-		this.rx = config.rx;
-		this.ry = config.ry;
+
+		this.w = config.w;
+		this.h = config.h;
 		
-		this.radius = 60;
+		this.rx = Math.sqrt(this.w * (this.w + this.h));
+		this.ry = this.rx * Math.sqrt(this.h / this.w);
+		
+		this.radius = (this.w + this.h) / 2;
 
 		// Setup Controls Variables
 		this.controls_visible = false;
@@ -100,9 +106,6 @@ export default class Node implements SimpleElement{
 	}
 
 	draw(ctx: CanvasRenderingContext2D) {
-		let ax = 50*2;
-		let by = 20*2;
-
 		ctx.save();
 		ctx.translate(this.x*2, this.y*2);
 
@@ -111,27 +114,27 @@ export default class Node implements SimpleElement{
 		ctx.lineWidth = 6;
 		ctx.strokeStyle = this.color;
 		ctx.fillStyle = "#fff";
-		ctx.ellipse(0, 0, Math.sqrt(ax * (ax + by)), Math.sqrt(ax * (ax + by)) * Math.sqrt(by / ax), 0, 0, Math.PI * 2, false);
+		ctx.ellipse(0, 0, this.rx*2, this.ry*2, 0, 0, Math.PI * 2, false);
 		ctx.fill();
 		ctx.stroke();
 
 		// Debugging
-		ctx.beginPath();
-		ctx.rect(-ax, -by, ax * 2, by * 2);
-		ctx.stroke();
+		// ctx.beginPath();
+		// ctx.rect(-ax, -by, ax * 2, by * 2);
+		// ctx.stroke();
 
 		// Draw Text
 		ctx.fillStyle = "#000";
 		ctx.font = "35px sans-serif";
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
-		ctx.fillText(this.label, 0, 0, ax * 2);
+		ctx.fillText(this.label, 0, 0, this.w * 4);
 
 		// Draw Handle
 		ctx.beginPath();
 		ctx.strokeStyle = "#000";
 		ctx.fillStyle = "#fff";
-		ctx.arc(ax, by, 15, 0, Math.PI * 2);
+		ctx.arc(this.w * 2, this.h * 2, 15, 0, Math.PI * 2);
 		ctx.fill();
 		ctx.stroke();
 
@@ -145,7 +148,11 @@ export default class Node implements SimpleElement{
 	// Helpers
 
 	isPointInNode(x: number, y: number, buffer: number) {
-		return ((Math.pow(x - this.x, 2) / Math.pow(this.rx, 2)) + (Math.pow(y - this.y, 2) / Math.pow(this.ry, 2))) <= 1;
+		return ((Math.pow(x - this.x, 2)
+				/ Math.pow(this.rx, 2)) +
+			(Math.pow(y - this.y, 2)
+				/ Math.pow(this.ry, 2)))
+			<= 1;
 	}
 
 	getBoundingBox() {
