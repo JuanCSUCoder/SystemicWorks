@@ -248,15 +248,19 @@ footer {
 .mini_button {
 	font-size: 1.6rem;
 
-	border: 0.1rem black solid;
+	border: none;
 	border-radius: 0.3em;
-	padding: .5em;
+	padding: .3em;
 	margin: .3em;
 
 	text-decoration: none;
 	color: black;
 
 	cursor: pointer;
+}
+
+.mini_button:hover {
+	background-color: #999;
 }
 
 /* Play Buttons Icons */
@@ -308,7 +312,7 @@ footer {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin: 0.2rem;
+	margin: 0;
 
 	align-items: center;
 	justify-content: space-between;
