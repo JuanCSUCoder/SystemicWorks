@@ -1,3 +1,4 @@
+import { _isPointInCircle } from "../../js/helpers";
 import { publish, subscribe, unsubscribe } from "../../js/minpubsub";
 import { LoopyMode } from "../Loopy";
 import Model from "../Model";
@@ -44,6 +45,7 @@ export default class Node implements SimpleElement {
   controls_direction: number;
   controls_selected: boolean;
   controls_pressed: boolean;
+  handler_hovered: boolean;
 
   // Listeners
   _listenerMouseMove: any;
@@ -78,6 +80,7 @@ export default class Node implements SimpleElement {
     this.controls_direction = 0;
     this.controls_selected = false;
     this.controls_pressed = false;
+    this.handler_hovered = false;
 
     // Make Element Interactive
     this._listenerMouseMove = subscribe("mousemove", () => {
@@ -94,6 +97,15 @@ export default class Node implements SimpleElement {
         } else {
           this.controls_visible = false;
           this.controls_direction = 0;
+        }
+      } else {
+        let cx = this.x + this.w;
+        let cy = this.y + this.h;
+
+        if (_isPointInCircle(Mouse.x, Mouse.y, cx, cy, 6)) {
+          this.handler_hovered = true;
+        } else {
+          this.handler_hovered = false;
         }
       }
     });
@@ -178,10 +190,12 @@ export default class Node implements SimpleElement {
     ctx.fillText(this.label, 0, 0, this.w * 4);
 
     // Draw Handle
-    ctx.beginPath();
+		ctx.beginPath();
+		ctx.shadowColor = "black";
+		ctx.shadowBlur = 0;
     ctx.strokeStyle = "#000";
-    ctx.fillStyle = "#fff";
-    ctx.arc(this.w * 2, this.h * 2, 15, 0, Math.PI * 2);
+    ctx.fillStyle = this.handler_hovered ? "#fff" : "#999";
+    ctx.arc(this.w * 2, this.h * 2, 12, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
 

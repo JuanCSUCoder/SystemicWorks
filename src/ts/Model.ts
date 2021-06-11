@@ -581,7 +581,7 @@ export default class Model {
 			let cx = node.x + node.w;
 			let cy = node.y + node.h;
 
-			if (_isPointInCircle(x, y, cx, cy, 7)) {
+			if (_isPointInCircle(x, y, cx, cy, 6)) {
 				return node;
 			}
 		}
