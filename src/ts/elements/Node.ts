@@ -173,7 +173,6 @@ export default class Node implements SimpleElement {
       false
     );
     ctx.fill();
-    ctx.stroke();
 
     // Debugging
     // ctx.beginPath();
