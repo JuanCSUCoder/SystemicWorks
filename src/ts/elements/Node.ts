@@ -6,17 +6,17 @@ import { SimpleElement } from "./ElemType";
 // NOT IMPLEMENTED
 
 export type BasicNodeConfig = {
-	x: number,
-	y: number,
-	init: number,
-	label: string,
-	color: string,
-	w: number,
-	h: number,
-}
+  x: number;
+  y: number;
+  init: number;
+  label: string;
+  color: string;
+  w: number;
+  h: number;
+};
 
 export interface NodeConfig extends BasicNodeConfig {
-	id: number;
+  id: number;
 }
 
 export default class Node implements SimpleElement {
@@ -30,15 +30,15 @@ export default class Node implements SimpleElement {
   w: number;
   h: number;
   rx: number;
-	ry: number;
-	
-	model: Model;
+  ry: number;
+
+  model: Model;
 
   _CLASS_: string = "Node";
 
   value: number;
 
-	// Play Controls State Variables
+  // Play Controls State Variables
   controls_visible: boolean;
   controls_alpha: number;
   controls_direction: number;
@@ -52,8 +52,8 @@ export default class Node implements SimpleElement {
   _listenerReset: any;
 
   constructor(model: Model, config: NodeConfig) {
-		this.id = config.id;
-		this.model = model;
+    this.id = config.id;
+    this.model = model;
 
     // Apply Configuration
     this.x = config.x;
@@ -188,16 +188,16 @@ export default class Node implements SimpleElement {
     ctx.restore();
   }
 
-	kill() {
-		unsubscribe("mousemove", this._listenerMouseMove);
-		unsubscribe("mousedown", this._listenerMouseDown);
-		unsubscribe("mouseup", this._listenerMouseUp);
-		unsubscribe("model/reset", this._listenerReset);
+  kill() {
+    unsubscribe("mousemove", this._listenerMouseMove);
+    unsubscribe("mousedown", this._listenerMouseDown);
+    unsubscribe("mouseup", this._listenerMouseUp);
+    unsubscribe("model/reset", this._listenerReset);
 
-		this.model.removeNode(this);
+    this.model.removeNode(this);
 
-		publish("kill", [this]);
-	}
+    publish("kill", [this]);
+  }
 
   // Helpers
 
