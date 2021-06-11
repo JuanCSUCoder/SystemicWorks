@@ -1,5 +1,6 @@
 import { _isPointInCircle } from "../../js/helpers";
 import { publish, subscribe, unsubscribe } from "../../js/minpubsub";
+import { _fixTextInBox, _writeParagraph } from "../Helpers";
 import { LoopyMode } from "../Loopy";
 import Model from "../Model";
 import { SimpleElement } from "./ElemType";
@@ -176,17 +177,16 @@ export default class Node implements SimpleElement {
 
     // Debugging
     // ctx.beginPath();
-    // ctx.rect(-ax, -by, ax * 2, by * 2);
+		// ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
     // ctx.stroke();
 
     // Draw Text
     ctx.fillStyle = "#000";
-    ctx.font = "35px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.shadowColor = "white";
     ctx.shadowBlur = 7;
-    ctx.fillText(this.label, 0, 0, this.w * 4);
+		_fixTextInBox(this.label, ctx, { width: this.w * 4.2, height: this.h * 4.2 });
 
     // Draw Handle
 		ctx.beginPath();
