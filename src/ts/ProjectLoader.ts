@@ -49,6 +49,36 @@ type LoopMarkV1 = [
   string // Color
 ];
 
+// Version 2.0 Types
+
+type ProjectV2 = [Version, NodeV2[], EdgeV1[], LabelV1[], number, LoopMarkV1[]];
+
+type DraftProjectV2 = [
+	Version?,
+  NodeV2[]?,
+  EdgeV1[]?,
+  LabelV1[]?,
+  number?,
+  LoopMarkV1[]?
+];
+
+type Version = [
+	number, // Major
+	number, // Minor
+	number, // Patch
+];
+
+type NodeV2 = [
+  number, // ID
+  number, // X
+  number, // Y
+  number, // Init Value
+  string, // Label
+  string, // Color
+	number, // Radius X
+	number, // Radius Y 
+];
+
 export default class ProjectLoader {
   raw_data: string;
 
@@ -63,10 +93,17 @@ export default class ProjectLoader {
 
     // Detect version and redirect process
     let file_ext = filename.split(".").pop();
+		let has_version = raw_data.includes("'");
+		
+		console.log("Data: ", raw_data);
 
     switch (file_ext) {
       case "smwks":
-        this.deserializeV1(model, raw_data);
+        if (has_version) {
+          this.deserializeV2(model, raw_data);
+        } else {
+          this.deserializeV1(model, raw_data);
+        }
         break;
       case "loopy":
         this.deserializeVL(model, raw_data);
@@ -81,20 +118,26 @@ export default class ProjectLoader {
 
   // Helper for All Versions
 
-  stringify(project: ProjectV1) {
+	stringify(project: ProjectV2) {
+		let version_str = JSON.stringify(project[0]);
+
+		project.splice(0, 1);
+		
     let dataString = JSON.stringify(project);
     dataString = dataString.replace(/"/gi, "%22"); // and ONLY URIENCODE THE QUOTES
     dataString = dataString.substr(0, dataString.length - 1) + "%5D"; // also replace THE LAST CHARACTER
-    return dataString;
+		return version_str + "'" + dataString;
   }
 
   // Version 1
 
-  serializeV1(model: Model): string {
-    let data: DraftProjectV1 = [];
+  serialize(model: Model): string {
+		let data: DraftProjectV2 = [];
+		
+		data.push(model.loopy.version as Version);
 
     // Nodes
-    let nodes: NodeV1[] = [];
+    let nodes: NodeV2[] = [];
     model.nodes.forEach((node) => {
       nodes.push([
         node.id,
@@ -103,7 +146,8 @@ export default class ProjectLoader {
         node.init,
         encodeURIComponent(encodeURIComponent(node.label)),
         encodeURIComponent(encodeURIComponent(node.color)),
-        Math.round(node.radius),
+				Math.round(node.w),
+				Math.round(node.h),
       ]);
     });
     data.push(nodes);
@@ -151,7 +195,7 @@ export default class ProjectLoader {
     });
     data.push(loop_marks);
 
-    return this.stringify(data as ProjectV1);
+    return this.stringify(data as ProjectV2);
   }
 
   deserializeV1(model: Model, raw_data: string) {
@@ -175,7 +219,8 @@ export default class ProjectLoader {
         init: node[3],
         label: decodeURIComponent(node[4]),
         color: decodeURIComponent(node[5]),
-        radius: node[6],
+				w: node[6],
+				h: node[6],
       });
     });
 
@@ -217,6 +262,75 @@ export default class ProjectLoader {
     // META
     model.nodeUID = UID;
   }
+
+	deserializeV2(model: Model, raw_string: string) {
+		model.clear();
+
+		let splited = raw_string.split("'");
+		let version = splited[0];
+		raw_string = splited[1];
+
+		let data = JSON.parse(raw_string);
+
+    // Get from array
+    let nodes: NodeV2[] = data[0];
+    let edges: EdgeV1[] = data[1];
+    let labels: LabelV1[] = data[2];
+    let UID: number = data[3];
+    let loop_marks: LoopMarkV1[] = data[4];
+
+    // Nodes
+    nodes.forEach((node) => {
+      model.addNode({
+        id: node[0],
+        x: node[1],
+        y: node[2],
+        init: node[3],
+        label: decodeURIComponent(node[4]),
+        color: decodeURIComponent(node[5]),
+        w: node[6],
+        h: node[7],
+      });
+    });
+
+    // Edges
+    edges.forEach((edge) => {
+      model.addEdge({
+        from: edge[0],
+        to: edge[1],
+        arc: edge[2],
+        strength: edge[3],
+        rotation: 0,
+        thickness: edge[5],
+        color: decodeURIComponent(edge[6]),
+        delay: edge[7],
+      });
+    });
+
+    // Labels
+    labels.forEach((label) => {
+      model.addLabel({
+        x: label[0],
+        y: label[1],
+        text: decodeURIComponent(label[2]),
+        color: decodeURIComponent(label[3]),
+      });
+    });
+
+    // LoopMarks
+    loop_marks.forEach((loop_mark) => {
+      model.addLoopMark({
+        x: loop_mark[0],
+        y: loop_mark[1],
+        clockwise: loop_mark[2],
+        reinforcement: loop_mark[3],
+        color: decodeURIComponent(loop_mark[4]),
+      });
+    });
+
+    // META
+    model.nodeUID = UID;
+	}
 
   deserializeVL(model: Model, raw_string: string) {
     model.clear();

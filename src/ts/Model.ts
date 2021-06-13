@@ -3,7 +3,7 @@ import Edge from "../js/Edge";
 import Grid from "./elements/Grid";
 import Label from "../js/Label";
 import LoopMark from "../js/LoopMark";
-import Node from "../js/Node";
+import Node from "./elements/Node";
 import {
   Bounds,
   Dictionary,
@@ -15,7 +15,7 @@ import Loopy, { LoopyMode, LoopyTool } from "./Loopy";
 import Mouse from "./Mouse";
 import ProjectLoader from "./ProjectLoader";
 import { SimpleElement } from "./elements/ElemType";
-import { _makeErrorFunc } from "../js/helpers";
+import { _isPointInCircle, _makeErrorFunc } from "../js/helpers";
 
 export default class Model {
   loopy: Loopy;
@@ -32,7 +32,7 @@ export default class Model {
   drawCountdown: number = this.drawCountdownFull;
 
   // Nodes
-  nodes: any[] = [];
+  nodes: Node[] = [];
   nodeByID: Dictionary<any> = {};
   nodeUID: number = 0;
 
@@ -418,53 +418,53 @@ export default class Model {
 
     // Remove LoopMark
     this.loop_marks.splice(this.loop_marks.indexOf(loop_mark), 1);
-	}
-	
-	// Update Lasts Configs
-	updateLasts(obj: any) {
-		switch (obj._CLASS_) {
-			case "Node":
-				this.node_last = {
-					x: 0,
-					y: 0,
-					init: obj.init,
-					color: obj.color,
-					label: obj.label,
-					radius: obj.radius,
-				};
-				break;
-			case "Edge":
-				this.edge_last = {
+  }
+
+  // Update Lasts Configs
+  updateLasts(obj: any) {
+    switch (obj._CLASS_) {
+      case "Node":
+        this.node_last = {
+          x: 0,
+          y: 0,
+          init: obj.init,
+          color: obj.color,
+          label: obj.label,
+          radius: obj.radius,
+        };
+        break;
+      case "Edge":
+        this.edge_last = {
           arc: obj.arc,
           rotation: obj.rotation,
           strength: obj.strength,
-					thickness: obj.thickness,
-					color: obj.color,
-					delay: obj.delay,
+          thickness: obj.thickness,
+          color: obj.color,
+          delay: obj.delay,
         };
-				break;
-			case "Label":
-				this.label_last = {
-					x: 0,
-					y: 0,
-					text: obj.text,
-					color: obj.color,
-				};
-				break;
-			case "LoopMark":
-				this.loopmark_last = {
+        break;
+      case "Label":
+        this.label_last = {
+          x: 0,
+          y: 0,
+          text: obj.text,
+          color: obj.color,
+        };
+        break;
+      case "LoopMark":
+        this.loopmark_last = {
           x: 0,
           y: 0,
           clockwise: obj.clockwise,
-					reinforcement: obj.reinforcement,
-					color: obj.color,
+          reinforcement: obj.reinforcement,
+          color: obj.color,
         };
-				break;
-			default:
-				_makeErrorFunc("No valid object for configuration update");
-				break;
-		}
-	}
+        break;
+      default:
+        _makeErrorFunc("No valid object for configuration update");
+        break;
+    }
+  }
 
   // Update & Draw
 
@@ -537,7 +537,7 @@ export default class Model {
   // Serialize & Deserialize
 
   serialize(): string {
-    return this.project.serializeV1(this);
+    return this.project.serialize(this);
   }
 
   deserialize(raw_data: string, filename: string) {
@@ -573,6 +573,19 @@ export default class Model {
 
     return null;
   }
+
+	getHandlerByPoint(x: number, y: number) {
+		for (let i = this.nodes.length - 1; i >= 0; i--) {
+			const node = this.nodes[i];
+			
+			let cx = node.x + node.w;
+			let cy = node.y + node.h;
+
+			if (_isPointInCircle(x, y, cx, cy, 6)) {
+				return node;
+			}
+		}
+	}
 
   getEdgeByPoint(x: number, y: number) {
     for (let i = this.edges.length - 1; i >= 0; i--) {

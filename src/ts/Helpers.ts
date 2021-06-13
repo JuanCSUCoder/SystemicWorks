@@ -128,3 +128,126 @@ export function toggleStylesheet(href: string, onoff?: boolean | undefined) {
 	
   return onoff;
 }
+
+type RectSize = {
+	width: number;
+	height: number;
+}
+
+export function _fixTextInBox(text: string, ctx: CanvasRenderingContext2D, box_size: RectSize) {
+	let parag = [text];
+	let font_size: number = 60;
+	ctx.font = font_size + "px sans-serif";	
+
+	while (_measureWidth(parag, font_size, ctx) > box_size.width || _measureHeight(parag.length, font_size) > box_size.height) {
+		if (_measureHeight(parag.length, font_size) <= box_size.height) {
+			let separation: SeparationResult = _separateText(parag);
+
+			if (!separation.success) {
+				font_size--;
+        ctx.font = font_size + "px sans-serif";
+			} else {
+				parag = separation.paragraph;
+			}
+		} else {
+			font_size--;
+      ctx.font = font_size + "px sans-serif";
+		}
+	}
+	_writeParagraph(parag, font_size, ctx);
+}
+
+type SeparationResult = {
+	paragraph: string[];
+	success: boolean;
+};
+
+function _separateText(paragraph: string[]): SeparationResult {
+	let new_parag: string[] = [];
+	let success: boolean = false;
+
+	paragraph.forEach(line => {
+		if (_isTextSeparable(line)) {
+			let separated: string[] = _separateLine(line);
+
+			new_parag.push(separated[0]);
+			new_parag.push(separated[1]);
+
+			success = true;
+		} else {
+			new_parag.push(line);
+		}
+	});
+
+	return {
+		paragraph: new_parag,
+		success: success,
+	};
+}
+
+function _separateLine(text_line: string): string[] {
+	let splited = text_line.split(" ");
+
+	let result: string[] = ["", ""];
+
+	for (let i = 0; i < Math.round(splited.length / 2); i++) {
+		const part = splited[i];
+		result[0] += part + " ";
+	}
+	
+	for (let i = Math.round(splited.length / 2); i < splited.length; i++) {
+		const part = splited[i];
+		result[1] += part + " ";
+	}
+
+	result[0] = result[0].slice(0, -1);
+	result[1] = result[1].slice(0, -1);
+
+	return result;
+}
+
+function _measureWidth(paragraph: string[], font_size: number, ctx: CanvasRenderingContext2D): number {
+	let max_width = 0;
+
+	ctx.save();
+	ctx.font = font_size + "px sans-serif";
+
+	paragraph.forEach(line => {
+		let w = ctx.measureText(line).width;
+
+		if (w > max_width) {
+			max_width = w;
+		}
+	});
+
+	ctx.restore();
+
+	return max_width;
+}
+
+function _measureHeight(rows: number, font_size: number): number {
+	return rows * font_size;
+}
+
+export function _writeParagraph(paragraph: string[], font_size: number, ctx: CanvasRenderingContext2D) {
+	let vert_offset = 0;
+	let height = paragraph.length * font_size;
+
+	ctx.save();
+
+	ctx.textBaseline = "top";
+	ctx.translate(0, - height / 2);
+
+	ctx.font = font_size + "px sans-serif";
+
+	paragraph.forEach(line => {
+		ctx.fillText(line, 0, vert_offset);
+		vert_offset += font_size;
+	});
+
+	ctx.restore();
+}
+
+function _isTextSeparable(text: string): boolean {
+	return text.includes(" ");
+}

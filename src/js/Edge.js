@@ -245,11 +245,21 @@ export default function Edge(model, config){
 		// From: http://www.mathopenref.com/arcradius.html
 		r = (h/2) + ((w*w)/(8*h));
 		y = r-h; // the circle's y-pos is radius - given height.
-		a2 = Math.acos((w/2)/r); // angle from x axis, arc-cosine of half-width & radius
+		a2 = Math.acos((w / 2) / r); // angle from x axis, arc-cosine of half-width & radius
+		
+		// Distance from node origin
+		let m_n = Math.tan(a2);
+		let a_n = self.to.ry;
+		let b_n = self.to.rx;
+		let x_n = 1 / Math.sqrt((1 / (a_n * a_n)) + ((m_n * m_n) / (b_n * b_n)));
+		let y_n = Math.sqrt((b_n * b_n) - ((x_n * x_n * b_n * b_n) / (a_n * a_n)));
+		let dx_n = Math.abs(x_n);
+		let dy_n = Math.abs(y_n);
+		let d_n = Math.sqrt(dx_n * dx_n + dy_n * dy_n);
 
 		// Arrow buffer...
-		arrowBuffer = 15;
-		arrowDistance = (self.to.radius+arrowBuffer)*2;
+		arrowBuffer = 25;
+		arrowDistance = (d_n+arrowBuffer)*2;
 		arrowAngle = arrowDistance/r; // (distance/circumference)*TAU, close enough.
 		beginDistance = (self.from.radius+arrowBuffer)*2;
 		beginAngle = beginDistance/r;
