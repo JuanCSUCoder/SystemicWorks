@@ -149,7 +149,15 @@ export default class Node implements SimpleElement {
 
   draw(ctx: CanvasRenderingContext2D) {
     ctx.save();
-    ctx.translate(this.x * 2, this.y * 2);
+		ctx.translate(this.x * 2, this.y * 2);
+		
+		// Draw Highlight
+		if (this.model.loopy.sidebar.currentPage.target == this) {
+			ctx.beginPath();
+			ctx.ellipse(0, 0, (this.rx + 10) * 2, (this.ry + 10) * 2, 0, 0, Math.PI * 2, false);
+      ctx.fillStyle = window.HIGHLIGHT_COLOR;
+      ctx.fill();
+    }
 
     // Draw Ellipse
     ctx.beginPath();

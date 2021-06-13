@@ -6,11 +6,12 @@ import { KeysStatus } from './ts/tools/Key';
 
 declare global {
 	interface Window {
-		loopy: Loopy,
-		publish: Function,
-		subscribe: Function,
-		Key: KeysStatus,
-	}
+    loopy: Loopy;
+    publish: Function;
+    subscribe: Function;
+    Key: KeysStatus;
+		HIGHLIGHT_COLOR: string;
+  }
 };
 
 window.subscribe = subscribe;
