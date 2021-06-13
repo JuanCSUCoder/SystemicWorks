@@ -71,7 +71,7 @@ export default class Node implements SimpleElement {
     this.rx = Math.sqrt(this.w * (this.w + this.h));
     this.ry = this.rx * Math.sqrt(this.h / this.w);
 
-    this.radius = (this.w + this.h) / 2;
+    this.radius = Math.max(this.rx, this.ry);
 
     this.value = this.init;
 
@@ -142,7 +142,7 @@ export default class Node implements SimpleElement {
     this.rx = Math.sqrt(this.w * (this.w + this.h));
     this.ry = this.rx * Math.sqrt(this.h / this.w);
 
-    this.radius = (this.w + this.h) / 2;
+    this.radius = Math.max(this.rx, this.ry);
 
     this.value = this.init;
   }

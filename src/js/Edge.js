@@ -248,7 +248,7 @@ export default function Edge(model, config){
 		a2 = Math.acos((w/2)/r); // angle from x axis, arc-cosine of half-width & radius
 
 		// Arrow buffer...
-		arrowBuffer = 15;
+		arrowBuffer = 0;
 		arrowDistance = (self.to.radius+arrowBuffer)*2;
 		arrowAngle = arrowDistance/r; // (distance/circumference)*TAU, close enough.
 		beginDistance = (self.from.radius+arrowBuffer)*2;
