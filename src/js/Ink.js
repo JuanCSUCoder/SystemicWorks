@@ -220,10 +220,11 @@ function Ink(loopy) {
 			var bounds = _getBounds(self.strokeData);
 			var x = (bounds.left + bounds.right) / 2;
 			var y = (bounds.top + bounds.bottom) / 2;
-			var r = ((bounds.width / 2) + (bounds.height / 2)) / 2;
+			var w = bounds.width / 2;
+			var h = bounds.height / 2;
 
 			// Circle can't be TOO smol
-			if (r > 15) {
+			if (w > 20 && h > 20) {
 
 				// Snap to radius
 				/*r = Math.round(r/Ink.SNAP_TO_RADIUS)*Ink.SNAP_TO_RADIUS;
@@ -236,7 +237,8 @@ function Ink(loopy) {
 				var newNode = loopy.model.addNode({
 					x: x,
 					y: y,
-					radius: r
+					w: w,
+					h: h,
 				});
 
 				// Edit it immediately
