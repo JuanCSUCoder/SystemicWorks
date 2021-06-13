@@ -24,6 +24,16 @@ function Dragger(loopy){
 		// ONLY WHEN EDITING w DRAG
 		if(self.loopy.mode!=Loopy.MODE_EDIT) return;
 		if (self.loopy.tool != Loopy.TOOL_DRAG) return;
+
+		// Any LoopMark under here? If so, start dragging!
+		var dragLoopMark = loopy.model.getLoopMarkByPoint(Mouse.x, Mouse.y);
+		if (dragLoopMark) {
+			self.dragging = dragLoopMark;
+			self.offsetX = Mouse.x - dragLoopMark.x;
+			self.offsetY = Mouse.y - dragLoopMark.y;
+			loopy.sidebar.edit(dragLoopMark);
+			return;
+		}
 		
 		var handler = loopy.model.getHandlerByPoint(Mouse.x, Mouse.y);
 		if (handler) {
@@ -63,17 +73,6 @@ function Dragger(loopy){
 			loopy.sidebar.edit(dragEdge); // and edit!
 			return;
 		}
-
-		// Any LoopMark under here? If so, start dragging!
-		var dragLoopMark = loopy.model.getLoopMarkByPoint(Mouse.x, Mouse.y);
-		if (dragLoopMark) {
-			self.dragging = dragLoopMark;
-			self.offsetX = Mouse.x - dragLoopMark.x;
-			self.offsetY = Mouse.y - dragLoopMark.y;
-			loopy.sidebar.edit(dragLoopMark);
-			return;
-		}
-
 	});
 	subscribe("mousemove",function(){
 
