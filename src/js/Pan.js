@@ -12,18 +12,22 @@ function Pan(loopy) {
 	self.mouseYRef = 0;
 
 	subscribe("mousedown", function () {
-		self.active = true;
-		self.referenced = false;
+		if (window.loopy.tool == Loopy.TOOL_PAN) {
+			self.active = true;
+			self.referenced = false;
 
-		loopy.initialCanvasX = loopy.offsetX;
-		loopy.initialCanvasY = loopy.offsetY;
+			loopy.initialCanvasX = loopy.offsetX;
+			loopy.initialCanvasY = loopy.offsetY;
+		}
 	})
 
 	subscribe("mouseup", function () {
-		self.active = false;
+		if (window.loopy.tool == Loopy.TOOL_PAN) {
+			self.active = false;
 
-		loopy.initialCanvasX = loopy.offsetX;
-		loopy.initialCanvasY = loopy.offsetY;
+			loopy.initialCanvasX = loopy.offsetX;
+			loopy.initialCanvasY = loopy.offsetY;
+		}
 	})
 
 	subscribe("mousemove", function () {
