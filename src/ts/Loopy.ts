@@ -45,7 +45,9 @@ export default class Loopy {
   tools_locked = false;
   clonning = false;
   dirty = false;
-  wobbleControls = -1;
+	wobbleControls = -1;
+	onlyText = false;
+	temp_onlyText = false;
 
   mouseControl: any;
   model: Model;
@@ -176,8 +178,10 @@ export default class Loopy {
     MinPubSub.publish("loopy/mode");
 
     // Play Mode
-    if (mode == LoopyMode.Play) {
-      this.toolbar.buttonsByID["drag"].callback();
+		if (mode == LoopyMode.Play) {
+			this.temp_onlyText = this.onlyText;
+			if (this.temp_onlyText) this.toolbar.buttonsByID["mode"].callback();
+      this.toolbar.buttonsByID["pan"].callback();
 
       this.wobbleControls = 45;
 
@@ -194,7 +198,8 @@ export default class Loopy {
     }
 
     if (mode == LoopyMode.Edit) {
-      this.wobbleControls = -1;
+			this.wobbleControls = -1;
+			if (this.onlyText != this.temp_onlyText) this.toolbar.buttonsByID["mode"].callback();
 
       this.sidebar.showPage("Edit");
       this.playbar.showPage("Editor");

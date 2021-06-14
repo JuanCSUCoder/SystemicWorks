@@ -124,7 +124,7 @@ function Toolbar(loopy){
 	self.addSeparator();
 	self.addButton({
 		id: "clone",
-		tooltip: "Press to Clone Previous Element",
+		tooltip: "Press to enable/disable clonning the previous element",
 		callback: function () {
 			if (loopy.clonning) {
 				loopy.clonning = false;
@@ -134,8 +134,20 @@ function Toolbar(loopy){
 		}
 	});
 	self.addButton({
+		id: "mode",
+		tooltip: "Press to enable/disable 'Only Text' mode",
+		callback: function () {
+			if (loopy.onlyText) {
+				loopy.onlyText = false;
+			} else {
+				loopy.onlyText = true;
+			}
+			publish("model/changed");
+		}
+	})
+	self.addButton({
 		id: "lock",
-		tooltip: "Press to Lock Edit Tools",
+		tooltip: "Press to Lock/Unlock Edit Tools",
 		callback: function () {
 			if (loopy.locked) {
 				loopy.locked = false;
@@ -208,6 +220,15 @@ function ToolbarButton(toolbar, config){
 		self.callback = function () {
 			config.callback();
 			if (loopy.clonning) {
+				self.select();
+			} else {
+				self.deselect();
+			}
+		}
+	} else if (config.id == 'mode') {
+		self.callback = function () {
+			config.callback();
+			if (loopy.onlyText) {
 				self.select();
 			} else {
 				self.deselect();
