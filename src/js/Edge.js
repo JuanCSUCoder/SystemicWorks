@@ -149,8 +149,8 @@ export default function Edge(model, config){
 			ctx.scale(size, size);
 
 			// Signal's COLOR, BLENDING
-			var fromColor = self.from.hue;
-			var toColor = self.to.hue;
+			var fromColor = self.from.color;
+			var toColor = self.to.color;
 			var blend;
 			var bStart=0.4, bEnd=0.6;
 			if(signal.position<bStart){

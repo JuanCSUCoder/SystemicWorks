@@ -1,11 +1,9 @@
-import { _isPointInCircle } from "../../js/helpers";
+import { _isPointInCircle, _shiftArray } from "../../js/helpers";
 import { publish, subscribe, unsubscribe } from "../../js/minpubsub";
 import { _fixTextInBox, _writeParagraph } from "../Helpers";
 import { LoopyMode } from "../Loopy";
 import Model from "../Model";
 import { SimpleElement } from "./ElemType";
-
-// NOT IMPLEMENTED
 
 export type BasicNodeConfig = {
   x: number;
@@ -15,6 +13,10 @@ export type BasicNodeConfig = {
   color: string;
   w: number;
   h: number;
+};
+
+export type Signal = {
+	delta: number;
 };
 
 export interface NodeConfig extends BasicNodeConfig {
@@ -46,13 +48,16 @@ export default class Node implements SimpleElement {
   controls_direction: number;
   controls_selected: boolean;
   controls_pressed: boolean;
-	handler_hovered: boolean;
-	offset: number;
-	offset_goto: number;
-	offset_velocity: number;
-	offset_acceleration: number;
-	offset_damping: number;
-	offset_hookes: number;
+  handler_hovered: boolean;
+
+  offset: number;
+  offset_goto: number;
+  offset_velocity: number;
+  offset_acceleration: number;
+  offset_damping: number;
+  offset_hookes: number;
+
+	shift_index: number;
 
   // Listeners
   _listenerMouseMove: any;
@@ -87,14 +92,16 @@ export default class Node implements SimpleElement {
     this.controls_direction = 0;
     this.controls_selected = false;
     this.controls_pressed = false;
-		this.handler_hovered = false;
+    this.handler_hovered = false;
 
-		this.offset = 0;
-		this.offset_goto = 0;
-		this.offset_velocity = 0;
-		this.offset_acceleration = 0;
-		this.offset_damping = 0.3;
-		this.offset_hookes = 0.8;
+    this.offset = 0;
+    this.offset_goto = 0;
+    this.offset_velocity = 0;
+    this.offset_acceleration = 0;
+    this.offset_damping = 0.3;
+    this.offset_hookes = 0.8;
+
+    this.shift_index = 0;
 
     // Make Element Interactive
     this._listenerMouseMove = subscribe("mousemove", () => {
@@ -133,7 +140,10 @@ export default class Node implements SimpleElement {
 
           this.value += delta;
 
-          // TODO: Propagate Delta
+          // Propagate Delta
+					this.sendSignal({
+            delta: delta,
+          });
         }
       }
     });
@@ -155,42 +165,42 @@ export default class Node implements SimpleElement {
     this.rx = Math.sqrt(this.w * (this.w + this.h));
     this.ry = this.rx * Math.sqrt(this.h / this.w);
 
-		this.radius = Math.max(this.rx, this.ry);
-		
-		let _isPlaying = (this.model.loopy.mode == LoopyMode.Play);
+    this.radius = Math.max(this.rx, this.ry);
 
-		if (this.model.loopy.mode == LoopyMode.Edit) this.value = this.init;
+    let _isPlaying = this.model.loopy.mode == LoopyMode.Play;
 
-		if (this.controls_selected) Mouse.showCursor("pointer");
+    if (this.model.loopy.mode == LoopyMode.Edit) this.value = this.init;
 
-		let gotoAlpha = this.controls_visible ? 1 : 0;
-		this.controls_alpha = this.controls_alpha * 0.5 + gotoAlpha * 0.5;
+    if (this.controls_selected) Mouse.showCursor("pointer");
 
-		if (_isPlaying && this.controls_pressed) {
+    let gotoAlpha = this.controls_visible ? 1 : 0;
+    this.controls_alpha = this.controls_alpha * 0.5 + gotoAlpha * 0.5;
+
+    if (_isPlaying && this.controls_pressed) {
       this.offset_goto = -this.controls_direction * 20; // by 20 pixels
       // _offsetGoto = _controlsDirection*0.2; // by scale +/- 0.1
     } else {
       this.offset_goto = 0;
-		}
-		
-		this.offset += this.offset_velocity;
-		this.offset = this.offset > 40 ? 40 : this.offset;
-		this.offset = this.offset < -40 ? -40 : this.offset;
+    }
+
+    this.offset += this.offset_velocity;
+    this.offset = this.offset > 40 ? 40 : this.offset;
+    this.offset = this.offset < -40 ? -40 : this.offset;
 
     this.offset_velocity += this.offset_acceleration;
     this.offset_velocity *= this.offset_damping;
-    this.offset_acceleration = (this.offset_goto - this.offset) * this.offset_hookes;
+    this.offset_acceleration =
+      (this.offset_goto - this.offset) * this.offset_hookes;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
     ctx.save();
-		ctx.translate(this.x * 2, this.y * 2);
-		
-		// Draw Highlight
-		if (this.model.loopy.sidebar.currentPage.target == this) {
-			ctx.beginPath();
-			if (!this.model.loopy.onlyText) {
-				
+    ctx.translate(this.x * 2, this.y * 2);
+
+    // Draw Highlight
+    if (this.model.loopy.sidebar.currentPage.target == this) {
+      ctx.beginPath();
+      if (!this.model.loopy.onlyText) {
         ctx.ellipse(
           0,
           0,
@@ -201,10 +211,10 @@ export default class Node implements SimpleElement {
           Math.PI * 2,
           false
         );
-			} else {
-				ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
-			}
-			ctx.fillStyle = window.HIGHLIGHT_COLOR;
+      } else {
+        ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
+      }
+      ctx.fillStyle = window.HIGHLIGHT_COLOR;
       ctx.fill();
     }
 
@@ -232,19 +242,19 @@ export default class Node implements SimpleElement {
         false
       );
       ctx.fill();
-		} else {
-			// Draw Background Box
-			ctx.beginPath();
-			ctx.fillStyle = "#fff";
-			ctx.shadowColor = "black";
-			ctx.shadowBlur = 7;
-			ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
-			ctx.fill();
-		}
+    } else {
+      // Draw Background Box
+      ctx.beginPath();
+      ctx.fillStyle = "#fff";
+      ctx.shadowColor = "black";
+      ctx.shadowBlur = 7;
+      ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
+      ctx.fill();
+    }
 
     // Debugging
     // ctx.beginPath();
-		// ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
+    // ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
     // ctx.stroke();
 
     // Draw Text
@@ -253,33 +263,33 @@ export default class Node implements SimpleElement {
     ctx.textBaseline = "middle";
     ctx.shadowColor = "white";
     ctx.shadowBlur = 7;
-		_fixTextInBox(this.label, ctx, { width: this.w * 4, height: this.h * 4 });
+    _fixTextInBox(this.label, ctx, { width: this.w * 4, height: this.h * 4 });
 
     // Draw Handle
-		ctx.beginPath();
-		ctx.shadowColor = "black";
-		ctx.shadowBlur = 0;
+    ctx.beginPath();
+    ctx.shadowColor = "black";
+    ctx.shadowBlur = 0;
     ctx.strokeStyle = "#000";
     ctx.fillStyle = this.handler_hovered ? "#fff" : "#999";
     ctx.arc(this.w * 2, this.h * 2, 12, 0, Math.PI * 2);
     ctx.fill();
-		ctx.stroke();
+    ctx.stroke();
 
-		var cl = 40;
+    var cl = 40;
     var cy = 0;
-		
-		// Draw Controls
-		ctx.globalAlpha = this.controls_alpha;
-		ctx.strokeStyle = "rgba(0,0,0,0.8)";
-		// Top-arrow
-		ctx.beginPath();
+
+    // Draw Controls
+    ctx.globalAlpha = this.controls_alpha;
+    ctx.strokeStyle = "rgba(0,0,0,0.8)";
+    // Top-arrow
+    ctx.beginPath();
     ctx.moveTo(-cl, -cy - cl);
     ctx.lineTo(0, -cy - cl * 2);
     ctx.lineTo(cl, -cy - cl);
     ctx.lineWidth = this.controls_direction > 0 ? 10 : 3;
-		ctx.stroke();
-		// Bottom-arrow
-		ctx.beginPath();
+    ctx.stroke();
+    // Bottom-arrow
+    ctx.beginPath();
     ctx.moveTo(-cl, cy + cl);
     ctx.lineTo(0, cy + cl * 2);
     ctx.lineTo(cl, cy + cl);
@@ -288,6 +298,29 @@ export default class Node implements SimpleElement {
 
     ctx.restore();
   }
+
+  // Signals
+  sendSignal(signal: Signal) {
+		var myEdges = this.model.getEdgesByStartNode(this);
+		myEdges = _shiftArray(myEdges, this.shift_index);
+
+		this.shift_index = (this.shift_index + 1) % myEdges.length;
+
+		myEdges.forEach(edge => {
+			edge.addSignal(signal);
+		});
+	}
+	
+	takeSignal(signal: Signal) {
+		// Change node value
+		this.value += signal.delta;
+
+		// Propagate signal
+		this.sendSignal(signal);
+
+		// Animation
+		this.offset_velocity -= 6 * (signal.delta / Math.abs(signal.delta));
+	}
 
   kill() {
     unsubscribe("mousemove", this._listenerMouseMove);
