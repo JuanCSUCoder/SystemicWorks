@@ -156,12 +156,13 @@ footer {
 }
 
 .toolbar_separator {
-	width: 2em;
+	width: 1em;
 	height: 4em;
+	opacity: .9;
 	background-position: center;
 	background-origin: content-box;
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
 }
 
 /* Playbar */

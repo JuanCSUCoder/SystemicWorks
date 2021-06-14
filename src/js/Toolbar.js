@@ -124,7 +124,7 @@ function Toolbar(loopy){
 	self.addSeparator();
 	self.addButton({
 		id: "clone",
-		tooltip: "Press to Clone Previous Element",
+		tooltip: "Press to enable/disable clonning the previous element",
 		callback: function () {
 			if (loopy.clonning) {
 				loopy.clonning = false;
@@ -135,7 +135,7 @@ function Toolbar(loopy){
 	});
 	self.addButton({
 		id: "mode",
-		tooltip: "Press to enable/disable Only Text mode",
+		tooltip: "Press to enable/disable 'Only Text' mode",
 		callback: function () {
 			if (loopy.onlyText) {
 				loopy.onlyText = false;
@@ -147,7 +147,7 @@ function Toolbar(loopy){
 	})
 	self.addButton({
 		id: "lock",
-		tooltip: "Press to Lock Edit Tools",
+		tooltip: "Press to Lock/Unlock Edit Tools",
 		callback: function () {
 			if (loopy.locked) {
 				loopy.locked = false;
