@@ -135,6 +135,13 @@ footer {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+
+	justify-content: center;
+	align-items: center;
+}
+
+#toolbar[mode=play] {
+	display: none;
 }
 
 .toolbar_button {
