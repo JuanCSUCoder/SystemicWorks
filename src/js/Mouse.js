@@ -7,6 +7,8 @@ window.Mouse = {};
 Mouse.x = 0;
 Mouse.y = 0;
 
+Mouse.showCursor = function (cursor) { };
+
 Mouse.init = function(loopy, target){
 
 	// Events!

@@ -46,7 +46,13 @@ export default class Node implements SimpleElement {
   controls_direction: number;
   controls_selected: boolean;
   controls_pressed: boolean;
-  handler_hovered: boolean;
+	handler_hovered: boolean;
+	offset: number;
+	offset_goto: number;
+	offset_velocity: number;
+	offset_acceleration: number;
+	offset_damping: number;
+	offset_hookes: number;
 
   // Listeners
   _listenerMouseMove: any;
@@ -75,13 +81,20 @@ export default class Node implements SimpleElement {
 
     this.value = this.init;
 
-    // Setup Controls Variables
+    // Setup Controls & State Variables
     this.controls_visible = false;
     this.controls_alpha = 0;
     this.controls_direction = 0;
     this.controls_selected = false;
     this.controls_pressed = false;
-    this.handler_hovered = false;
+		this.handler_hovered = false;
+
+		this.offset = 0;
+		this.offset_goto = 0;
+		this.offset_velocity = 0;
+		this.offset_acceleration = 0;
+		this.offset_damping = 0.3;
+		this.offset_hookes = 0.8;
 
     // Make Element Interactive
     this._listenerMouseMove = subscribe("mousemove", () => {
@@ -142,9 +155,31 @@ export default class Node implements SimpleElement {
     this.rx = Math.sqrt(this.w * (this.w + this.h));
     this.ry = this.rx * Math.sqrt(this.h / this.w);
 
-    this.radius = Math.max(this.rx, this.ry);
+		this.radius = Math.max(this.rx, this.ry);
+		
+		let _isPlaying = (this.model.loopy.mode == LoopyMode.Play);
 
-    this.value = this.init;
+		if (this.model.loopy.mode == LoopyMode.Edit) this.value = this.init;
+
+		if (this.controls_selected) Mouse.showCursor("pointer");
+
+		let gotoAlpha = this.controls_visible ? 1 : 0;
+		this.controls_alpha = this.controls_alpha * 0.5 + gotoAlpha * 0.5;
+
+		if (_isPlaying && this.controls_pressed) {
+      this.offset_goto = -this.controls_direction * 20; // by 20 pixels
+      // _offsetGoto = _controlsDirection*0.2; // by scale +/- 0.1
+    } else {
+      this.offset_goto = 0;
+		}
+		
+		this.offset += this.offset_velocity;
+		this.offset = this.offset > 40 ? 40 : this.offset;
+		this.offset = this.offset < -40 ? -40 : this.offset;
+
+    this.offset_velocity += this.offset_acceleration;
+    this.offset_velocity *= this.offset_damping;
+    this.offset_acceleration = (this.offset_goto - this.offset) * this.offset_hookes;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -228,6 +263,27 @@ export default class Node implements SimpleElement {
     ctx.fillStyle = this.handler_hovered ? "#fff" : "#999";
     ctx.arc(this.w * 2, this.h * 2, 12, 0, Math.PI * 2);
     ctx.fill();
+		ctx.stroke();
+
+		var cl = 40;
+    var cy = 0;
+		
+		// Draw Controls
+		ctx.globalAlpha = this.controls_alpha;
+		ctx.strokeStyle = "rgba(0,0,0,0.8)";
+		// Top-arrow
+		ctx.beginPath();
+    ctx.moveTo(-cl, -cy - cl);
+    ctx.lineTo(0, -cy - cl * 2);
+    ctx.lineTo(cl, -cy - cl);
+    ctx.lineWidth = this.controls_direction > 0 ? 10 : 3;
+		ctx.stroke();
+		// Bottom-arrow
+		ctx.beginPath();
+    ctx.moveTo(-cl, cy + cl);
+    ctx.lineTo(0, cy + cl * 2);
+    ctx.lineTo(cl, cy + cl);
+    ctx.lineWidth = this.controls_direction < 0 ? 10 : 3;
     ctx.stroke();
 
     ctx.restore();
