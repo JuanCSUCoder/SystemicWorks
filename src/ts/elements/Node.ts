@@ -34,7 +34,7 @@ export default class Node implements SimpleElement {
   w: number;
   h: number;
   rx: number;
-  ry: number;
+	ry: number;
 
   model: Model;
 
@@ -59,6 +59,10 @@ export default class Node implements SimpleElement {
 
 	shift_index: number;
 
+	// Colored Bubble Values
+	cb_rx: number;
+	cb_ry: number;
+
   // Listeners
   _listenerMouseMove: any;
   _listenerMouseDown: any;
@@ -80,7 +84,10 @@ export default class Node implements SimpleElement {
 
     // Pre calculations
     this.rx = Math.sqrt(this.w * (this.w + this.h));
-    this.ry = this.rx * Math.sqrt(this.h / this.w);
+		this.ry = this.rx * Math.sqrt(this.h / this.w);
+		
+		this.cb_rx = this.rx * this.init;
+		this.cb_ry = this.ry * this.init;
 
     this.radius = Math.max(this.rx, this.ry);
 
@@ -218,24 +225,31 @@ export default class Node implements SimpleElement {
       ctx.fill();
     }
 
-    if (!this.model.loopy.onlyText) {
-      // Draw Ellipse
-      ctx.beginPath();
-      ctx.lineWidth = 6;
-      ctx.strokeStyle = this.color;
-      ctx.fillStyle = "#fff";
-      ctx.ellipse(0, 0, this.rx * 2, this.ry * 2, 0, 0, Math.PI * 2, false);
-      ctx.fill();
-      ctx.stroke();
+		if (!this.model.loopy.onlyText) {
+			// Draw Ellipse
+			ctx.beginPath();
+			ctx.lineWidth = 6;
+			ctx.strokeStyle = this.color;
+			ctx.fillStyle = "#fff";
+			ctx.ellipse(0, 0, this.rx * 2, this.ry * 2, 0, 0, Math.PI * 2, false);
+			ctx.fill();
+			ctx.stroke();
+			
+			// Calculate Value radius
+			let cb_rx_goto = this.rx * 0.9 * Math.abs(this.value);
+			this.cb_rx = this.cb_rx * 0.8 + cb_rx_goto * 0.2;
 
-      // Draw Value
-      ctx.beginPath();
-      ctx.fillStyle = this.color;
-      ctx.ellipse(
-        0,
-        0,
-        this.rx * 2 * this.value,
-        this.ry * 2 * this.value,
+			let cb_ry_goto = this.ry * 0.9 * Math.abs(this.value);
+			this.cb_ry = this.cb_ry * 0.8 + cb_ry_goto * 0.2;
+
+			// Draw Value
+			ctx.beginPath();
+			ctx.fillStyle = this.color;
+			ctx.ellipse(
+				0,
+				0,
+				this.cb_rx * 2,
+        this.cb_ry * 2,
         0,
         0,
         Math.PI * 2,
