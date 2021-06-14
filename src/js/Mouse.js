@@ -42,7 +42,7 @@ Mouse.init = function(loopy, target){
 		tx += (CW+_PADDING)/2;
 		ty += (CH+_PADDING)/2;
 
-		if (loopy.tool!=Loopy.TOOL_PAN) {
+		if (!loopy.pan.active) {
 			tx -= loopy.offsetX;
 			ty -= loopy.offsetY;
 		}

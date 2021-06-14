@@ -178,7 +178,7 @@ export default class Loopy {
 
     // Play Mode
     if (mode == LoopyMode.Play) {
-      this.toolbar.buttonsByID["drag"].callback();
+      this.toolbar.buttonsByID["pan"].callback();
 
       this.wobbleControls = 45;
 
