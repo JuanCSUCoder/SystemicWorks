@@ -1,6 +1,6 @@
 import { _isPointInCircle, _shiftArray } from "../../js/helpers";
 import { publish, subscribe, unsubscribe } from "../../js/minpubsub";
-import { _fixTextInBox, _writeParagraph } from "../Helpers";
+import { Bounds, _fixTextInBox, _writeParagraph } from "../Helpers";
 import { LoopyMode } from "../Loopy";
 import Model from "../Model";
 import { SimpleElement } from "./ElemType";
@@ -335,20 +335,29 @@ export default class Node implements SimpleElement {
 
   // Helpers
 
-  isPointInNode(x: number, y: number, buffer: number) {
-    return (
-      Math.pow(x - this.x, 2) / Math.pow(this.rx, 2) +
-        Math.pow(y - this.y, 2) / Math.pow(this.ry, 2) <=
-      1
-    );
+	isPointInNode(x: number, y: number, buffer: number) {
+		if (!this.model.loopy.onlyText) {
+			return (
+        Math.pow(x - this.x, 2) / Math.pow(this.rx, 2) +
+          Math.pow(y - this.y, 2) / Math.pow(this.ry, 2) <=
+        1
+      );
+		} else {
+			let bounds = this.getBoundingBox();
+
+			let p_in_x = bounds.left < x && x < bounds.right;
+			let p_in_y = bounds.top < y && y < bounds.bottom;
+
+			return p_in_x && p_in_y;
+		}
   }
 
-  getBoundingBox() {
+  getBoundingBox(): Bounds {
     return {
-      left: 0,
-      top: 0,
-      right: 0,
-      bottom: 0,
+      left: this.x - this.w,
+      top: this.y - this.h,
+      right: this.x + this.w,
+      bottom: this.y + this.h,
     };
   }
 }
