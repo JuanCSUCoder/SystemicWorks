@@ -26,6 +26,11 @@ module.exports = {
 				{ from: "pages/assets", to: "assets" },
 			],
 		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{ from: "pages/favicon.png" }
+			]
+		}),
 		// Add your plugins here
 		// Learn more obout plugins from https://webpack.js.org/configuration/plugins/
 	],
