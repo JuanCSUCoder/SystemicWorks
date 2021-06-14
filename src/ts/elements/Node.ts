@@ -219,7 +219,7 @@ export default class Node implements SimpleElement {
           false
         );
       } else {
-        ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
+				ctx.rect(-this.w * 2 - 10, -this.h * 2 - 10, this.w * 4 + 20, this.h * 4 + 20);
       }
       ctx.fillStyle = window.HIGHLIGHT_COLOR;
       ctx.fill();
