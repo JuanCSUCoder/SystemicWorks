@@ -45,7 +45,8 @@ export default class Loopy {
   tools_locked = false;
   clonning = false;
   dirty = false;
-  wobbleControls = -1;
+	wobbleControls = -1;
+	onlyText = true;
 
   mouseControl: any;
   model: Model;

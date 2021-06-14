@@ -154,34 +154,58 @@ export default class Node implements SimpleElement {
 		// Draw Highlight
 		if (this.model.loopy.sidebar.currentPage.target == this) {
 			ctx.beginPath();
-			ctx.ellipse(0, 0, (this.rx + 10) * 2, (this.ry + 10) * 2, 0, 0, Math.PI * 2, false);
-      ctx.fillStyle = window.HIGHLIGHT_COLOR;
+			if (!this.model.loopy.onlyText) {
+				
+        ctx.ellipse(
+          0,
+          0,
+          (this.rx + 10) * 2,
+          (this.ry + 10) * 2,
+          0,
+          0,
+          Math.PI * 2,
+          false
+        );
+			} else {
+				ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
+			}
+			ctx.fillStyle = window.HIGHLIGHT_COLOR;
       ctx.fill();
     }
 
-    // Draw Ellipse
-    ctx.beginPath();
-    ctx.lineWidth = 6;
-    ctx.strokeStyle = this.color;
-    ctx.fillStyle = "#fff";
-    ctx.ellipse(0, 0, this.rx * 2, this.ry * 2, 0, 0, Math.PI * 2, false);
-    ctx.fill();
-    ctx.stroke();
+    if (!this.model.loopy.onlyText) {
+      // Draw Ellipse
+      ctx.beginPath();
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = this.color;
+      ctx.fillStyle = "#fff";
+      ctx.ellipse(0, 0, this.rx * 2, this.ry * 2, 0, 0, Math.PI * 2, false);
+      ctx.fill();
+      ctx.stroke();
 
-    // Draw Value
-    ctx.beginPath();
-    ctx.fillStyle = this.color;
-    ctx.ellipse(
-      0,
-      0,
-      this.rx * 2 * this.value,
-      this.ry * 2 * this.value,
-      0,
-      0,
-      Math.PI * 2,
-      false
-    );
-    ctx.fill();
+      // Draw Value
+      ctx.beginPath();
+      ctx.fillStyle = this.color;
+      ctx.ellipse(
+        0,
+        0,
+        this.rx * 2 * this.value,
+        this.ry * 2 * this.value,
+        0,
+        0,
+        Math.PI * 2,
+        false
+      );
+      ctx.fill();
+		} else {
+			// Draw Background Box
+			ctx.beginPath();
+			ctx.fillStyle = "#fff";
+			ctx.shadowColor = "black";
+			ctx.shadowBlur = 7;
+			ctx.rect(-this.w * 2, -this.h * 2, this.w * 4, this.h * 4);
+			ctx.fill();
+		}
 
     // Debugging
     // ctx.beginPath();
@@ -194,7 +218,7 @@ export default class Node implements SimpleElement {
     ctx.textBaseline = "middle";
     ctx.shadowColor = "white";
     ctx.shadowBlur = 7;
-		_fixTextInBox(this.label, ctx, { width: this.w * 4.2, height: this.h * 4.2 });
+		_fixTextInBox(this.label, ctx, { width: this.w * 4, height: this.h * 4 });
 
     // Draw Handle
 		ctx.beginPath();

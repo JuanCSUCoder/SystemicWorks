@@ -258,7 +258,7 @@ export default function Edge(model, config){
 		let d_n = Math.sqrt(dx_n * dx_n + dy_n * dy_n);
 
 		// Arrow buffer...
-		arrowBuffer = 25;
+		arrowBuffer = this.model.loopy.onlyText ? 0 : 25;
 		arrowDistance = (d_n+arrowBuffer)*2;
 		arrowAngle = arrowDistance/r; // (distance/circumference)*TAU, close enough.
 		beginDistance = (self.from.radius+arrowBuffer)*2;
