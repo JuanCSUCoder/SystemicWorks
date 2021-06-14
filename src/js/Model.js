@@ -438,8 +438,6 @@ function Model(loopy){
 		var UID = data[3];
 		var loop_marks = data[4];
 
-		console.log(data);
-
 		// Nodes
 		for(var i=0;i<nodes.length;i++){
 			var node = nodes[i];

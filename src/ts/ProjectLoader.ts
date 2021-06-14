@@ -94,8 +94,6 @@ export default class ProjectLoader {
     // Detect version and redirect process
     let file_ext = filename.split(".").pop();
 		let has_version = raw_data.includes("'");
-		
-		console.log("Data: ", raw_data);
 
     switch (file_ext) {
       case "smwks":
