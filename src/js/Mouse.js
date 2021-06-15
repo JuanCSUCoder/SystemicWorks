@@ -3,6 +3,12 @@ import { publish, subscribe } from "./minpubsub";
 import { _PADDING, _PADDING_BOTTOM } from '../ts/Helpers';
 
 window.Mouse = {};
+
+Mouse.x = 0;
+Mouse.y = 0;
+
+Mouse.showCursor = function (cursor) { };
+
 Mouse.init = function(loopy, target){
 
 	// Events!
@@ -36,7 +42,7 @@ Mouse.init = function(loopy, target){
 		tx += (CW+_PADDING)/2;
 		ty += (CH+_PADDING)/2;
 
-		if (loopy.tool!=Loopy.TOOL_PAN) {
+		if (!loopy.pan.active) {
 			tx -= loopy.offsetX;
 			ty -= loopy.offsetY;
 		}

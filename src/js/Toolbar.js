@@ -6,6 +6,7 @@ TOOLBAR CODE
 
 import { publish, subscribe } from "../js/minpubsub";
 import { Loopy } from "../js/helpers";
+import { toggleStylesheet } from "../ts/Helpers";
 
 function Toolbar(loopy){
 
@@ -24,7 +25,7 @@ function Toolbar(loopy){
 		// Add the button
 		var button = new ToolbarButton(self,{
 			id: id,
-			icon: "assets/icons/"+id+".png",
+			icon: "assets/nicons/"+id+".svg",
 			tooltip: tooltip,
 			callback: callback
 		});
@@ -57,7 +58,11 @@ function Toolbar(loopy){
 		}
 
 		if (loopy.locked) {
-			buttons[buttons.length-1].select();
+			this.buttonsByID['lock'].select();
+		}
+
+		if (loopy.clonning) {
+			this.buttonsByID['clone'].select();
 		}
 
 		button.select();
@@ -118,14 +123,45 @@ function Toolbar(loopy){
 	});
 	self.addSeparator();
 	self.addButton({
+		id: "clone",
+		tooltip: "Press to enable/disable clonning the previous element",
+		callback: function () {
+			if (loopy.clonning) {
+				loopy.clonning = false;
+			} else {
+				loopy.clonning = true;
+			}
+		}
+	});
+	self.addButton({
+		id: "mode",
+		tooltip: "Press to enable/disable 'Only Text' mode",
+		callback: function () {
+			if (loopy.onlyText) {
+				loopy.onlyText = false;
+			} else {
+				loopy.onlyText = true;
+			}
+			publish("model/changed");
+		}
+	})
+	self.addButton({
 		id: "lock",
-		tooltip: "Press to Lock Edit Tools",
+		tooltip: "Press to Lock/Unlock Edit Tools",
 		callback: function () {
 			if (loopy.locked) {
 				loopy.locked = false;
 			} else {
 				loopy.locked = true;
 			}
+		}
+	});
+	self.addSeparator();
+	self.addButton({
+		id: "fs",
+		tooltip: "Return to the Landing Page",
+		callback: function () {
+			toggleStylesheet("assets/fs.css")
 		}
 	})
 
@@ -167,8 +203,8 @@ function ToolbarButton(toolbar, config){
 	};
 
 	// On Click
-	if (config.id=='lock') {
-		self.callback = function() {
+	if (config.id == 'lock') {
+		self.callback = function () {
 			config.callback();
 			if (loopy.locked) {
 				self.select();
@@ -176,8 +212,30 @@ function ToolbarButton(toolbar, config){
 				self.deselect();
 			}
 		}
+	} else if (config.id == 'fs') {
+		self.callback = function () {
+			config.callback();
+		}
+	} else if (config.id == 'clone') {
+		self.callback = function () {
+			config.callback();
+			if (loopy.clonning) {
+				self.select();
+			} else {
+				self.deselect();
+			}
+		}
+	} else if (config.id == 'mode') {
+		self.callback = function () {
+			config.callback();
+			if (loopy.onlyText) {
+				self.select();
+			} else {
+				self.deselect();
+			}
+		}
 	} else {
-		self.callback = function(){
+		self.callback = function () {
 			config.callback();
 			toolbar.selectButton(self);
 		};

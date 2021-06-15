@@ -1,6 +1,6 @@
 {
 	"name": "systemic-works",
-	"version": "1.1.1",
+	"version": "2.0.0",
 	"description": "Systemic Works",
 	"private": "true",
 	"scripts": {
@@ -14,26 +14,29 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/JCSUCoder/SystemicWorks.git"
+		"url": "git+https://github.com/JuanCSUCoder/SystemicWorks.git"
 	},
 	"author": "Juan Camilo Sánchez Urrego <jcsu2019369@gmail.com>",
 	"license": "GPL-3.0",
 	"bugs": {
-		"url": "https://github.com/JCSUCoder/SystemicWorks/issues"
+		"url": "https://github.com/JuanCSUCoder/SystemicWorks/issues"
 	},
-	"homepage": "https://github.com/JCSUCoder/SystemicWorks#readme",
+	"homepage": "https://github.com/JuanCSUCoder/SystemicWorks#readme",
 	"devDependencies": {
-		"@webpack-cli/generators": "^2.0.0",
-		"copy-webpack-plugin": "^8.1.1",
-		"css-loader": "^5.2.4",
-		"gh-pages": "^3.1.0",
+		"@webpack-cli/generators": "^2.2.0",
+		"copy-webpack-plugin": "^9.0.0",
+		"css-loader": "^5.2.6",
+		"gh-pages": "^3.2.0",
 		"html-webpack-plugin": "^5.3.1",
 		"live-server": "^1.2.1",
 		"style-loader": "^2.0.0",
-		"ts-loader": "^9.1.1",
-		"typescript": "^4.2.4",
-		"webpack": "^5.35.1",
-		"webpack-cli": "^4.6.0",
+		"ts-loader": "^9.2.3",
+		"typescript": "^4.3.2",
+		"webpack": "^5.38.1",
+		"webpack-cli": "^4.7.2",
 		"webpack-dev-server": "^3.11.2"
+	},
+	"dependencies": {
+		"ws": "^7.4.6"
 	}
 }

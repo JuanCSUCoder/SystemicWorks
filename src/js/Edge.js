@@ -5,7 +5,7 @@ EDGE!
 **********************************/
 
 import { subscribe, publish, unsubscribe } from './minpubsub';
-import { _configureProperties, Loopy, _makeErrorFunc, _isPointInCircle } from './helpers';
+import { _configureProperties, Loopy, _makeErrorFunc, _isPointInCircle, _blendColors } from './helpers';
 
 Edge.allSignals = [];
 Edge.MAX_SIGNALS = 100;
@@ -25,17 +25,8 @@ export default function Edge(model, config){
 	self.model = model;
 	self.config = config;
 
-	// Default values...
-	_configureProperties(self, config, {
-    from: _makeErrorFunc("CAN'T LEAVE 'FROM' BLANK"),
-    to: _makeErrorFunc("CAN'T LEAVE 'TO' BLANK"),
-    arc: 100,
-    rotation: 0,
-    strength: Edge.defaultStrength,
-    thickness: Edge.defaultThickness,
-    color: Edge.defaultColor,
-		delay: Edge.defaultDelay,
-  });
+	// Add Configuration to the object
+	_configureProperties(self, config);
 
 	// Get my NODES
 	self.from = model.getNode(self.from);
@@ -158,8 +149,8 @@ export default function Edge(model, config){
 			ctx.scale(size, size);
 
 			// Signal's COLOR, BLENDING
-			var fromColor = self.from.hue;
-			var toColor = self.to.hue;
+			var fromColor = self.from.color;
+			var toColor = self.to.color;
 			var blend;
 			var bStart=0.4, bEnd=0.6;
 			if(signal.position<bStart){
@@ -254,11 +245,21 @@ export default function Edge(model, config){
 		// From: http://www.mathopenref.com/arcradius.html
 		r = (h/2) + ((w*w)/(8*h));
 		y = r-h; // the circle's y-pos is radius - given height.
-		a2 = Math.acos((w/2)/r); // angle from x axis, arc-cosine of half-width & radius
+		a2 = Math.acos((w / 2) / r); // angle from x axis, arc-cosine of half-width & radius
+		
+		// Distance from node origin
+		let m_n = Math.tan(a2);
+		let a_n = self.to.ry;
+		let b_n = self.to.rx;
+		let x_n = 1 / Math.sqrt((1 / (a_n * a_n)) + ((m_n * m_n) / (b_n * b_n)));
+		let y_n = Math.sqrt((b_n * b_n) - ((x_n * x_n * b_n * b_n) / (a_n * a_n)));
+		let dx_n = Math.abs(x_n);
+		let dy_n = Math.abs(y_n);
+		let d_n = Math.sqrt(dx_n * dx_n + dy_n * dy_n);
 
 		// Arrow buffer...
-		arrowBuffer = 15;
-		arrowDistance = (self.to.radius+arrowBuffer)*2;
+		arrowBuffer = this.model.loopy.onlyText ? 0 : 25;
+		arrowDistance = (d_n+arrowBuffer)*2;
 		arrowAngle = arrowDistance/r; // (distance/circumference)*TAU, close enough.
 		beginDistance = (self.from.radius+arrowBuffer)*2;
 		beginAngle = beginDistance/r;
@@ -292,6 +293,10 @@ export default function Edge(model, config){
 			dmr = end - dmm;
 		} else {
 			dmr = end + dmm;
+		}
+
+		if (self.from==self.to) {
+			dmr -= Math.PI/2
 		}
 
 		// if (self.arc > 0) {

@@ -16,7 +16,7 @@ import { _PADDING, _PADDING_BOTTOM } from '../ts/Helpers';
 Ink.MINIMUM_RADIUS = Node.DEFAULT_RADIUS;
 Ink.SNAP_TO_RADIUS = 25;
 
-function Ink(loopy){
+function Ink(loopy) {
 
 	var self = {};
 	self.loopy = loopy;
@@ -31,12 +31,12 @@ function Ink(loopy){
 	self.strokeData = [];
 
 	// Drawing!
-	self.drawInk = function(){
+	self.drawInk = function () {
 
-		if(!Mouse.pressed) return;
+		if (!Mouse.pressed) return;
 
 		// Last point
-		var lastPoint = self.strokeData[self.strokeData.length-1];
+		var lastPoint = self.strokeData[self.strokeData.length - 1];
 
 		// Style
 		ctx.strokeStyle = "#ccc";
@@ -47,16 +47,16 @@ function Ink(loopy){
 		var canvasses = document.getElementById("canvasses");
 		var CW = canvasses.clientWidth - _PADDING - _PADDING;
 		var CH = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
-		var tx = loopy.offsetX*2;
-		var ty = loopy.offsetY*2;
-		tx -= CW+_PADDING;
-		ty -= CH+_PADDING;
+		var tx = loopy.offsetX * 2;
+		var ty = loopy.offsetY * 2;
+		tx -= CW + _PADDING;
+		ty -= CH + _PADDING;
 		var s = loopy.offsetScale; // TODO: Zooming
-		tx = s*tx;
-		ty = s*ty;
-		tx += CW+_PADDING;
-		ty += CH+_PADDING;
-		if(loopy.embedded){
+		tx = s * tx;
+		ty = s * ty;
+		tx += CW + _PADDING;
+		ty += CH + _PADDING;
+		if (loopy.embedded) {
 			tx += _PADDING; // dunno why but this is needed
 			ty += _PADDING; // dunno why but this is needed
 		}
@@ -65,68 +65,68 @@ function Ink(loopy){
 
 		// Draw line from last to current
 		ctx.beginPath();
-		ctx.moveTo(lastPoint[0]*2, lastPoint[1]*2);
-		ctx.lineTo(Mouse.x*2, Mouse.y*2);
+		ctx.moveTo(lastPoint[0] * 2, lastPoint[1] * 2);
+		ctx.lineTo(Mouse.x * 2, Mouse.y * 2);
 		ctx.stroke();
 
 		// Update last point
-		self.strokeData.push([Mouse.x,Mouse.y]);
+		self.strokeData.push([Mouse.x, Mouse.y]);
 
 	};
-	self.reset = function(){
+	self.reset = function () {
 		// Translate to center, (translate, scale, translate) to expand to size
 		var canvasses = document.getElementById("canvasses");
 		var CW = canvasses.clientWidth - _PADDING - _PADDING;
 		var CH = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
-		var tx = loopy.offsetX*2;
-		var ty = loopy.offsetY*2;
-		tx -= CW+_PADDING;
-		ty -= CH+_PADDING;
+		var tx = loopy.offsetX * 2;
+		var ty = loopy.offsetY * 2;
+		tx -= CW + _PADDING;
+		ty -= CH + _PADDING;
 		var s = loopy.offsetScale; // TODO: Zooming
-		tx = s*tx;
-		ty = s*ty;
-		tx += CW+_PADDING;
-		ty += CH+_PADDING;
-		if(loopy.embedded){
+		tx = s * tx;
+		ty = s * ty;
+		tx += CW + _PADDING;
+		ty += CH + _PADDING;
+		if (loopy.embedded) {
 			tx += _PADDING; // dunno why but this is needed
 			ty += _PADDING; // dunno why but this is needed
 		}
 
-		ctx.clearRect(-tx, -ty, canvas.width,canvas.height); // Clear canvas
+		ctx.clearRect(-tx, -ty, canvas.width, canvas.height); // Clear canvas
 		self.strokeData = []; // Reset stroke data
 	};
-	subscribe("mousedown",function(){
+	subscribe("mousedown", function () {
 
 		// ONLY WHEN EDITING w INK
-		if(self.loopy.mode!=Loopy.MODE_EDIT) return;
-		if(self.loopy.tool!=Loopy.TOOL_INK) return;
+		if (self.loopy.mode != Loopy.MODE_EDIT) return;
+		if (self.loopy.tool != Loopy.TOOL_INK) return;
 
 		// New stroke data
 		self.strokeData = [];
-		self.strokeData.push([Mouse.x,Mouse.y]);
+		self.strokeData.push([Mouse.x, Mouse.y]);
 
 		// Draw to canvas!
 		self.drawInk();
 
 	});
-	subscribe("mousemove",function(){
+	subscribe("mousemove", function () {
 
 		// ONLY WHEN EDITING w INK
-		if(self.loopy.mode!=Loopy.MODE_EDIT) return;
-		if(self.loopy.tool!=Loopy.TOOL_INK) return;
+		if (self.loopy.mode != Loopy.MODE_EDIT) return;
+		if (self.loopy.tool != Loopy.TOOL_INK) return;
 
 		// Draw ink!
 		self.drawInk();
 
 	});
-	subscribe("mouseup",function(){
+	subscribe("mouseup", function () {
 
 		// ONLY WHEN EDITING w INK
-		if(self.loopy.mode!=Loopy.MODE_EDIT) return;
-		if(self.loopy.tool!=Loopy.TOOL_INK) return;
+		if (self.loopy.mode != Loopy.MODE_EDIT) return;
+		if (self.loopy.tool != Loopy.TOOL_INK) return;
 
-		if(self.strokeData.length<2) return;
-		if(!Mouse.moved) return;
+		if (self.strokeData.length < 2) return;
+		if (!Mouse.moved) return;
 
 		/*************************
 		
@@ -140,15 +140,15 @@ function Ink(loopy){
 		// Started in a node?
 		var startPoint = self.strokeData[0];
 		var startNode = loopy.model.getNodeByPoint(startPoint[0], startPoint[1]);
-		if(!startNode) startNode=loopy.model.getNodeByPoint(startPoint[0], startPoint[1], 20); // try again with buffer
+		if (!startNode) startNode = loopy.model.getNodeByPoint(startPoint[0], startPoint[1], 20); // try again with buffer
 
 		// Ended in a node?
-		var endPoint = self.strokeData[self.strokeData.length-1];
+		var endPoint = self.strokeData[self.strokeData.length - 1];
 		var endNode = loopy.model.getNodeByPoint(endPoint[0], endPoint[1]);
-		if(!endNode) endNode=loopy.model.getNodeByPoint(endPoint[0], endPoint[1], 40); // try again with buffer
+		if (!endNode) endNode = loopy.model.getNodeByPoint(endPoint[0], endPoint[1], 40); // try again with buffer
 
 		// EDGE: started AND ended in nodes
-		if(startNode && endNode){
+		if (startNode && endNode) {
 
 			// Config!
 			var edgeConfig = {
@@ -157,18 +157,18 @@ function Ink(loopy){
 			};
 
 			// If it's the same node...
-			if(startNode==endNode){
+			if (startNode == endNode) {
 
 				// TODO: clockwise or counterclockwise???
 				// TODO: if the arc DOES NOT go beyond radius, don't make self-connecting edge. also min distance.
 
 				// Find rotation first by getting average point
 				var bounds = _getBounds(self.strokeData);
-				var x = (bounds.left+bounds.right)/2;
-				var y = (bounds.top+bounds.bottom)/2;
-				var dx = x-startNode.x;
-				var dy = y-startNode.y;
-				var angle = Math.atan2(dy,dx);
+				var x = (bounds.left + bounds.right) / 2;
+				var y = (bounds.top + bounds.bottom) / 2;
+				var dx = x - startNode.x;
+				var dy = y - startNode.y;
+				var angle = Math.atan2(dy, dx);
 
 				// Then, find arc height.
 				var translated = _translatePoints(self.strokeData, -startNode.x, -startNode.y);
@@ -176,37 +176,37 @@ function Ink(loopy){
 				bounds = _getBounds(rotated);
 
 				// Arc & Rotation!
-				edgeConfig.rotation = angle*(360/Math.TAU) + 90;
+				edgeConfig.rotation = angle * (360 / Math.TAU) + 90;
 				edgeConfig.arc = bounds.right;
 
 				// ACTUALLY, IF THE ARC IS *NOT* GREATER THAN THE RADIUS, DON'T DO IT.
 				// (and otherwise, make sure minimum distance of radius+25)
-				if(edgeConfig.arc < startNode.radius){
-					edgeConfig=null;
+				if (edgeConfig.arc < startNode.radius) {
+					edgeConfig = null;
 					loopy.sidebar.edit(startNode); // you were probably trying to edit the node
-				}else{
-					var minimum = startNode.radius+25;
-					if(edgeConfig.arc<minimum) edgeConfig.arc=minimum;
+				} else {
+					var minimum = startNode.radius + 25;
+					if (edgeConfig.arc < minimum) edgeConfig.arc = minimum;
 				}
 
-			}else{
+			} else {
 
 				// Otherwise, find the arc by translating & rotating
-				var dx = endNode.x-startNode.x;
-				var dy = endNode.y-startNode.y;
-				var angle = Math.atan2(dy,dx);
+				var dx = endNode.x - startNode.x;
+				var dy = endNode.y - startNode.y;
+				var angle = Math.atan2(dy, dx);
 				var translated = _translatePoints(self.strokeData, -startNode.x, -startNode.y);
 				var rotated = _rotatePoints(translated, -angle);
 				var bounds = _getBounds(rotated);
-				
+
 				// Arc!
-				if(Math.abs(bounds.top)>Math.abs(bounds.bottom)) edgeConfig.arc = -bounds.top;
+				if (Math.abs(bounds.top) > Math.abs(bounds.bottom)) edgeConfig.arc = -bounds.top;
 				else edgeConfig.arc = -bounds.bottom;
 
 			}
 
 			// Add the edge!
-			if(edgeConfig){
+			if (edgeConfig) {
 				var newEdge = loopy.model.addEdge(edgeConfig);
 				loopy.sidebar.edit(newEdge);
 			}
@@ -214,16 +214,17 @@ function Ink(loopy){
 		}
 
 		// NODE: did NOT start in a node.
-		if(!startNode){
+		if (!startNode) {
 
 			// Just roughly make a circle the size of the bounds of the circle
 			var bounds = _getBounds(self.strokeData);
-			var x = (bounds.left+bounds.right)/2;
-			var y = (bounds.top+bounds.bottom)/2;
-			var r = ((bounds.width/2)+(bounds.height/2))/2;
+			var x = (bounds.left + bounds.right) / 2;
+			var y = (bounds.top + bounds.bottom) / 2;
+			var w = bounds.width / 2;
+			var h = bounds.height / 2;
 
 			// Circle can't be TOO smol
-			if(r>15){
+			if (w > 20 && h > 20) {
 
 				// Snap to radius
 				/*r = Math.round(r/Ink.SNAP_TO_RADIUS)*Ink.SNAP_TO_RADIUS;
@@ -234,9 +235,10 @@ function Ink(loopy){
 
 				// Make that node!
 				var newNode = loopy.model.addNode({
-					x:x,
-					y:y,
-					radius:r
+					x: x,
+					y: y,
+					w: w,
+					h: h,
 				});
 
 				// Edit it immediately
@@ -250,11 +252,11 @@ function Ink(loopy){
 		self.reset();
 
 	});
-	subscribe("mouseclick",function(){
+	subscribe("mouseclick", function () {
 
 		// ONLY WHEN EDITING w INK
-		if(self.loopy.mode!=Loopy.MODE_EDIT) return;
-		if(self.loopy.tool!=Loopy.TOOL_INK) return;
+		if (self.loopy.mode != Loopy.MODE_EDIT) return;
+		if (self.loopy.tool != Loopy.TOOL_INK) return;
 
 		// Reset
 		self.reset();
