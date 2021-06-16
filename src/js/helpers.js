@@ -28,6 +28,13 @@ export var isMacLike = navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i) ? tru
 var _PADDING = 25;
 var _PADDING_BOTTOM = 110;
 
+var body_elem = document.getElementsByTagName("body")[0];
+
+body_elem.ontransitionend = function () {
+	console.log("Resizing");
+	publish("resize");
+};
+
 window.onresize = function () {
 	publish("resize");
 };
