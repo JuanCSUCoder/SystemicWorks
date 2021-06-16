@@ -31,7 +31,6 @@ var _PADDING_BOTTOM = 110;
 var body_elem = document.getElementsByTagName("body")[0];
 
 body_elem.ontransitionend = function () {
-	console.log("Resizing");
 	publish("resize");
 };
 
