@@ -577,7 +577,7 @@ export default class Model {
 	getHandlerByPoint(x: number, y: number) {
 		for (let i = this.nodes.length - 1; i >= 0; i--) {
 			const node = this.nodes[i];
-			
+
 			let cx = node.x + node.w;
 			let cy = node.y + node.h;
 
