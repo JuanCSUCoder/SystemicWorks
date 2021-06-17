@@ -107,18 +107,18 @@ textarea {
     background: #30363d;
     color: white;
   }
-	.Bug-report .title{
-		color: #fdfdfd;
-	}
+  .Bug-report .title {
+    color: #fdfdfd;
+  }
   .Controls1,
   .Controls,
   .textarea {
     background: #24303c;
-		border: 1px solid #1f53c5;
+    border: 1px solid #1f53c5;
   }
-	.Bug-report a{
-		color: #5b6df7;
-	}
+  .Bug-report a {
+    color: #5b6df7;
+  }
   .Bug-report .Bottoms {
     background: #1f53c5;
     color: white;
