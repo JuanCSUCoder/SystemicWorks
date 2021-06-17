@@ -76,7 +76,7 @@ type NodeV2 = [
   string, // Label
   string, // Color
 	number, // Radius X
-	number, // Radius Y 
+	number, // Radius Y
 ];
 
 export default class ProjectLoader {
@@ -122,7 +122,7 @@ export default class ProjectLoader {
 		let version_str = JSON.stringify(project[0]);
 
 		project.splice(0, 1);
-		
+
     let dataString = JSON.stringify(project);
     dataString = dataString.replace(/"/gi, "%22"); // and ONLY URIENCODE THE QUOTES
     dataString = dataString.substr(0, dataString.length - 1) + "%5D"; // also replace THE LAST CHARACTER
@@ -133,7 +133,7 @@ export default class ProjectLoader {
 
   serialize(model: Model): string {
 		let data: DraftProjectV2 = [];
-		
+
 		data.push(model.loopy.version as Version);
 
     // Nodes
