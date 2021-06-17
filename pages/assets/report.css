@@ -1,21 +1,80 @@
-html {
-	font-size: 62.5%;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+* {
+	margin:0%;
+	padding: 0;
+	box-sizing: border-box;
 }
-
 body {
-	font-size: 1.4rem;
+	background-image: url('aguafondo.jpg');
 }
-
-.main-container {
-	margin: 2rem;
+.Bug-report{
+	width: 600px;
+	background:#24303c;
+	padding: 30px;
+	margin: auto;
+	margin-top: 100px;
+	border-radius: 4px;
+	height: 750px;
+	font-family: 'calibri';
+	color: white;
+	box-shadow: 7px 13px 37px #000;
 }
-
-textarea {
-	width: 50rem;
+.Bug-report h4 {
+font-size: 22px;
+margin-bottom: 20px;
 }
-
-label {
-	display: block;
-	margin-bottom: 1rem;
+.Controls1 {
+	width: 100%;
+	background:#24303c;
+	padding: 10px;
+	border-radius: 20px;
+	margin-bottom: 12px;
+	border: 1px solid #1f53c5;
+	font-family: 'calibri';
+	font-size: 14px;
+	line-height: 10px;
+	margin-block-start: 20px;
+}
+.Controls {
+	width: 100%;
+	background:#24303c;
+	padding: 10px;
+	border-radius: 20px;
+	margin-bottom: 12px;
+	border: 1px solid #1f53c5;
+	font-family: 'calibri';
+	font-size: 14px;
+	line-height: 10px;
+}
+.Bug-report p{
+	height: 40px;
+	text-align: justify;
+	font-size: 18px;
+	margin-top: 20px;
+	line-height: 25px;
+	text-indent: 50px;
+	letter-spacing: 1px;
+}
+.Bug-report .p4{
+	text-align: inherit;
+	font-size: 14px;
+	line-height: 25px;
+  text-indent: 50px;
+}
+.Bug-report a {
+	color: white;
+	font-size:18px;
+	text-decoration: underline;
+}
+.Bug-report a:hover {
+	color: white;
+	text-decoration: none;
+}
+.Bug-report .Bottoms {
+	width: 100%;
+	background: #1f53c5;
+	border: none;
+	padding: 12px;
+	color: white;
+	margin: 16px 0;
+	font-size: 16px;
 }

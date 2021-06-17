@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Report Bugs - Systemic Works</title>
+	<title>Bug Report</title>
 
 	<link rel="stylesheet" href="../assets/report.css">
 
@@ -38,68 +38,52 @@
 			body += version.value;
 
 			body = encodeURIComponent(body);
-			
-			window.location.href = "https://github.com/JuanCSUCoder/SystemicWorks/issues/new?assignees=&labels=&body="+body+"&title="+title;
+
+			window.location.href = "https://github.com/JuanCSUCoder/SystemicWorks/issues/new?assignees=&labels=&body=" + body + "&title=" + title;
 		}
 	</script>
 </head>
 
 <body>
-	<header>
-		<center>
-			<h1>Report Bugs of SystemicWorks</h1>
+	<main>
+		<section class="Bug-report">
+			<h4>Report Bugs of SystemicWorks</h4>
 			<nav>
 				<a href="../">Go Back to SystemicWorks</a>
 			</nav>
-		</center>
-	</header>
-	<main class="main-container">
-		<h2>Form</h2>
-		<p>Please don't include personal data since this information will be published in project development page at <a
-				href="https://github.com/JuanCSUCoder/SystemicWorks">GitHub</a></p>
-		<form id="report-form">
-			<label for="title">
-				<span>Title of Report: </span>
-				<input type="text" name="title" id="title" />
-			</label>
-			<br />
-			<label for="description">
-				<span>Bug Description: </span>
-				<textarea name="description" id="description"></textarea>
-			</label>
-			<br />
-			<label for="steps">
-				<span>Steps to Reproduce: </span>
-				<textarea name="steps" id="steps"></textarea>
-			</label>
-			<br />
-			<label for="browser">
-				<span>Browser Version: </span>
-				<input type="text" name="browser" id="browser" />
-			</label>
-			<br />
-			<input type="submit" value="Send Report" />
-		</form>
+			<p>Please don't include personal data since this information will be published in project development page at <a
+					href="https://github.com/JuanCSUCoder/SystemicWorks">GitHub</a></p>
+			<br>
+			<input class="Controls1" type="text" name="Title" id="Title" placeholder="Enter the title of the report">
+			</br>
+			<br>
+			<input class="Controls" type="text" name="Description" id="Description" placeholder="Enter the bug description">
+			</br>
+			<br>
+			<input class="Controls" type="text" name="Steps to reproduce" id="Steps to reproduce"	placeholder="Enter the steps to reproduce">
+			</br>
+			<br>
+			<input class="Controls" type="text" name="Browser Version" id="Browser Version" placeholder="Enter your browser version">
+			</br>
+			<input class="Bottoms" type="Submit" value="Send Report">
+			<p4>Distributed under GPLv3.0 License</p4>
+			<p4>Copyright (C) 2021
+
+				This program is free software: you can redistribute it and/or modify
+				it under the terms of the GNU General Public License as published by
+				the Free Software Foundation, either version 3 of the License, or
+				(at your option) any later version.
+
+				This program is distributed in the hope that it will be useful,
+				but WITHOUT ANY WARRANTY; without even the implied warranty of
+				MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+				GNU General Public License for more details.
+
+				You should have received a copy of the GNU General Public License
+				along with this program. If not, see
+				https://www.gnu.org/licenses.</p4>
+		</section>
 	</main>
-	<footer>
-		<center>
-			<p>Distributed under GPLv3.0 License</p>
-			<p>Copyright (C) 2021
-			
-					This program is free software: you can redistribute it and/or modify
-					it under the terms of the GNU General Public License as published by
-					the Free Software Foundation, either version 3 of the License, or
-					(at your option) any later version.
-			
-					This program is distributed in the hope that it will be useful,
-					but WITHOUT ANY WARRANTY; without even the implied warranty of
-					MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-					GNU General Public License for more details.
-			
-					You should have received a copy of the GNU General Public License
-					along with this program. If not, see
-					https://www.gnu.org/licenses.</p>
-		</center>
-	</footer>
 </body>
+
 </html>
