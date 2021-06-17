@@ -5,9 +5,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Report Bugs - Systemic Works</title>
-
 	<link rel="stylesheet" href="../assets/report.css">
+	<title>Bug Report</title>
 
 	<script>
 		window.addEventListener("load", () => {
@@ -38,68 +37,59 @@
 			body += version.value;
 
 			body = encodeURIComponent(body);
-			
-			window.location.href = "https://github.com/JuanCSUCoder/SystemicWorks/issues/new?assignees=&labels=&body="+body+"&title="+title;
+
+			window.location.href = "https://github.com/JuanCSUCoder/SystemicWorks/issues/new?assignees=&labels=&body=" + body + "&title=" + title;
 		}
 	</script>
 </head>
 
 <body>
-	<header>
-		<center>
-			<h1>Report Bugs of SystemicWorks</h1>
+
+	<section class="Bug-report">
+		<header>
+			<h1 class="title">Report Bugs of <span style="color:#F00">Systemic</span><span style="color:#00F">Works</span>
+			</h1>
 			<nav>
 				<a href="../">Go Back to SystemicWorks</a>
 			</nav>
-		</center>
-	</header>
-	<main class="main-container">
-		<h2>Form</h2>
-		<p>Please don't include personal data since this information will be published in project development page at <a
-				href="https://github.com/JuanCSUCoder/SystemicWorks">GitHub</a></p>
-		<form id="report-form">
-			<label for="title">
-				<span>Title of Report: </span>
-				<input type="text" name="title" id="title" />
-			</label>
-			<br />
-			<label for="description">
-				<span>Bug Description: </span>
-				<textarea name="description" id="description"></textarea>
-			</label>
-			<br />
-			<label for="steps">
-				<span>Steps to Reproduce: </span>
-				<textarea name="steps" id="steps"></textarea>
-			</label>
-			<br />
-			<label for="browser">
-				<span>Browser Version: </span>
-				<input type="text" name="browser" id="browser" />
-			</label>
-			<br />
-			<input type="submit" value="Send Report" />
-		</form>
-	</main>
-	<footer>
-		<center>
-			<p>Distributed under GPLv3.0 License</p>
-			<p>Copyright (C) 2021
-			
+		</header>
+		<main>
+			<p>Please don't include personal data since this information will be published in a project development page at <a
+					href="https://github.com/JuanCSUCoder/SystemicWorks">GitHub</a></p>
+
+			<form id="report-form">
+				<input class="Controls1" type="text" name="title" id="title" placeholder="Write the report title">
+				<textarea class="textarea" name="description" id="description"
+					placeholder="Write a brief description of the bug"></textarea>
+				<textarea class="textarea" name="steps" id="steps"
+					placeholder="Write step by step, how to reproduce the bug"></textarea>
+
+				<input class="Controls" type="text" name="browser" id="browser" placeholder="Enter your browser version">
+				<input class="Bottoms" type="Submit" value="Send Report">
+			</form>
+		</main>
+		<footer>
+			<div>
+				<p4>Distributed under GPLv3.0 License.
+					Copyright (C) 2021.
+
 					This program is free software: you can redistribute it and/or modify
 					it under the terms of the GNU General Public License as published by
 					the Free Software Foundation, either version 3 of the License, or
 					(at your option) any later version.
-			
+
 					This program is distributed in the hope that it will be useful,
 					but WITHOUT ANY WARRANTY; without even the implied warranty of
 					MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 					GNU General Public License for more details.
-			
+
 					You should have received a copy of the GNU General Public License
 					along with this program. If not, see
-					https://www.gnu.org/licenses.</p>
-		</center>
-	</footer>
+					https://www.gnu.org/licenses.
+				</p4>
+			</div>
+		</footer>
+	</section>
 </body>
+
 </html>
