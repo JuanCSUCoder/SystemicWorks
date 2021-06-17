@@ -70,7 +70,7 @@ export default class Model {
     this.ctx = this.canvas.getContext("2d")!;
 
     // Grid
-    this.grid = new Grid(50, 50, 4, 5, 2);
+    this.grid = new Grid(30, 30, 5, 2, 1);
     this.grid_img = this.grid.getImg();
 
     // Render Triggers
