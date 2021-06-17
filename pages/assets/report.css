@@ -1,100 +1,79 @@
 * {
-	margin: 0%;
-	padding: 0%;
-	box-sizing: border-box;
+  margin:0%;
+  padding: 0;
+  box-sizing: border-box;
 }
-body {
-	background: url(Themes/oscuro.jpg);
-	background-size: cover;
-	background-attachment: fixed;
+body{
+background: rgb(153,172,255);
+background: radial-gradient(circle, rgba(153,172,255,1) 0%, rgba(220,220,255,1) 100%);
 }
-.Bug-report .form .header .title {
-font-weight: normal;
-font-family: san-serif;
-color: rgb(250, 250, 47);
-font-size: 38px;
-text-align: center;
-padding: 14px 0;
+.Bug-report{
+  width: 600px;
+  background:#fcfcfc;
+  padding: 30px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 4px;
+  height: 730px;
+  font-family: 'calibri';
+  color: rgb(0, 0, 0);
+  box-shadow: 7px 13px 37px rgb(0, 0, 0);
 }
-.Bug-report .form .header .title span {
-color: #fff;
+.Bug-report .title {
+font-size: 35px;
+margin-bottom: 20px;
+color: #000000;
 }
-.Bug-report .form {
-	background: rgb(0, 0, 0, .6);
-	width: 90%;
-	max-width: 650px;
-	margin: auto;
-	padding: 5px 35px;
-	margin-top: 30px;
-	padding-bottom: 30px;
-	border-radius: 3px;
+.Controls1{
+	margin-block-start: 20px;
 }
-.Bug-report .form .controls1 {
-	margin-top: 25px;
-}
-.Bug-report .form .controls1, .controls {
-	display: 	block;
-	color: rgb(250, 250, 47);
-	font-size: 22px;
-	font-family: Roboto;
-	position: relative;
-	font-weight: bolder;
-}
-.Bug-report .form .form-input, .form-textarea {
-	background: rgb(0, 0, 0, .7);
-	border: none;
-	outline: none;
-	border-bottom: 2px solid #d0d30b;
-	width: 100%;
-	padding: 12px;
-	margin-bottom: 20px;
-	border-radius: 2px;
-	font-size: 18px;
-	color: #FFF;
-	font-family: Roboto;
-}
-.Bug-report .form .form-textarea {
-	resize: vertical;
-	max-height: 150px;
-	min-height: 90px;
-}
-.Bug-report .form .Bottoms {
-	width: 100%;
-  background: #740a26;
-  border: none;
-  padding: 15px 0;
-  color: white;
-  margin: 16px 0;
-  font-size: 20px;
-	font-family: Roboto;
-	outline: none;
-	cursor: pointer;
-}
-.Bug-report .form .Bottoms:hover {
-	background: rgb(143, 28, 28);
-}
-.Bug-report .form .header .title a.one{
-	margin-top: 25px;
-}
-.Bug-report .form a:link, a.one:link,a:visited,a.one:visited {
-  color: rgb(208, 202, 36);
-  font-size:22px;
-	text-decoration: none;
-}
-
-.Bug-report .form a:hover, a.one:hover {
-  text-decoration: underline;
+.Controls1, .Controls {
+  width: 100%;
+  background:#fdfdfd;
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  border: 3px solid #081366;
+  font-family: 'calibri';
+  font-size: 16px;
+  line-height: 10px;
+	font-weight: bold;
 }
 .Bug-report p{
   height: 40px;
   text-align: justify;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 20px;
   line-height: 25px;
   letter-spacing: 0.5px;
-	color: #FFF;
+	font-weight: bold;
 }
-.Bug-report .form p2{
-	font-size: 12px;
+.Bug-report p4{
+  text-align: justify;
+  font-size: 12px;
+	font-weight: bold;
+}
+.Bug-report a {
+  color: #111592;
+  font-size:18px;
+  text-decoration: underline;
+	font-weight: bold;
+}
+.Bug-report a:hover {
+  color: #111592;
+  text-decoration: none;
+}
+.Bug-report .Bottoms {
+  width: 100%;
+  background: #111592;
+  border: none;
+  padding: 12px;
+  color: rgb(255, 255, 255);
+  margin: 16px 0;
+  font-size: 16px;
+	font-weight: bold;
+}
+.Bug-report div {
 	text-align: justify;
 }
+

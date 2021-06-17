@@ -22,19 +22,19 @@
 		function run_report() {
 			let title_elem = document.getElementById("title");
 			let desc = document.getElementById("description");
-			let version = document.getElementById("browser");
 			let steps = document.getElementById("steps");
+			let version = document.getElementById("browser");
 
 			let title = encodeURIComponent(title_elem.value);
 
 			let body = "**Bug description**\n";
 			body += desc.value;
 
-			body += "\n**Browser Version:** ";
-			body += version.value;
-
 			body += "\n**Steps to Reproduce**\n";
 			body += steps.value;
+
+			body += "\n**Browser Version:** ";
+			body += version.value;
 
 			body = encodeURIComponent(body);
 
@@ -44,50 +44,50 @@
 </head>
 
 <body>
-	<section class="Bug-report">
-		<form action="" class="form">
-			<div class="header">
-				<h1 class="title">Report Bugs <span>SystemicWorks</span></h1>
-				<nav>
-					<a href="../">Go Back to SystemicWorks</a>
-				</nav>
+	<main>
+		<section class="Bug-report">
+			<h1 class="title">Report Bugs of <span style="color:#F00">Systemic</span><span style="color:#00F">Works</span></h1>
+			<nav>
+				<a href="../">Go Back to SystemicWorks</a>
+			</nav>
+			<p>Please don't include personal data since this information will be published in a project development page at <a
+					href="https://github.com/JuanCSUCoder/SystemicWorks">GitHub</a></p>
+			<br>
+			<input class="Controls1" type="text" name="Title" id="Title" placeholder="Enter the title of the report">
+			</br>
+			<br>
+			<input class="Controls" type="text" name="Description" id="Description" placeholder="Enter the bug description">
+			</br>
+			<br>
+			<input class="Controls" type="text" name="Steps to reproduce" id="Steps to reproduce"
+				placeholder="Enter the steps to reproduce the bug">
+			</br>
+			<br>
+			<input class="Controls" type="text" name="Browser Version" id="Browser Version"
+				placeholder="Enter your browser version">
+			</br>
+			<input class="Bottoms" type="Submit" value="Send Report">
+			<div>
+				<p4>Distributed under GPLv3.0 License.
+					Copyright (C) 2021.
+
+					This program is free software: you can redistribute it and/or modify
+					it under the terms of the GNU General Public License as published by
+					the Free Software Foundation, either version 3 of the License, or
+					(at your option) any later version.
+
+					This program is distributed in the hope that it will be useful,
+					but WITHOUT ANY WARRANTY; without even the implied warranty of
+					MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+					GNU General Public License for more details.
+
+					You should have received a copy of the GNU General Public License
+					along with this program. If not, see
+					https://www.gnu.org/licenses.
+				</p4>
 			</div>
-			<p>Please don't include personal data since this information will be published in a project development page at
-				<a class="one" href="https://github.com/JuanCSUCoder/SystemicWorks">GitHub</a>
-			</p>
-			<label for="Title" class="controls1"> Title of report: </label>
-				<input type="text" id="Title" class="form-input" placeholder="Write the report title">
-
-				<label for="Bug description" class="controls"> Bug description: </label>
-					<input type="text" id="Bug description" class="form-input" placeholder="Write a brief description of the bug">
-
-					<label for="Version" class="controls"> Browser version: </label>
-						<input type="text" id="Version" class="form-input" placeholder="Write your browser version">
-
-						<label for="Steps" class="controls"> Explain how the bug is reproduced: </label>
-							<textarea id="Steps" class="form-textarea"placeholder="Write step by step, how is the bug reproduced"></textarea>
-
-							<input class="Bottoms" type="Submit" value="Send Report">
-
-							<p2>Distributed under GPLv3.0 License.
-								Copyright (C) 2021.
-
-								This program is free software: you can redistribute it and/or modify
-								it under the terms of the GNU General Public License as published by
-								the Free Software Foundation, either version 3 of the License, or
-								(at your option) any later version.
-
-								This program is distributed in the hope that it will be useful,
-								but WITHOUT ANY WARRANTY; without even the implied warranty of
-								MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-								GNU General Public License for more details.
-
-								You should have received a copy of the GNU General Public License
-								along with this program. If not, see
-								https://www.gnu.org/licenses.
-							</p2>
-	</section>
-	</form>
+		</section>
+	</main>
 </body>
 
 </html>
