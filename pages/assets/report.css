@@ -1,113 +1,126 @@
 * {
-  margin:0%;
+  margin: 0%;
   padding: 0;
   box-sizing: border-box;
 }
-body{
-background: rgb(153,172,255);
-background: radial-gradient(circle, rgba(153,172,255,1) 0%, rgba(220,220,255,1) 100%);
+body {
+  background: rgb(153, 172, 255);
+  background: radial-gradient(
+    circle,
+    rgba(153, 172, 255, 1) 0%,
+    rgba(220, 220, 255, 1) 100%
+  );
 }
-.Bug-report{
+.Bug-report {
   width: 600px;
-  background:#fcfcfc;
+  background: #fcfcfc;
   padding: 30px;
   margin: auto;
   margin-top: 100px;
   border-radius: 4px;
   height: 730px;
-  font-family: 'calibri';
+  font-family: "calibri";
   color: rgb(0, 0, 0);
   box-shadow: 7px 13px 37px rgb(0, 0, 0);
 }
 .Bug-report .title {
-font-size: 35px;
-margin-bottom: 20px;
-color: #000000;
-text-align: center;
+  font-size: 35px;
+  margin-bottom: 20px;
+  color: #000000;
+  text-align: center;
 }
-.Controls1{
-	margin-block-start: 20px;
+.Controls1 {
+  margin-block-start: 33px;
 }
-.Controls1, .Controls, textarea {
+.Controls1,
+.Controls,
+textarea {
   width: 100%;
-  background:#fdfdfd;
+  background: #fdfdfd;
   padding: 10px;
   border-radius: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 30px;
   border: 3px solid #001eff;
-  font-family: 'calibri';
+  font-family: "calibri";
   font-size: 16px;
   line-height: 10px;
-	font-weight: bold;
+  font-weight: bold;
 }
-.Bug-report p{
+.Bug-report p {
   height: 40px;
   text-align: justify;
   font-size: 18px;
   margin-top: 20px;
   line-height: 25px;
   letter-spacing: 0.5px;
-	font-weight: bold;
+  font-weight: bold;
 }
-.Bug-report p4{
+.Bug-report p4 {
   text-align: justify;
   font-size: 12px;
-	font-weight: bold;
+  font-weight: bold;
 }
 .Bug-report a {
   color: #0004ff;
-  font-size:18px;
-	font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
 }
-.Bug-report a:link
-{
-	text-decoration: none;
+.Bug-report a:link {
+  text-decoration: none;
 }
 .Bug-report a:hover {
   color: #ff0000;
 }
-.Bug-report .Bottoms{
+.Bug-report .Bottoms {
   width: 100%;
-	transition: background 0.5s ease;
+  transition: background 0.5s ease;
   background: #001eff;
   border: none;
   padding: 12px;
   color: rgb(255, 255, 255);
   margin: 16px 0;
   font-size: 16px;
-	font-weight: bold;
-	cursor: pointer;
+  font-weight: bold;
+  cursor: pointer;
 }
 .Bug-report .textarea {
-	resize: vertical;
-	max-height: 150px;
-	min-height: 40px;
+  resize: vertical;
+  max-height: 150px;
+  min-height: 40px;
 }
-.Bug-report .Bottoms:hover{
-	background:#c90101 ;
+.Bug-report .Bottoms:hover {
+  background: #c90101;
 }
 .Bug-report div {
-	text-align: justify;
+  text-align: justify;
 }
-/* @media (prefers-color-scheme: dark) {
-	body{
-background: rgb(3,0,80);
-background: radial-gradient(circle, rgba(3,0,80,1) 0%, rgba(0,0,0,0.8911939775910365) 99%);
+@media (prefers-color-scheme: dark) {
+  body {
+    background: rgb(3, 0, 80);
+    background: radial-gradient(
+      circle,
+      rgba(3, 0, 80, 1) 0%,
+      rgba(0, 0, 0, 0.8911939775910365) 99%
+    );
+  }
+  .Bug-report {
+    background: #30363d;
+    color: white;
+  }
+	.Bug-report .title{
+		color: #fdfdfd;
 	}
-.Bug-report{
-	background:#30363d;
-	color: white;
+  .Controls1,
+  .Controls,
+  .textarea {
+    background: #24303c;
+		border: 1px solid #1f53c5;
+  }
+	.Bug-report a{
+		color: #5b6df7;
+	}
+  .Bug-report .Bottoms {
+    background: #1f53c5;
+    color: white;
+  }
 }
-.Controls1, .Controls{
-	background:#24303c;
-}
-.Bug-report a {
-	color: rgb(5, 5, 5);
-}
-.Bug-report a:hover {
-  color: rgb(255, 255, 255);
-}
-.Bug-report .Bottoms {
-
-}
-} */
