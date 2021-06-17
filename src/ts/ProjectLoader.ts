@@ -99,11 +99,13 @@ export default class ProjectLoader {
       case "smwks":
         if (has_version) {
           this.deserializeV2(model, raw_data);
-        } else {
+				} else {
+					alert("You are importing an old SystemicWorks file, so it will be converted to the new format");
           this.deserializeV1(model, raw_data);
         }
         break;
-      case "loopy":
+			case "loopy":
+				alert("You are importing a Loopy file, so it will be converted to the .smwks format");
         this.deserializeVL(model, raw_data);
         break;
       case "mdl":
@@ -217,8 +219,8 @@ export default class ProjectLoader {
         init: node[3],
         label: decodeURIComponent(node[4]),
         color: decodeURIComponent(node[5]),
-				w: node[6],
-				h: node[6],
+				w: node[6]*0.6,
+				h: node[6]*0.6,
       });
     });
 
@@ -352,7 +354,9 @@ export default class ProjectLoader {
         y: node[2],
         init: node[3],
         label: decodeURIComponent(node[4]),
-        hue: HueColors[node[5]],
+        color: HueColors[node[5]],
+				w: 40,
+				h: 40,
       });
     }
 
@@ -408,8 +412,9 @@ export default class ProjectLoader {
             y: Number(element[4]),
             init: 0.5,
             label: element[2],
-            color: "#666",
-            radius: 60,
+            color: "#3284d1",
+						w: Number(element[5]),
+						h: Number(element[6]),
           });
         } else if (element[0] == "1") {
           // It is an edge
@@ -417,7 +422,7 @@ export default class ProjectLoader {
           model.addEdge({
             from: Number(element[2]),
             to: Number(element[3]),
-            arc: 100,
+            arc: 30,
             strength: 1,
             rotation: 0,
             thickness: 3,
