@@ -23,17 +23,18 @@ background: radial-gradient(circle, rgba(153,172,255,1) 0%, rgba(220,220,255,1) 
 font-size: 35px;
 margin-bottom: 20px;
 color: #000000;
+text-align: center;
 }
 .Controls1{
 	margin-block-start: 20px;
 }
-.Controls1, .Controls {
+.Controls1, .Controls, textarea {
   width: 100%;
   background:#fdfdfd;
   padding: 10px;
   border-radius: 20px;
   margin-bottom: 12px;
-  border: 3px solid #081366;
+  border: 3px solid #001eff;
   font-family: 'calibri';
   font-size: 16px;
   line-height: 10px;
@@ -54,26 +55,59 @@ color: #000000;
 	font-weight: bold;
 }
 .Bug-report a {
-  color: #111592;
+  color: #0004ff;
   font-size:18px;
-  text-decoration: underline;
 	font-weight: bold;
 }
-.Bug-report a:hover {
-  color: #111592;
-  text-decoration: none;
+.Bug-report a:link
+{
+	text-decoration: none;
 }
-.Bug-report .Bottoms {
+.Bug-report a:hover {
+  color: #ff0000;
+}
+.Bug-report .Bottoms{
   width: 100%;
-  background: #111592;
+	transition: background 0.5s ease;
+  background: #001eff;
   border: none;
   padding: 12px;
   color: rgb(255, 255, 255);
   margin: 16px 0;
   font-size: 16px;
 	font-weight: bold;
+	cursor: pointer;
+}
+.Bug-report .textarea {
+	resize: vertical;
+	max-height: 150px;
+	min-height: 40px;
+}
+.Bug-report .Bottoms:hover{
+	background:#c90101 ;
 }
 .Bug-report div {
 	text-align: justify;
 }
+/* @media (prefers-color-scheme: dark) {
+	body{
+background: rgb(3,0,80);
+background: radial-gradient(circle, rgba(3,0,80,1) 0%, rgba(0,0,0,0.8911939775910365) 99%);
+	}
+.Bug-report{
+	background:#30363d;
+	color: white;
+}
+.Controls1, .Controls{
+	background:#24303c;
+}
+.Bug-report a {
+	color: rgb(5, 5, 5);
+}
+.Bug-report a:hover {
+  color: rgb(255, 255, 255);
+}
+.Bug-report .Bottoms {
 
+}
+} */
