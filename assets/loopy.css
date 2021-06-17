@@ -253,6 +253,42 @@ footer {
 	height: 10px;
 }
 
+#hide-button {
+	display: flex;
+
+	cursor: pointer;
+
+	justify-content: flex-end;
+	align-items: center;
+
+	font-size: 2rem;
+	width: 100%;
+
+	margin-bottom: 0.4em;
+}
+
+#hide-button > div {
+	display: flex;
+
+	width: 1.7em;
+	height: 1.7em;
+
+	border-radius: 100%;
+	background-color: rgb(218, 218, 218);
+
+	align-items: center;
+	justify-content: center;
+}
+
+#hide-button > div:hover {
+	background-color: rgb(138, 138, 138);
+}
+
+#hide-button > div > p {
+	text-align: center;
+	vertical-align: middle;
+}
+
 .mini_button {
 	font-size: 1.6rem;
 
@@ -269,6 +305,33 @@ footer {
 
 .mini_button:hover {
 	background-color: #999;
+}
+
+#unhide-button {
+	font-size: 1.6rem;
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+
+	padding: .7em;
+	height: 2.5em;
+	border-radius: 1.5em;
+
+	background-color: rgb(218, 218, 218);
+
+	position: fixed;
+	bottom: 2em;
+	right: 1em;
+}
+
+#unhide-button:hover {
+	background-color: rgb(138, 138, 138);
+}
+
+#unhide-button > p {
+	vertical-align: middle;
+	text-align: center;
 }
 
 /* Play Buttons Icons */
