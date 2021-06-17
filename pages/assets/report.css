@@ -4,11 +4,11 @@
 	box-sizing: border-box;
 }
 body {
-	background-image: url('aguafondo.jpg');
+	background-image: url('negro.jpg');
 }
 .Bug-report{
 	width: 600px;
-	background:#24303c;
+	background:#30363d;
 	padding: 30px;
 	margin: auto;
 	margin-top: 100px;
@@ -51,7 +51,6 @@ margin-bottom: 20px;
 	font-size: 18px;
 	margin-top: 20px;
 	line-height: 25px;
-	text-indent: 50px;
 	letter-spacing: 1px;
 }
 .Bug-report .p4{
