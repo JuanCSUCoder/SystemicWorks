@@ -114,6 +114,7 @@ textarea {
   .Controls,
   .textarea {
     background: #24303c;
+		color: white;
     border: 1px solid #1f53c5;
   }
   .Bug-report a {
