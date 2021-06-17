@@ -19,7 +19,7 @@ body {
   margin-top: 100px;
   border-radius: 4px;
   height: 730px;
-  font-family: "calibri";
+  font-family: Arial, Helvetica, sans-serif;
   color: rgb(0, 0, 0);
   box-shadow: 7px 13px 37px rgb(0, 0, 0);
 }
@@ -41,7 +41,7 @@ textarea {
   border-radius: 20px;
   margin-bottom: 30px;
   border: 3px solid #001eff;
-  font-family: "calibri";
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 10px;
   font-weight: bold;
