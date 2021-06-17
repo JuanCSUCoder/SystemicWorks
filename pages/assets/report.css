@@ -13,13 +13,13 @@ body {
 	margin: auto;
 	margin-top: 100px;
 	border-radius: 4px;
-	height: 750px;
+	height: 730px;
 	font-family: 'calibri';
 	color: white;
 	box-shadow: 7px 13px 37px #000;
 }
 .Bug-report h4 {
-font-size: 22px;
+font-size: 35px;
 margin-bottom: 20px;
 }
 .Controls1 {
@@ -30,7 +30,7 @@ margin-bottom: 20px;
 	margin-bottom: 12px;
 	border: 1px solid #1f53c5;
 	font-family: 'calibri';
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 10px;
 	margin-block-start: 20px;
 }
@@ -42,7 +42,7 @@ margin-bottom: 20px;
 	margin-bottom: 12px;
 	border: 1px solid #1f53c5;
 	font-family: 'calibri';
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 10px;
 }
 .Bug-report p{
@@ -51,13 +51,11 @@ margin-bottom: 20px;
 	font-size: 18px;
 	margin-top: 20px;
 	line-height: 25px;
-	letter-spacing: 1px;
+	letter-spacing: 0.5px;
 }
-.Bug-report .p4{
-	text-align: inherit;
-	font-size: 14px;
-	line-height: 25px;
-  text-indent: 50px;
+.Bug-report p4{
+	text-align: justify;
+	font-size: 12px;
 }
 .Bug-report a {
 	color: white;
