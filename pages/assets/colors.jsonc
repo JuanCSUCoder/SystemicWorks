@@ -1,0 +1,73 @@
+/* CSV = c11616,05056c,fa5a5a,5252f7,940404,030317 */
+[
+  /* Array */
+  ["c11616", "05056c", "fa5a5a", "5252f7", "940404", "030317"],
+
+  /* Object */
+  {
+    "Venetian Red - Primary": "c11616",
+    "Navy Blue - Secondary": "05056c",
+    "Tart Orange - Primary Light": "fa5a5a",
+    "Majorelle Blue - Secondary Light": "5252f7",
+    "Dark Red - Primary Dark": "940404",
+    "Xiketic - Secondary Dark": "030317"
+  },
+
+  /* Extended Array */
+  [
+    {
+      "name": "Venetian Red - Primary",
+      "hex": "c11616",
+      "rgb": [193, 22, 22],
+      "cmyk": [0, 89, 89, 24],
+      "hsb": [0, 89, 76],
+      "hsl": [0, 80, 42],
+      "lab": [41, 63, 47]
+    },
+    {
+      "name": "Navy Blue - Secondary",
+      "hex": "05056c",
+      "rgb": [5, 5, 108],
+      "cmyk": [95, 95, 0, 58],
+      "hsb": [240, 95, 42],
+      "hsl": [240, 91, 22],
+      "lab": [11, 40, -56]
+    },
+    {
+      "name": "Tart Orange - Primary Light",
+      "hex": "fa5a5a",
+      "rgb": [250, 90, 90],
+      "cmyk": [0, 64, 64, 2],
+      "hsb": [0, 64, 98],
+      "hsl": [0, 94, 67],
+      "lab": [60, 61, 33]
+    },
+    {
+      "name": "Majorelle Blue - Secondary Light",
+      "hex": "5252f7",
+      "rgb": [82, 82, 247],
+      "cmyk": [67, 67, 0, 3],
+      "hsb": [240, 67, 97],
+      "hsl": [240, 91, 65],
+      "lab": [45, 50, -82]
+    },
+    {
+      "name": "Dark Red - Primary Dark",
+      "hex": "940404",
+      "rgb": [148, 4, 4],
+      "cmyk": [0, 97, 97, 42],
+      "hsb": [0, 97, 58],
+      "hsl": [0, 95, 30],
+      "lab": [30, 53, 42]
+    },
+    {
+      "name": "Xiketic - Secondary Dark",
+      "hex": "030317",
+      "rgb": [3, 3, 23],
+      "cmyk": [87, 87, 0, 91],
+      "hsb": [240, 87, 9],
+      "hsl": [240, 77, 5],
+      "lab": [1, 4, -10]
+    }
+  ]
+]

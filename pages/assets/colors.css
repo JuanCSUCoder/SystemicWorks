@@ -1,0 +1,9 @@
+/* CSS HEX */
+:root {
+	--primary-col: #c11616ff;
+	--secondary-col: #05056cff;
+	--primary-light-col: #fa5a5aff;
+	--secondary-light-col: #5252f7ff;
+	--primary-dark-col: #940404ff;
+	--secondary-dark-col: #030317ff;
+}
