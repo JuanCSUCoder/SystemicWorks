@@ -39,11 +39,24 @@ module.exports = {
 			short_name: 'SystemicWorks',
 			description: 'An advanced and open source app for thinking in systems with causal loops diagrams',
 			background_color: '#ffffff',
+			theme_color: "#0000ff",
+			ios: true,
 			crossorigin: null, //can be null, use-credentials or anonymous
 			icons: [
 				{
 					src: path.resolve('pages/icon_large.png'),
-					sizes: [96, 128, 192, 256, 384, 512, 1024] // multiple sizes
+					sizes: [96, 128, 192, 256, 384, 512, 1024], // multiple sizes
+					ios: true
+				},
+				{
+					src: path.resolve('pages/icon_large.png'),
+					sizes: 1024,
+					ios: 'startup'
+				},
+				{
+					src: path.resolve('pages/maskable_icon.png'),
+					sizes: [96, 128, 192, 256, 384, 512, 1024], // multiple sizes
+					purpose: 'maskable'
 				},
 			]
 		}),
