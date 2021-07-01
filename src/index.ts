@@ -107,7 +107,7 @@ window.onload = function () {
       });
 		} catch (error) {
 			let install_button = document.getElementById("install_button") as HTMLAnchorElement;
-			install_button.innerText = "Check if it is already installed";
+			install_button.innerText = "Something failed. Check if it is already installed or add it manually to the home screen";
 			install_button.style.backgroundColor = "yellow";
 			install_button.style.color = "black";
 			install_button.style.pointerEvents = "none";
