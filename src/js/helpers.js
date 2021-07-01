@@ -28,9 +28,9 @@ export var isMacLike = navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i) ? tru
 var _PADDING = 25;
 var _PADDING_BOTTOM = 110;
 
-var body_elem = document.getElementsByTagName("body")[0];
+var header_elem = document.querySelector(".page-head");
 
-body_elem.ontransitionend = function () {
+header_elem.ontransitionend = function () {
 	publish("resize");
 };
 
