@@ -12,6 +12,9 @@ declare global {
     Key: KeysStatus;
     HIGHLIGHT_COLOR: string;
     promptPWA(): void;
+    launchQueue: {
+      setConsumer(param: Function): void
+    };
   }
 };
 
