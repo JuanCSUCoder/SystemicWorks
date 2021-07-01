@@ -205,7 +205,7 @@ function Sidebar(loopy) {
 			html: "" +
 
 				"<b style='font-size:1.4em'>About ...</b> <br>" +
-				"Build: v2.0.0 - <strong>RC 2</strong><br>" +
+				"Build: v2.1.0<br>" +
 				"an advanced and free tool for thinking in systems<br><br>" +
 				"<font size='3'><strong>License:</strong> GPLv3</font>" +
 
