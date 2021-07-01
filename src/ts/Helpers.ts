@@ -98,7 +98,7 @@ export let HueColors = [
 
 export function toggleStylesheet(href: string, onoff?: boolean | undefined) {
 	var existingNode; //get existing stylesheet node if it already exists
-	
+
   for (var i = 0; i < document.styleSheets.length; i++) {
     if (
       document.styleSheets[i].href &&
@@ -106,9 +106,9 @@ export function toggleStylesheet(href: string, onoff?: boolean | undefined) {
     )
       existingNode = document.styleSheets[i].ownerNode;
 	}
-	
+
 	if (onoff == undefined) onoff = !existingNode; //toggle on or off if undefined
-	
+
   if (onoff) {
     //TURN ON:
     if (existingNode) return onoff; //already exists so cancel now
@@ -121,7 +121,7 @@ export function toggleStylesheet(href: string, onoff?: boolean | undefined) {
     //TURN OFF:
     if (existingNode) existingNode.parentNode.removeChild(existingNode);
 	}
-	
+
   return onoff;
 }
 
@@ -133,7 +133,7 @@ type RectSize = {
 export function _fixTextInBox(text: string, ctx: CanvasRenderingContext2D, box_size: RectSize) {
 	let parag = [text];
 	let font_size: number = 60;
-	ctx.font = font_size + "px sans-serif";	
+	ctx.font = font_size + "px sans-serif";
 
 	while (_measureWidth(parag, font_size, ctx) > box_size.width || _measureHeight(parag.length, font_size) > box_size.height) {
 		if (_measureHeight(parag.length, font_size) <= box_size.height) {
@@ -190,7 +190,7 @@ function _separateLine(text_line: string): string[] {
 		const part = splited[i];
 		result[0] += part + " ";
 	}
-	
+
 	for (let i = Math.round(splited.length / 2); i < splited.length; i++) {
 		const part = splited[i];
 		result[1] += part + " ";
