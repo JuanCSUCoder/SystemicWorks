@@ -17,12 +17,13 @@
 	<link href="assets/loopy.css" rel="stylesheet" />
 	<link rel="stylesheet" href="assets/tablet.css" media="screen and (min-width:700px)" />
 	<link rel="stylesheet" href="assets/desktop.css" media="screen and (min-width:1200px)" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<link href="assets/balloon.css" rel="stylesheet" />
 
 </head>
 
-<body>
+<body style="display: none;">
 	<header class="page-head">
 		<center>
 			<h1 class="page-head_title">
@@ -31,8 +32,11 @@
 				systems with causal loops diagrams.
 			</h1>
 			<nav class="page-head_nav">
+				<a href="#install" onclick="window.promptPWA();" id="install_button"><span>Install</span> <span style="font-family: Material Icons; font-size: 20px;"
+						class="material-icons-outlined">get_app</span></a>
 				<a target="_blank" rel="noreferrer" href="https://juancsucoder.github.io/">Go to the developer page</a>
 				<a target="_blank" rel="noreferrer" href="https://github.com/JuanCSUCoder/SystemicWorks">View Source Code</a>
+			</nav>
 			</nav>
 		</center>
 	</header>

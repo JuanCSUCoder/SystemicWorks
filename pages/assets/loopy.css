@@ -21,8 +21,6 @@ body {
 	margin: 2em;
 
 	min-width: 324px;
-
-	transition: all ease 1s;
 }
 
 footer {
@@ -31,10 +29,8 @@ footer {
 }
 
 .page-head {
-	max-height: 16rem;
+	max-height: 26rem;
 	overflow: hidden;
-
-	transition: max-height ease 1s;
 }
 
 .page-head_nav {
@@ -485,4 +481,20 @@ main li {
 }
 #canvasses[cursor=loop]{
 	cursor: url('cursors/loop.png') 15 15, auto;
+}
+
+#install_button {
+	display: flex;
+
+	background-color: green;
+	color: white;
+
+	margin: 1em;
+
+	align-items: center;
+	justify-content: center;
+}
+
+#install_button:hover {
+	background-color: rgb(51, 153, 51);
 }

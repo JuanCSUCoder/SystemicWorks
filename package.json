@@ -8,7 +8,8 @@
 		"build:dev": "webpack --mode=development",
 		"build:prod": "webpack --mode=production",
 		"watch": "webpack --watch",
-		"serve": "webpack serve --mode=development",
+		"serve": "webpack serve --mode=development --config dev.config.js",
+		"serve-sw": "webpack serve --mode=development",
 		"deploy": "gh-pages -d build -b stable",
 		"test": "echo No test defined"
 	},
