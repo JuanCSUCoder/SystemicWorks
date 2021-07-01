@@ -58,7 +58,15 @@ module.exports = {
 					sizes: [96, 128, 192, 256, 384, 512, 1024], // multiple sizes
 					purpose: 'maskable'
 				},
-			]
+			],
+			file_handlers: [
+				{
+					"action": "./",
+					"accept": {
+						"text/plain": [".smwks"]
+					}
+				},
+			],
 		}),
 		new GenerateSW({
 			cleanupOutdatedCaches: true,

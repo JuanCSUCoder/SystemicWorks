@@ -124,6 +124,10 @@ export default class Loopy {
       };
 
       input.click();
+		});
+		
+		subscribe("file/loaded", (data: string) => {
+      this.model.deserialize(data, "default.smwks");
     });
 
     // Bind this to functions
@@ -144,13 +148,46 @@ export default class Loopy {
     requestAnimationFrame(this.draw);
   }
 
-  init() {
-    var data = _getParameterByName("data");
+	init() {
+		let data = _getParameterByName("data");
     if (!data) {
       data = decodeURIComponent(this._blankData);
     }
 
-    this.model.deserialize(data, "default.smwks");
+		if ("launchQueue" in window) {
+			window.launchQueue.setConsumer((launchParams: any) => {
+
+        // Nothing to do when the queue is empty.
+        if (!launchParams.files.length) {
+          return;
+				}
+
+				const myFile = launchParams.files[0];
+				var getmeta = myFile.getMetadata();
+
+        getmeta.onsuccess = function () {
+          var size = this.result.size;
+
+          // The reading operation will start with the byte at index 0 in the file
+          myFile.location = 0;
+
+          // Start a reading operation for the whole file content
+          var reading = myFile.readAsText(size);
+
+					reading.onsuccess = function () {
+						publish("file/loaded", [this.result]);
+          };
+
+          reading.onerror = function () {
+            console.log(
+              "Something went wrong in the reading process: " + this.error
+            );
+          };
+        };
+      });
+    }
+
+		this.model.deserialize(data, "default.smwks");
   }
 
   update() {
