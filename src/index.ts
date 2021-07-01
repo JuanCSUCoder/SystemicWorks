@@ -122,4 +122,25 @@ window.onload = function () {
 	document.querySelectorAll("canvas").forEach(canvas => {
 		_onResize(canvas_cont as HTMLDivElement, canvas);
 	});
+
+	// Debug Tools
+	const debug_mode = false;
+
+	if (debug_mode) {
+		subscribe("resize", () => {
+			console.log("Resize Event");
+		});
+
+		subscribe("model/changed", () => {
+			console.log("Model Changed Event");
+		});
+
+		subscribe("model/reset", () => {
+			console.log("Model Reset Event");
+		});
+
+		subscribe("canvas/moved", () => {
+			console.log("Canvas Moved Event");
+		});
+	}
 };
