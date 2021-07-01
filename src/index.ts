@@ -96,14 +96,23 @@ window.onload = function () {
   );
   // Show the prompt
   window.promptPWA = () => {
-    deferredPrompt.prompt();
+    try {
+			deferredPrompt.prompt();
 
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === "accepted") {
-        toggleStylesheet("assets/fs.css", true);
-      }
-      deferredPrompt = null;
-    });
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          toggleStylesheet("assets/fs.css", true);
+        }
+        deferredPrompt = null;
+      });
+		} catch (error) {
+			let install_button = document.getElementById("install_button") as HTMLAnchorElement;
+			install_button.innerText = "Check if it is already installed";
+			install_button.style.backgroundColor = "yellow";
+			install_button.style.color = "black";
+			install_button.style.pointerEvents = "none";
+			install_button.style.cursor = "default";
+		}
   };
 
   document.getElementsByTagName("body")[0].style.display = "block";
