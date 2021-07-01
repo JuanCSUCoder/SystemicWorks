@@ -1,0 +1,104 @@
+{
+  "icons": [
+    {
+      "src": "./icon_1024x1024.36bcad99d9c92c74cce53700d66ddf50.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon_512x512.1156ae7aa61061b512b51371dedeeda1.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon_384x384.d2e09d6d4e8a12eac01a49024b51f27f.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon_256x256.20775221d8da7aeebbc2218f70ad6c28.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon_192x192.feb5853bda5e3e3e5ee4547c5afee53d.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon_128x128.64c9b58ab4ccf4b4369b905e2cec6786.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon_96x96.900fa60b70db3f0812a8e0f3befbff94.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon_1024x1024.75e2f0e1434392ed29d8203e43f73bc2.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_1024x1024.75e2f0e1434392ed29d8203e43f73bc2.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_512x512.f467de3375d417aa8de5845578a49b44.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_384x384.7f7f03842f7f34c6284e362f2e2ad599.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_256x256.299e3a2d0870ec0f572676b194a80540.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_192x192.c7d4552074eb8b9966f26edafaea0fe2.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_128x128.025109500a3b9490c09fd3de86b5dae1.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon_96x96.b1688dbd97df2fb94ba7941f825befb7.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "name": "SystemicWorks App",
+  "short_name": "SystemicWorks",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "An advanced and open source app for thinking in systems with causal loops diagrams",
+  "background_color": "#ffffff",
+  "theme_color": "#0000ff",
+  "file_handlers": [
+    {
+      "action": "./",
+      "accept": {
+        "text/plain": [
+          ".smwks"
+        ]
+      }
+    }
+  ]
+}

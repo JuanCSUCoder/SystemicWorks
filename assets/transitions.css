@@ -1,0 +1,7 @@
+body {
+	transition: all ease 1s;
+}
+
+.page-head {
+	transition: max-height ease 1s;
+}
