@@ -5,52 +5,56 @@ that I couldn't be arsed to put into separate classes
 
 *****************************/
 
-import {publish, subscribe} from './minpubsub';
+import { publish, subscribe } from "./minpubsub";
 
 export var Loopy = {
-  MODE_EDIT : 0,
-  MODE_PLAY : 1,
+  MODE_EDIT: 0,
+  MODE_PLAY: 1,
 
-  TOOL_INK : 0,
-  TOOL_DRAG : 1,
-  TOOL_ERASE : 2,
-  TOOL_LABEL : 3,
-  TOOL_PAN : 4,
-  TOOL_LOOP : 5,
+  TOOL_INK: 0,
+  TOOL_DRAG: 1,
+  TOOL_ERASE: 2,
+  TOOL_LABEL: 3,
+  TOOL_PAN: 4,
+  TOOL_LOOP: 5,
 };
 
 Math.TAU = Math.PI * 2;
 
 window.HIGHLIGHT_COLOR = "rgba(193, 220, 255, 0.6)";
 
-export var isMacLike =
-    navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i) ? true : false;
+export var isMacLike = navigator.platform.match(/(Mac|iPhone|iPod|iPad)/i)
+  ? true
+  : false;
 
 var _PADDING = 25;
 var _PADDING_BOTTOM = 110;
 
 var header_elem = document.querySelector(".page-head");
 
-header_elem.ontransitionend = function() { publish("resize"); };
+header_elem.ontransitionend = function () {
+  publish("resize");
+};
 
-window.onresize = function() { publish("resize"); };
+window.onresize = function () {
+  publish("resize");
+};
 
-window.onbeforeunload = function(e) {
+window.onbeforeunload = function (e) {
   if (loopy.dirty) {
     var dialogText =
-        "Are you sure you want to leave without saving your changes?";
+      "Are you sure you want to leave without saving your changes?";
     e.returnValue = dialogText;
     return dialogText;
   }
 };
 
 export function _createCanvas() {
-
   var canvasses = document.getElementById("canvasses");
   var canvas = document.createElement("canvas");
 
   // Dimensions
-  var _onResize = function() {
+  var _onResize = function () {
     var width = canvasses.clientWidth;
     var height = canvasses.clientHeight;
     canvas.width = width * 2; // retina
@@ -64,7 +68,9 @@ export function _createCanvas() {
   canvasses.appendChild(canvas);
 
   // subscribe to RESIZE
-  subscribe("resize", function() { _onResize(); });
+  subscribe("resize", function () {
+    _onResize();
+  });
 
   // Gimme
   return canvas;
@@ -86,13 +92,19 @@ export function _createButton(label, onclick) {
 }
 
 export function _createInput(className, textarea) {
-  var input = textarea ? document.createElement("textarea")
-                       : document.createElement("input");
+  var input = textarea
+    ? document.createElement("textarea")
+    : document.createElement("input");
   input.setAttribute("class", className);
-  input.addEventListener("keydown", function(event) {
-    event.stopPropagation ? event.stopPropagation()
-                          : (event.cancelBubble = true);
-  }, false); // STOP IT FROM TRIGGERING KEY.js
+  input.addEventListener(
+    "keydown",
+    function (event) {
+      event.stopPropagation
+        ? event.stopPropagation()
+        : (event.cancelBubble = true);
+    },
+    false
+  ); // STOP IT FROM TRIGGERING KEY.js
   return input;
 }
 
@@ -102,16 +114,20 @@ export function _createPicker(className) {
   input.setAttribute("class", className);
   input.setAttribute("type", "color");
 
-  input.addEventListener("keydown", function(event) {
-    event.stopPropagation ? event.stopPropagation()
-                          : (event.cancelBubble = true);
-  }, false); // STOP IT FROM TRIGGERING KEY.js
+  input.addEventListener(
+    "keydown",
+    function (event) {
+      event.stopPropagation
+        ? event.stopPropagation()
+        : (event.cancelBubble = true);
+    },
+    false
+  ); // STOP IT FROM TRIGGERING KEY.js
 
   return input;
 }
 
 export function _createNumberInput(onUpdate) {
-
   var self = {};
 
   // dom!
@@ -120,26 +136,36 @@ export function _createNumberInput(onUpdate) {
   self.dom.style.width = "40px";
   self.dom.style.padding = "5px";
 
-  self.dom.addEventListener("keydown", function(event) {
-    event.stopPropagation ? event.stopPropagation()
-                          : (event.cancelBubble = true);
-  }, false); // STOP IT FROM TRIGGERING KEY.js
+  self.dom.addEventListener(
+    "keydown",
+    function (event) {
+      event.stopPropagation
+        ? event.stopPropagation()
+        : (event.cancelBubble = true);
+    },
+    false
+  ); // STOP IT FROM TRIGGERING KEY.js
 
   // on update
-  self.dom.onchange = function() {
+  self.dom.onchange = function () {
     var value = parseInt(self.getValue());
-    if (isNaN(value))
-      value = 0;
+    if (isNaN(value)) value = 0;
     self.setValue(value);
     onUpdate(value);
   };
 
   // select on click, yo
-  self.dom.onclick = function() { self.dom.select(); };
+  self.dom.onclick = function () {
+    self.dom.select();
+  };
 
   // set & get value
-  self.getValue = function() { return self.dom.value; };
-  self.setValue = function(num) { self.dom.value = num; };
+  self.getValue = function () {
+    return self.dom.value;
+  };
+  self.setValue = function (num) {
+    self.dom.value = num;
+  };
 
   // return an OBJECT.
   return self;
@@ -151,17 +177,16 @@ export function _blank() {
 
 export function _getTotalOffset(target) {
   var bounds = target.getBoundingClientRect();
-  return {left : bounds.left, top : bounds.top};
+  return { left: bounds.left, top: bounds.top };
 }
 
 export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup) {
-
   // WRAP THEM CALLBACKS
-  var _onmousedown = function(event) {
+  var _onmousedown = function (event) {
     var _fakeEvent = _onmousemove(event);
     onmousedown(_fakeEvent);
   };
-  var _onmousemove = function(event) {
+  var _onmousemove = function (event) {
     // Mouse position
     var _fakeEvent = {};
     if (event.changedTouches) {
@@ -180,7 +205,7 @@ export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup) {
     onmousemove(_fakeEvent);
     return _fakeEvent;
   };
-  var _onmouseup = function(event) {
+  var _onmouseup = function (event) {
     var _fakeEvent = {};
     onmouseup(_fakeEvent);
   };
@@ -197,33 +222,31 @@ export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup) {
 }
 
 export function _getBounds(points) {
-
   // Bounds
-  var left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
+  var left = Infinity,
+    top = Infinity,
+    right = -Infinity,
+    bottom = -Infinity;
   for (var i = 0; i < points.length; i++) {
     var point = points[i];
-    if (point[0] < left)
-      left = point[0];
-    if (right < point[0])
-      right = point[0];
-    if (point[1] < top)
-      top = point[1];
-    if (bottom < point[1])
-      bottom = point[1];
+    if (point[0] < left) left = point[0];
+    if (right < point[0]) right = point[0];
+    if (point[1] < top) top = point[1];
+    if (bottom < point[1]) bottom = point[1];
   }
 
   // Dimensions
-  var width = (right - left);
-  var height = (bottom - top);
+  var width = right - left;
+  var height = bottom - top;
 
   // Gimme
   return {
-    left : left,
-    right : right,
-    top : top,
-    bottom : bottom,
-    width : width,
-    height : height
+    left: left,
+    right: right,
+    top: top,
+    bottom: bottom,
+    width: width,
+    height: height,
   };
 }
 
@@ -257,7 +280,6 @@ export function _configureProperties(self, config) {
 }
 
 export function _isPointInCircle(x, y, cx, cy, radius) {
-
   // Point distance
   var dx = cx - x;
   var dy = cy - y;
@@ -271,29 +293,24 @@ export function _isPointInCircle(x, y, cx, cy, radius) {
 }
 
 export function _isPointInBox(x, y, box) {
-
-  if (x < box.x)
-    return false;
-  if (x > box.x + box.width)
-    return false;
-  if (y < box.y)
-    return false;
-  if (y > box.y + box.height)
-    return false;
+  if (x < box.x) return false;
+  if (x > box.x + box.width) return false;
+  if (y < box.y) return false;
+  if (y > box.y + box.height) return false;
 
   return true;
 }
 
 // TODO: Make more use of this???
 export function _makeErrorFunc(msg) {
-  return function() { throw Error(msg); };
+  return function () {
+    throw Error(msg);
+  };
 }
 
 export function _blendColors(hex1, hex2, blend) {
-
   var color = "#";
   for (var i = 0; i < 3; i++) {
-
     // Into numbers...
     var sub1 = hex1.substring(1 + 2 * i, 3 + 2 * i);
     var sub2 = hex2.substring(1 + 2 * i, 3 + 2 * i);
@@ -303,7 +320,7 @@ export function _blendColors(hex1, hex2, blend) {
     // Blended number & sub
     var num = Math.floor(num1 * (1 - blend) + num2 * blend);
     var sub = num.toString(16).toUpperCase();
-    var paddedSub = ('0' + sub).slice(-2); // in case it's only one digit long
+    var paddedSub = ("0" + sub).slice(-2); // in case it's only one digit long
 
     // Add that babe
     color += paddedSub;
