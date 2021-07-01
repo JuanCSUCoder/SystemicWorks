@@ -3,7 +3,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const { GenerateSW } = require('workbox-webpack-plugin');
+// const { GenerateSW } = require('workbox-webpack-plugin');
+
+console.log("Development Configuration");
 
 module.exports = {
 	mode: 'development',
@@ -60,9 +62,9 @@ module.exports = {
 				},
 			]
 		}),
-		new GenerateSW({
-			cleanupOutdatedCaches: true,
-		}),
+		// new GenerateSW({
+		// 	cleanupOutdatedCaches: true,
+		// }),
 		// Add your plugins here
 		// Learn more obout plugins from https://webpack.js.org/configuration/plugins/
 	],

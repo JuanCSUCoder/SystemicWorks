@@ -203,18 +203,9 @@ export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup) {
 	document.body.addEventListener("mouseup", _onmouseup);
 
 	// TOUCH.
-	target.addEventListener("touchstart", _onmousedown, {
-		capture: false,
-		passive: true,
-	});
-	target.addEventListener("touchmove", _onmousemove, {
-		capture: false,
-		passive: true,
-	});
-	document.body.addEventListener("touchend", _onmouseup, {
-		capture: false,
-		passive: true,
-	});
+	target.addEventListener("touchstart", _onmousedown, false);
+	target.addEventListener("touchmove", _onmousemove, false);
+	document.body.addEventListener("touchend", _onmouseup, false);
 
 }
 
