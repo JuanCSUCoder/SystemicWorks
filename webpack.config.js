@@ -2,6 +2,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
@@ -30,6 +32,23 @@ module.exports = {
 			patterns: [
 				{ from: "pages/favicon.png" }
 			]
+		}),
+		new WebpackPwaManifest({
+			publicPath: './',
+			name: 'SystemicWorks App',
+			short_name: 'SystemicWorks',
+			description: 'An advanced and open source app for thinking in systems with causal loops diagrams',
+			background_color: '#ffffff',
+			crossorigin: null, //can be null, use-credentials or anonymous
+			icons: [
+				{
+					src: path.resolve('pages/icon_large.png'),
+					sizes: [96, 128, 192, 256, 384, 512, 1024] // multiple sizes
+				},
+			]
+		}),
+		new GenerateSW({
+			cleanupOutdatedCaches: true,
 		}),
 		// Add your plugins here
 		// Learn more obout plugins from https://webpack.js.org/configuration/plugins/
