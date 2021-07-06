@@ -128,7 +128,21 @@ export default class Loopy {
 		
 		subscribe("file/loaded", (data: string) => {
       this.model.deserialize(data, "default.smwks");
-    });
+		});
+		
+		subscribe("wheel", (delta: number) => {
+			if (delta > 0) {
+				for (let i = 0; i < delta; i++) {
+					this.offsetScale *= 1.1;
+					publish("canvas/moved");
+				}
+			} else {
+				for (let i = 0; i < Math.abs(delta); i++) {
+          this.offsetScale *= 0.9;
+          publish("canvas/moved");
+        }
+			}
+		});
 
     // Bind this to functions
     this.init = this.init.bind(this);

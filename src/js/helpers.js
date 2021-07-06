@@ -164,7 +164,7 @@ export function _getTotalOffset(target) {
 	};
 }
 
-export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup) {
+export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup, onwheel) {
 
 	// WRAP THEM CALLBACKS
 	var _onmousedown = function (event) {
@@ -196,10 +196,16 @@ export function _addMouseEvents(target, onmousedown, onmousemove, onmouseup) {
 		var _fakeEvent = {};
 		onmouseup(_fakeEvent);
 	};
+	var _onwheel = function (event) {
+		var _fakeEvent = {};
+		_fakeEvent.deltaY = event.deltaY;
+		onwheel(_fakeEvent);
+	};
 
 	// Add events!
 	target.addEventListener("mousedown", _onmousedown);
 	target.addEventListener("mousemove", _onmousemove);
+	target.addEventListener("wheel", _onwheel);
 	document.body.addEventListener("mouseup", _onmouseup);
 
 	// TOUCH.
