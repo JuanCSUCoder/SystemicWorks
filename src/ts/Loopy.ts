@@ -213,7 +213,9 @@ export default class Loopy {
 
     if (!this.modal.isShowing) {
       this.model.update();
-    }
+		}
+		
+		this.offsetScale = Math.min(Math.max(0.125, this.offsetScale), 4);
   }
 
   draw() {
