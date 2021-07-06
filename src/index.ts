@@ -87,10 +87,16 @@ window.onload = function () {
 
   let KeysController = new Key(window, window.loopy);
 
+	let install_button = document.getElementById(
+    "install_button"
+	) as HTMLAnchorElement;
+	
   let deferredPrompt: BeforeInstallPromptEvent;
   window.addEventListener(
     "beforeinstallprompt",
-    (e: BeforeInstallPromptEvent) => {
+		(e: BeforeInstallPromptEvent) => {
+			install_button.style.display = "flex";
+
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
       // Stash the event so it can be triggered later.
@@ -98,7 +104,7 @@ window.onload = function () {
     }
   );
   // Show the prompt
-  window.promptPWA = () => {
+	window.promptPWA = () => {
     try {
 			deferredPrompt.prompt();
 
@@ -109,8 +115,8 @@ window.onload = function () {
         deferredPrompt = null;
       });
 		} catch (error) {
-			let install_button = document.getElementById("install_button") as HTMLAnchorElement;
 			install_button.innerText = "Something failed. Check if it is already installed or add it manually to the home screen";
+			install_button.style.display = "flex";
 			install_button.style.backgroundColor = "yellow";
 			install_button.style.color = "black";
 			install_button.style.pointerEvents = "none";
