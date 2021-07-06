@@ -26,10 +26,15 @@ export default class Model {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   canvas_dirty: boolean = false;
+  last_scale: number = 1;
 
   // Draw Helpers
   drawCountdownFull: number = 60; // Two Seconds
   drawCountdown: number = this.drawCountdownFull;
+
+  scale_ease: number = 1;
+  x_ease: number = 0;
+  y_ease: number = 0;
 
   // Nodes
   nodes: Node[] = [];
@@ -68,9 +73,10 @@ export default class Model {
     // Canvas
     this.canvas = _createCanvas();
     this.ctx = this.canvas.getContext("2d")!;
+    this.last_scale = this.loopy.offsetScale;
 
     // Grid
-    this.grid = new Grid(30, 30, 5, 2, 1);
+    this.grid = new Grid(30, 30, 5, 2, 1 / this.loopy.offsetScale);
     this.grid_img = this.grid.getImg();
 
     // Render Triggers
@@ -479,6 +485,14 @@ export default class Model {
       node.update(this.speed);
     });
 
+    // Update Grid
+    if (this.last_scale != this.loopy.offsetScale) {
+      this.grid = new Grid(30, 30, 5, 2, 1 / this.loopy.offsetScale);
+      this.grid_img = this.grid.getImg();
+
+      this.last_scale = this.loopy.offsetScale;
+    }
+
     this.canvas_dirty = true;
   }
 
@@ -504,15 +518,20 @@ export default class Model {
 
       ctx.save();
 
+      // Calculate eases
+			this.scale_ease = this.scale_ease * 0.8 + loopy.offsetScale * 0.2;
+			this.x_ease = this.x_ease * 0.8 + loopy.offsetX * 0.2;
+			this.y_ease = this.y_ease * 0.8 + loopy.offsetY * 0.2;
+
       // Translate to center, (translate, scale, translate) to expand to size
       let canvasses = document.getElementById("canvasses")!;
       let CW = canvasses.clientWidth - _PADDING - _PADDING;
       let CH = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
-      let tx = loopy.offsetX * 2;
-      let ty = loopy.offsetY * 2;
+      let tx = this.x_ease * 2;
+      let ty = this.y_ease * 2;
       tx -= CW + _PADDING;
       ty -= CH + _PADDING;
-      var s = loopy.offsetScale; // TODO: Zooming
+      var s = this.scale_ease;
       tx = s * tx;
       ty = s * ty;
       tx += CW + _PADDING;
@@ -574,18 +593,18 @@ export default class Model {
     return null;
   }
 
-	getHandlerByPoint(x: number, y: number) {
-		for (let i = this.nodes.length - 1; i >= 0; i--) {
-			const node = this.nodes[i];
-			
-			let cx = node.x + node.w;
-			let cy = node.y + node.h;
+  getHandlerByPoint(x: number, y: number) {
+    for (let i = this.nodes.length - 1; i >= 0; i--) {
+      const node = this.nodes[i];
 
-			if (_isPointInCircle(x, y, cx, cy, 6)) {
-				return node;
-			}
-		}
-	}
+      let cx = node.x + node.w;
+      let cy = node.y + node.h;
+
+      if (_isPointInCircle(x, y, cx, cy, 6)) {
+        return node;
+      }
+    }
+  }
 
   getEdgeByPoint(x: number, y: number) {
     for (let i = this.edges.length - 1; i >= 0; i--) {

@@ -68,9 +68,12 @@ Mouse.init = function(loopy, target){
 		Mouse.moved = false;
 		Mouse.startedOnTarget = false;
 	};
+	var _onwheel = function (event) {
+		publish("wheel", [event.deltaY * -0.01]);
+	}
 
 	// Add mouse & touch events!
-	_addMouseEvents(target, _onmousedown, _onmousemove, _onmouseup);
+	_addMouseEvents(target, _onmousedown, _onmousemove, _onmouseup, _onwheel);
 
 	// Cursor & Update
 	Mouse.target = target;

@@ -128,7 +128,33 @@ export default class Loopy {
 		
 		subscribe("file/loaded", (data: string) => {
       this.model.deserialize(data, "default.smwks");
-    });
+		});
+		
+		subscribe("wheel", (delta: number) => {
+			let weight = 40;
+
+			if (window.Key.alt || window.Key.shift || window.Key.control) {
+				if (window.Key.alt) {
+					this.offsetY += delta * weight;
+					publish("canvas/moved");
+				} else {
+					this.offsetX += delta * weight;
+          publish("canvas/moved");
+				}
+			} else {
+				if (delta > 0) {
+          for (let i = 0; i < delta; i++) {
+            this.offsetScale *= 1.1;
+            publish("canvas/moved");
+          }
+        } else {
+          for (let i = 0; i < Math.abs(delta); i++) {
+            this.offsetScale *= 0.9;
+            publish("canvas/moved");
+          }
+        }
+			}
+		});
 
     // Bind this to functions
     this.init = this.init.bind(this);
@@ -199,7 +225,9 @@ export default class Loopy {
 
     if (!this.modal.isShowing) {
       this.model.update();
-    }
+		}
+		
+		this.offsetScale = Math.min(Math.max(0.125, this.offsetScale), 4);
   }
 
   draw() {
