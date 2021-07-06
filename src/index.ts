@@ -130,7 +130,7 @@ window.onload = function () {
 	});
 
 	// Debug Tools
-	const debug_mode = false;
+	const debug_mode = true;
 
 	if (debug_mode) {
 		subscribe("resize", () => {

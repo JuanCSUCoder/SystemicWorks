@@ -92,6 +92,22 @@ function Toolbar(loopy){
 			self.setTool('pan');
 		}
 	});
+	self.addButton({
+		id: "zout",
+		tooltip: "ZOOM OUT",
+		callback: function () {
+			loopy.offsetScale *= 0.9;
+			publish("canvas/moved");
+		}
+	});
+	self.addButton({
+		id: "zin",
+		tooltip: "ZOOM IN",
+		callback: function () {
+			loopy.offsetScale *= 1.1;
+			publish("canvas/moved");
+		}
+	})
 	self.addSeparator();
 	self.addButton({
 		id: "ink",
@@ -233,6 +249,10 @@ function ToolbarButton(toolbar, config){
 			} else {
 				self.deselect();
 			}
+		}
+	} else if (config.id.startsWith('z')) {
+		self.callback = function () {
+			config.callback();
 		}
 	} else {
 		self.callback = function () {

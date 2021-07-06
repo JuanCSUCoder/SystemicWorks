@@ -25,7 +25,8 @@ export default class Model {
   // Canvas
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
-  canvas_dirty: boolean = false;
+	canvas_dirty: boolean = false;
+	last_scale: number = 1;
 
   // Draw Helpers
   drawCountdownFull: number = 60; // Two Seconds
@@ -67,10 +68,11 @@ export default class Model {
 
     // Canvas
     this.canvas = _createCanvas();
-    this.ctx = this.canvas.getContext("2d")!;
+		this.ctx = this.canvas.getContext("2d")!;
+		this.last_scale = this.loopy.offsetScale;
 
     // Grid
-    this.grid = new Grid(30, 30, 5, 2, 1);
+    this.grid = new Grid(30, 30, 5, 2, 1/this.loopy.offsetScale);
     this.grid_img = this.grid.getImg();
 
     // Render Triggers
@@ -477,7 +479,15 @@ export default class Model {
     // Update Nodes
     this.nodes.forEach((node) => {
       node.update(this.speed);
-    });
+		});
+		
+		// Update Grid
+		if (this.last_scale != this.loopy.offsetScale) {
+			this.grid = new Grid(30, 30, 5, 2, 1 / this.loopy.offsetScale);
+			this.grid_img = this.grid.getImg();
+			
+			this.last_scale = this.loopy.offsetScale;
+		}
 
     this.canvas_dirty = true;
   }
