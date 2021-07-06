@@ -131,15 +131,27 @@ export default class Loopy {
 		});
 		
 		subscribe("wheel", (delta: number) => {
-			if (delta > 0) {
-				for (let i = 0; i < delta; i++) {
-					this.offsetScale *= 1.1;
+			let weight = 40;
+
+			if (window.Key.alt || window.Key.shift || window.Key.control) {
+				if (window.Key.alt) {
+					this.offsetY += delta * weight;
 					publish("canvas/moved");
+				} else {
+					this.offsetX += delta * weight;
+          publish("canvas/moved");
 				}
 			} else {
-				for (let i = 0; i < Math.abs(delta); i++) {
-          this.offsetScale *= 0.9;
-          publish("canvas/moved");
+				if (delta > 0) {
+          for (let i = 0; i < delta; i++) {
+            this.offsetScale *= 1.1;
+            publish("canvas/moved");
+          }
+        } else {
+          for (let i = 0; i < Math.abs(delta); i++) {
+            this.offsetScale *= 0.9;
+            publish("canvas/moved");
+          }
         }
 			}
 		});
