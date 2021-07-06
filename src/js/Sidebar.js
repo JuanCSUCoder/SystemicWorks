@@ -9,6 +9,7 @@ import { publish, subscribe } from "../js/minpubsub";
 import { _createButton, _createLabel, _createInput, _createPicker, _addMouseEvents } from "./helpers";
 import LoopMark from './LoopMark';
 import Edge from './Edge';
+import { version } from '../../package.json';
 
 function Sidebar(loopy) {
 
@@ -205,7 +206,7 @@ function Sidebar(loopy) {
 			html: "" +
 
 				"<b style='font-size:1.4em'>About ...</b> <br>" +
-				"Build: v2.1.0<br>" +
+				"Build: v"+version+"<br>" +
 				"an advanced and free tool for thinking in systems<br><br>" +
 				"<font size='3'><strong>License:</strong> GPLv3</font>" +
 
