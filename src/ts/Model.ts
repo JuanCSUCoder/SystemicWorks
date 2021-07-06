@@ -30,7 +30,8 @@ export default class Model {
 
   // Draw Helpers
   drawCountdownFull: number = 60; // Two Seconds
-  drawCountdown: number = this.drawCountdownFull;
+	drawCountdown: number = this.drawCountdownFull;
+	scale_ease: number = 1;
 
   // Nodes
   nodes: Node[] = [];
@@ -512,7 +513,10 @@ export default class Model {
       // Clear
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      ctx.save();
+			ctx.save();
+			
+			// Calculate scale
+			this.scale_ease = this.scale_ease * 0.8 + loopy.offsetScale * 0.2;
 
       // Translate to center, (translate, scale, translate) to expand to size
       let canvasses = document.getElementById("canvasses")!;
@@ -522,7 +526,7 @@ export default class Model {
       let ty = loopy.offsetY * 2;
       tx -= CW + _PADDING;
       ty -= CH + _PADDING;
-      var s = loopy.offsetScale; // TODO: Zooming
+      var s = this.scale_ease;
       tx = s * tx;
       ty = s * ty;
       tx += CW + _PADDING;
