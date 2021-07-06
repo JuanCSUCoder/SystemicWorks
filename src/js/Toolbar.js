@@ -85,6 +85,7 @@ function Toolbar(loopy){
 			self.setTool("drag");
 		}
 	});
+	self.addSeparator();
 	self.addButton({
 		id:"pan",
 		tooltip: "(P)AN",
