@@ -18,10 +18,10 @@ function Labeller(loopy){
 		if(self.loopy.tool!=Loopy.TOOL_LABEL) return;
 
 		// And if ALREADY EDITING LABEL, just GO TO TOP.
-		if(self.loopy.sidebar.currentPage.id == "Label"){
-			loopy.sidebar.showPage("Edit");
-			return;
-		}
+		// if(self.loopy.sidebar.currentPage.id == "Label"){
+		// 	loopy.sidebar.showPage("Edit");
+		// 	return;
+		// }
 
 		// Otherwise, make it & edit it!
 		var newLabel = loopy.model.addLabel({

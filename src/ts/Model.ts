@@ -176,6 +176,64 @@ export default class Model {
       }
     });
 
+		subscribe("mouseup", () => {
+			if (
+        this.loopy.mode == LoopyMode.Edit &&
+        this.loopy.tool != LoopyTool.Erase
+      ) {
+        // Check what was clicked and open edit page
+        let clickedNode = this.getNodeByPoint(
+          this.loopy.mouseControl.x,
+          this.loopy.mouseControl.y,
+          2
+        );
+
+        if (clickedNode) {
+          this.loopy.sidebar.edit(clickedNode);
+          return;
+        }
+
+        let clickedLabel = this.getLabelByPoint(
+          this.loopy.mouseControl.x,
+          this.loopy.mouseControl.y
+        );
+
+        if (clickedLabel) {
+          this.loopy.sidebar.edit(clickedLabel);
+          return;
+        }
+
+        let clickedEdge = this.getEdgeByPoint(
+          this.loopy.mouseControl.x,
+          this.loopy.mouseControl.y
+        );
+
+        if (clickedEdge) {
+          this.loopy.sidebar.edit(clickedEdge);
+          return;
+        }
+
+        let clickedLoopMark = this.getLoopMarkByPoint(
+          this.loopy.mouseControl.x,
+          this.loopy.mouseControl.y
+        );
+
+        if (clickedLoopMark) {
+          this.loopy.sidebar.edit(clickedLoopMark);
+          return;
+        }
+
+        // Add a Label if nothing was clicked and Label Tool is Selected
+        if (this.loopy.tool == LoopyTool.Label) {
+          this.loopy.labeller.tryMakingLabel();
+          return;
+        }
+
+        // If nothing of above is TRUE then go to main Edit Page
+        this.loopy.sidebar.showPage("Edit");
+      }
+		})
+
     // Setup Default Configurations
 
     this.node_def = {
