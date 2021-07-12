@@ -23,12 +23,12 @@ function Toolbar(loopy){
 		var callback = options.callback;
 
 		// Add the button
-		var button = new ToolbarButton(self,{
+		var button = new ToolbarButton(self, {
 			id: id,
 			icon: "assets/nicons/"+id+".svg",
 			tooltip: tooltip,
 			callback: callback
-		});
+		}, loopy);
 		self.dom.appendChild(button.dom);
 		buttons.push(button);
 		self.buttonsByID[id] = button;
@@ -182,7 +182,10 @@ function Toolbar(loopy){
 		}
 	})
 
-	// Select button
+	// Select defaults
+	self.buttonsByID.clone.callback();
+	self.buttonsByID.lock.callback();
+
 	self.buttonsByID.drag.callback();
 
 	// Return to default
@@ -197,7 +200,7 @@ function Toolbar(loopy){
 	return self;
 }
 
-function ToolbarButton(toolbar, config){
+function ToolbarButton(toolbar, config, loopy){
 
 	var self = this;
 	self.id = config.id;

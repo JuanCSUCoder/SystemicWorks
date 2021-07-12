@@ -126,7 +126,7 @@ function Ink(loopy) {
 		if (self.loopy.tool != Loopy.TOOL_INK) return;
 
 		if (self.strokeData.length < 2) return;
-		if (!Mouse.moved) return;
+		
 
 		/*************************
 		
@@ -141,6 +141,7 @@ function Ink(loopy) {
 		var startPoint = self.strokeData[0];
 		var startNode = loopy.model.getNodeByPoint(startPoint[0], startPoint[1]);
 		if (!startNode) startNode = loopy.model.getNodeByPoint(startPoint[0], startPoint[1], 20); // try again with buffer
+		if (!Mouse.moved && startNode) return;
 
 		// Ended in a node?
 		var endPoint = self.strokeData[self.strokeData.length - 1];
@@ -244,6 +245,16 @@ function Ink(loopy) {
 				// Edit it immediately
 				loopy.sidebar.edit(newNode);
 
+			} else {
+				var newNode = loopy.model.addNode({
+					x: x,
+					y: y,
+					w: 40,
+					h: 20,
+				});
+
+				// Edit it immediately
+				loopy.sidebar.edit(newNode);
 			}
 
 		}
