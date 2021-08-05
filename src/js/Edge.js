@@ -11,7 +11,7 @@ Edge.allSignals = [];
 Edge.MAX_SIGNALS = 100;
 Edge.MAX_SIGNALS_PER_EDGE = 10;
 Edge.defaultStrength = 1;
-Edge.defaultColor = "#666";
+Edge.defaultColor = "#666666";
 Edge.defaultThickness = 3;
 Edge.defaultDelay = 0;
 

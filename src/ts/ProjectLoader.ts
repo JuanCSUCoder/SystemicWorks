@@ -426,7 +426,7 @@ export default class ProjectLoader {
             strength: 1,
             rotation: 0,
             thickness: 3,
-            color: "#666",
+            color: "#666666",
             delay: 0,
           });
         }
