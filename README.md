@@ -46,4 +46,14 @@ npm run build:dev
 ## Deploy
 To deploy in GitHub Pages use:
 
-	npm run deploy
+```bash
+npm run deploy
+```
+
+## Tag, Build and Deploy
+To update packages, auto-version, tag and deploy in GitHub Pages use:
+
+**Replace &lt;type&gt; with patch, minor or major**
+```bash
+npm i && npx release <type> && npm run build:prod && npm run deploy
+```
