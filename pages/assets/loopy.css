@@ -432,9 +432,13 @@ footer {
 
 #modal_page{
 	margin: 15px;
-	font-size: 25px;
+	font-size: 18px;
 	font-weight: 100;
 	color: #333;
+}
+
+#modal_page input {
+	width: 100%;
 }
 
 #modal iframe{

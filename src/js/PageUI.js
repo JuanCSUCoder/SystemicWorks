@@ -44,7 +44,7 @@ export function Page(){
 
 	// DOM
 	self.dom = document.createElement("div");
-	self.show = function(){ self.dom.style.display="flex"; };
+	self.show = function(){ self.dom.style.display="block"; };
 	self.hide = function(){ self.dom.style.display="none"; };
 
 	// Add Component

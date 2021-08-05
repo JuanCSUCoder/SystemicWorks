@@ -111,7 +111,7 @@ function Modal(loopy){
 		page.width = 500;
 		page.height = 155;
 		page.addComponent(new ComponentHTML({
-			html: "copy your link:"
+			html: "Copy your link:"
 		}));
 		var output = page.addComponent(new ComponentOutput({}));
 
