@@ -148,6 +148,18 @@ function Ink(loopy) {
 		var endNode = loopy.model.getNodeByPoint(endPoint[0], endPoint[1]);
 		if (!endNode) endNode = loopy.model.getNodeByPoint(endPoint[0], endPoint[1], 40); // try again with buffer
 
+		// Clicked an edge?
+		let clickedEdge = loopy.model.getEdgeByPoint(startPoint[0], startPoint[1]);
+
+		// Clicked a label?
+		let clickedLabel = loopy.model.getLabelByPoint(startPoint[0], startPoint[1]);
+
+		// Clicked a Loopmark?
+		let clickedLoopMark = loopy.model.getLoopMarkByPoint(startPoint[0], startPoint[1]);
+
+		// Should create a node
+		let createNode = Mouse.moved && !(clickedEdge || clickedLabel || clickedLoopMark) && !startNode;
+
 		// EDGE: started AND ended in nodes
 		if (startNode && endNode) {
 
@@ -215,7 +227,7 @@ function Ink(loopy) {
 		}
 
 		// NODE: did NOT start in a node.
-		if (!startNode) {
+		if (createNode) {
 
 			// Just roughly make a circle the size of the bounds of the circle
 			var bounds = _getBounds(self.strokeData);
