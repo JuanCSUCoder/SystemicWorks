@@ -12,8 +12,9 @@ declare global {
     Key: KeysStatus;
     HIGHLIGHT_COLOR: string;
     promptPWA(): void;
+    debug_mode: boolean;
     launchQueue: {
-      setConsumer(param: Function): void
+      setConsumer(param: Function): void;
     };
   }
 };
@@ -130,9 +131,9 @@ window.onload = function () {
 	});
 
 	// Debug Tools
-	const debug_mode = false;
+	window.debug_mode = false;
 
-	if (debug_mode) {
+	if (window.debug_mode) {
 		subscribe("resize", () => {
 			console.log("Resize Event");
 		});

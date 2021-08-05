@@ -35,7 +35,8 @@ export default class Key {
       "keydown",
       (e) => {
 				if (!(loopy && loopy.modal && loopy.modal.isShowing)) {
-					console.log(e.key);
+					window.debug_mode ? console.log(e.key) : '';
+					
           let code = this.key_codes[e.key];
 
           win.Key[code] = true;
