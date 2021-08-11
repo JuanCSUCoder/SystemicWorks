@@ -40,7 +40,7 @@
   "dependencies": {
     "release": "^6.3.0",
     "webpack-pwa-manifest": "^4.3.0",
-    "workbox-webpack-plugin": "^6.1.5",
+    "workbox-webpack-plugin": "^6.2.3",
     "ws": "^8.0.0"
   }
 }
