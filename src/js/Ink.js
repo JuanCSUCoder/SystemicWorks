@@ -74,25 +74,24 @@ function Ink(loopy) {
 
 	};
 	self.reset = function () {
-		// Translate to center, (translate, scale, translate) to expand to size
-		var canvasses = document.getElementById("canvasses");
-		var CW = canvasses.clientWidth - _PADDING - _PADDING;
-		var CH = canvasses.clientHeight - _PADDING_BOTTOM - _PADDING;
-		var tx = loopy.offsetX * 2;
-		var ty = loopy.offsetY * 2;
-		tx -= CW + _PADDING;
-		ty -= CH + _PADDING;
-		var s = loopy.offsetScale; // TODO: Zooming
-		tx = s * tx;
-		ty = s * ty;
-		tx += CW + _PADDING;
-		ty += CH + _PADDING;
-		if (loopy.embedded) {
-			tx += _PADDING; // dunno why but this is needed
-			ty += _PADDING; // dunno why but this is needed
+		let s = loopy.offsetScale;
+		let tx = loopy.offsetX * 2 * s;
+		let ty = loopy.offsetY * 2 * s;
+		let tw = canvas.width / s;
+		let th = canvas.height / s;
+
+		ctx.setTransform(s, 0, 0, s, tx, ty);
+
+		if (window.debug_mode) {
+			console.log("TW: " + tw);
+			console.log("TH: " + th);
+			ctx.fillStyle = "rgba(0,0,0,0.5)";
+			ctx.fillRect(0, 0, tw, th);
+			setTimeout(() => { ctx.clearRect(0, 0, tw, th) }, 1000);
+		} else {
+			ctx.clearRect(0, 0, tw, th);
 		}
 
-		ctx.clearRect(-tx, -ty, canvas.width, canvas.height); // Clear canvas
 		self.strokeData = []; // Reset stroke data
 	};
 	subscribe("mousedown", function () {
