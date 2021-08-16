@@ -59,14 +59,15 @@ module.exports = {
 					purpose: 'maskable'
 				},
 			],
-			file_handlers: [
-				{
-					"action": "./",
-					"accept": {
-						"text/plain": [".smwks"]
-					}
-				},
-			],
+			// File Handling API (unstable):
+			// file_handlers: [
+			// 	{
+			// 		"action": "./",
+			// 		"accept": {
+			// 			"text/plain": [".smwks"]
+			// 		}
+			// 	},
+			// ],
 		}),
 		new GenerateSW({
 			cleanupOutdatedCaches: true,
