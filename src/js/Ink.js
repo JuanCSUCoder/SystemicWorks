@@ -8,17 +8,16 @@ TODO: when switch away tool, clear the Ink canvas
 
 **********************************/
 
-import {_PADDING, _PADDING_BOTTOM} from '../ts/Helpers';
+import { _PADDING, _PADDING_BOTTOM } from "../ts/Helpers";
 
-import {_createCanvas, _rotatePoints, _translatePoints} from './helpers';
-import {_getBounds, Loopy} from './helpers';
-import {publish, subscribe} from './minpubsub';
+import { _createCanvas, _rotatePoints, _translatePoints } from "./helpers";
+import { _getBounds, Loopy } from "./helpers";
+import { publish, subscribe } from "./minpubsub";
 
 Ink.MINIMUM_RADIUS = Node.DEFAULT_RADIUS;
 Ink.SNAP_TO_RADIUS = 25;
 
 function Ink(loopy) {
-
   var self = {};
   self.loopy = loopy;
 
@@ -32,9 +31,8 @@ function Ink(loopy) {
   self.strokeData = [];
 
   // Drawing!
-  self.drawInk = function() {
-    if (!Mouse.pressed)
-      return;
+  self.drawInk = function () {
+    if (!Mouse.pressed) return;
 
     // Last point
     var lastPoint = self.strokeData[self.strokeData.length - 1];
@@ -71,9 +69,9 @@ function Ink(loopy) {
     ctx.stroke();
 
     // Update last point
-    self.strokeData.push([ Mouse.x, Mouse.y ]);
+    self.strokeData.push([Mouse.x, Mouse.y]);
   };
-  self.reset = function() {
+  self.reset = function () {
     let s = loopy.offsetScale;
     let tx = loopy.offsetX * 2 * s;
     let ty = loopy.offsetY * 2 * s;
@@ -87,46 +85,41 @@ function Ink(loopy) {
       console.log("TH: " + th);
       ctx.fillStyle = "rgba(0,0,0,0.5)";
       ctx.fillRect(0, 0, tw, th);
-      setTimeout(() => {ctx.clearRect(0, 0, tw, th)}, 1000);
+      setTimeout(() => {
+        ctx.clearRect(0, 0, tw, th);
+      }, 1000);
     } else {
       ctx.clearRect(0, 0, tw, th);
     }
 
     self.strokeData = []; // Reset stroke data
   };
-  subscribe("mousedown", function() {
+  subscribe("mousedown", function () {
     // ONLY WHEN EDITING w INK
-    if (self.loopy.mode != Loopy.MODE_EDIT)
-      return;
-    if (self.loopy.tool != Loopy.TOOL_INK)
-      return;
+    if (self.loopy.mode != Loopy.MODE_EDIT) return;
+    if (self.loopy.tool != Loopy.TOOL_INK) return;
 
     // New stroke data
     self.strokeData = [];
-    self.strokeData.push([ Mouse.x, Mouse.y ]);
+    self.strokeData.push([Mouse.x, Mouse.y]);
 
     // Draw to canvas!
     self.drawInk();
   });
-  subscribe("mousemove", function() {
+  subscribe("mousemove", function () {
     // ONLY WHEN EDITING w INK
-    if (self.loopy.mode != Loopy.MODE_EDIT)
-      return;
-    if (self.loopy.tool != Loopy.TOOL_INK)
-      return;
+    if (self.loopy.mode != Loopy.MODE_EDIT) return;
+    if (self.loopy.tool != Loopy.TOOL_INK) return;
 
     // Draw ink!
     self.drawInk();
   });
-  subscribe("mouseup", function() {
+  subscribe("mouseup", function () {
     // ONLY WHEN EDITING w INK
-    if (self.loopy.mode != Loopy.MODE_EDIT)
-      return;
-    if (self.loopy.tool != Loopy.TOOL_INK)
-      return;
+    if (self.loopy.mode != Loopy.MODE_EDIT) return;
+    if (self.loopy.tool != Loopy.TOOL_INK) return;
 
-    if (self.strokeData.length < 2)
-      return;
+    if (self.strokeData.length < 2) return;
 
     /*************************
 
@@ -141,43 +134,43 @@ function Ink(loopy) {
     var startPoint = self.strokeData[0];
     var startNode = loopy.model.getNodeByPoint(startPoint[0], startPoint[1]);
     if (!startNode)
-      startNode = loopy.model.getNodeByPoint(startPoint[0], startPoint[1],
-                                             20); // try again with buffer
-    if (!Mouse.moved && startNode)
-      return;
+      startNode = loopy.model.getNodeByPoint(startPoint[0], startPoint[1], 20); // try again with buffer
+    if (!Mouse.moved && startNode) return;
 
     // Ended in a node?
     var endPoint = self.strokeData[self.strokeData.length - 1];
     var endNode = loopy.model.getNodeByPoint(endPoint[0], endPoint[1]);
     if (!endNode)
-      endNode = loopy.model.getNodeByPoint(endPoint[0], endPoint[1],
-                                           40); // try again with buffer
+      endNode = loopy.model.getNodeByPoint(endPoint[0], endPoint[1], 40); // try again with buffer
 
     // Clicked an edge?
     let clickedEdge = loopy.model.getEdgeByPoint(startPoint[0], startPoint[1]);
 
     // Clicked a label?
-    let clickedLabel =
-        loopy.model.getLabelByPoint(startPoint[0], startPoint[1]);
+    let clickedLabel = loopy.model.getLabelByPoint(
+      startPoint[0],
+      startPoint[1]
+    );
 
     // Clicked a Loopmark?
-    let clickedLoopMark =
-        loopy.model.getLoopMarkByPoint(startPoint[0], startPoint[1]);
+    let clickedLoopMark = loopy.model.getLoopMarkByPoint(
+      startPoint[0],
+      startPoint[1]
+    );
 
     // Should create a node
-    let createNode = Mouse.moved &&
-                     !(clickedEdge || clickedLabel || clickedLoopMark) &&
-                     !startNode;
+    let createNode =
+      Mouse.moved &&
+      !(clickedEdge || clickedLabel || clickedLoopMark) &&
+      !startNode;
 
     // EDGE: started AND ended in nodes
     if (startNode && endNode) {
-
       // Config!
-      var edgeConfig = {from : startNode.id, to : endNode.id};
+      var edgeConfig = { from: startNode.id, to: endNode.id };
 
       // If it's the same node...
       if (startNode == endNode) {
-
         // TODO: clockwise or counterclockwise???
         // TODO: if the arc DOES NOT go beyond radius, don't make
         // self-connecting edge. also min distance.
@@ -191,8 +184,11 @@ function Ink(loopy) {
         var angle = Math.atan2(dy, dx);
 
         // Then, find arc height.
-        var translated =
-            _translatePoints(self.strokeData, -startNode.x, -startNode.y);
+        var translated = _translatePoints(
+          self.strokeData,
+          -startNode.x,
+          -startNode.y
+        );
         var rotated = _rotatePoints(translated, -angle);
         bounds = _getBounds(rotated);
 
@@ -204,30 +200,28 @@ function Ink(loopy) {
         // (and otherwise, make sure minimum distance of radius+25)
         if (edgeConfig.arc < startNode.radius) {
           edgeConfig = null;
-          loopy.sidebar.edit(
-              startNode); // you were probably trying to edit the node
+          loopy.sidebar.edit(startNode); // you were probably trying to edit the node
         } else {
           var minimum = startNode.radius + 25;
-          if (edgeConfig.arc < minimum)
-            edgeConfig.arc = minimum;
+          if (edgeConfig.arc < minimum) edgeConfig.arc = minimum;
         }
-
       } else {
-
         // Otherwise, find the arc by translating & rotating
         var dx = endNode.x - startNode.x;
         var dy = endNode.y - startNode.y;
         var angle = Math.atan2(dy, dx);
-        var translated =
-            _translatePoints(self.strokeData, -startNode.x, -startNode.y);
+        var translated = _translatePoints(
+          self.strokeData,
+          -startNode.x,
+          -startNode.y
+        );
         var rotated = _rotatePoints(translated, -angle);
         var bounds = _getBounds(rotated);
 
         // Arc!
         if (Math.abs(bounds.top) > Math.abs(bounds.bottom))
           edgeConfig.arc = -bounds.top;
-        else
-          edgeConfig.arc = -bounds.bottom;
+        else edgeConfig.arc = -bounds.bottom;
       }
 
       // Add the edge!
@@ -239,7 +233,6 @@ function Ink(loopy) {
 
     // NODE: did NOT start in a node.
     if (createNode) {
-
       // Just roughly make a circle the size of the bounds of the circle
       var bounds = _getBounds(self.strokeData);
       var x = (bounds.left + bounds.right) / 2;
@@ -249,7 +242,6 @@ function Ink(loopy) {
 
       // Circle can't be TOO smol
       if (w > 20 && h > 20) {
-
         // Snap to radius
         /*r = Math.round(r/Ink.SNAP_TO_RADIUS)*Ink.SNAP_TO_RADIUS;
         if(r<Ink.MINIMUM_RADIUS) r=Ink.MINIMUM_RADIUS;*/
@@ -259,21 +251,20 @@ function Ink(loopy) {
 
         // Make that node!
         var newNode = loopy.model.addNode({
-          x : x,
-          y : y,
-          w : w,
-          h : h,
+          x: x,
+          y: y,
+          w: w,
+          h: h,
         });
 
         // Edit it immediately
         loopy.sidebar.edit(newNode);
-
       } else {
         var newNode = loopy.model.addNode({
-          x : x,
-          y : y,
-          w : 40,
-          h : 20,
+          x: x,
+          y: y,
+          w: 40,
+          h: 20,
         });
 
         // Edit it immediately
@@ -284,12 +275,10 @@ function Ink(loopy) {
     // Reset.
     self.reset();
   });
-  subscribe("mouseclick", function() {
+  subscribe("mouseclick", function () {
     // ONLY WHEN EDITING w INK
-    if (self.loopy.mode != Loopy.MODE_EDIT)
-      return;
-    if (self.loopy.tool != Loopy.TOOL_INK)
-      return;
+    if (self.loopy.mode != Loopy.MODE_EDIT) return;
+    if (self.loopy.tool != Loopy.TOOL_INK) return;
 
     // Reset
     self.reset();
