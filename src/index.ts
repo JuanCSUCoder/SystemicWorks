@@ -16,7 +16,12 @@ declare global {
     launchQueue: {
       setConsumer(param: Function): void;
     };
-  }
+	}
+	
+	interface Console {
+		stdlog: Function;
+		logs: any[];
+	}
 };
 
 interface BeforeInstallPromptEvent extends Event {
@@ -133,21 +138,48 @@ window.onload = function () {
 	// Debug Tools
 	window.debug_mode = false;
 
-	if (window.debug_mode) {
-		subscribe("resize", () => {
-			console.log("Resize Event");
-		});
+	let sidebar_console = document.getElementById("debug_logs");
+	let debug_toggle = document.getElementById("debug_toggle");
 
-		subscribe("model/changed", () => {
-			console.log("Model Changed Event");
-		});
+	console.stdlog = console.log.bind(console);
+  console.logs = [];
+	console.log = function () {
+    console.logs.push(Array.from(arguments));
+		console.stdlog.apply(console, arguments);
+		
+		publish("logs/update");
+	};
+	
+	subscribe("logs/update", () => {
+		let new_p = document.createElement("p");
+		new_p.appendChild(
+      document.createTextNode(console.logs[console.logs.length - 1] + "\n")
+		);
+		
+		sidebar_console.appendChild(new_p);
+	});
 
-		subscribe("model/reset", () => {
-			console.log("Model Reset Event");
-		});
+	setInterval(() => {
+		sidebar_console.scrollTop = sidebar_console.scrollHeight;
+	}, 100);
 
-		subscribe("canvas/moved", () => {
-			console.log("Canvas Moved Event");
-		});
-	}
+	debug_toggle.addEventListener("change", (ev: InputEvent) => {
+		window.debug_mode = (ev.currentTarget as HTMLInputElement).checked;
+	});
+
+	subscribe("resize", () => {
+		window.debug_mode ? console.log("Resize Event") : '';
+	});
+
+	subscribe("model/changed", () => {
+		window.debug_mode ? console.log("Model Changed Event") : '';
+	});
+
+	subscribe("model/reset", () => {
+		window.debug_mode ? console.log("Model Reset Event") : '';
+	});
+
+	subscribe("canvas/moved", () => {
+		window.debug_mode ? console.log("Canvas Moved Event") : '';
+	});
 };
