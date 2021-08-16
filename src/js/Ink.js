@@ -80,16 +80,28 @@ function Ink(loopy) {
 		let tw = canvas.width / s;
 		let th = canvas.height / s;
 
+		let ax = - loopy.offsetX * 2;
+		let ay = - loopy.offsetY * 2;
+
 		ctx.setTransform(s, 0, 0, s, tx, ty);
 
 		if (window.debug_mode) {
+			console.log("Ink Debug --------");
+			console.log("AX: " + ax);
+			console.log("AY: " + ay);
+
+			console.log("TX: " + tx);
+			console.log("TY: " + ty);
+
 			console.log("TW: " + tw);
 			console.log("TH: " + th);
+			console.log("------------------");
+
 			ctx.fillStyle = "rgba(0,0,0,0.5)";
-			ctx.fillRect(0, 0, tw, th);
-			setTimeout(() => { ctx.clearRect(0, 0, tw, th) }, 1000);
+			ctx.fillRect(ax, ay, tw, th);
+			setTimeout(() => { ctx.clearRect(ax, ay, tw, th) }, 1000);
 		} else {
-			ctx.clearRect(0, 0, tw, th);
+			ctx.clearRect(ax, ay, tw, th);
 		}
 
 		self.strokeData = []; // Reset stroke data
@@ -254,7 +266,7 @@ function Ink(loopy) {
 				});
 
 				// Edit it immediately
-				loopy.sidebar.edit(newNode);
+				!window.debug_mode ? loopy.sidebar.edit(newNode): '';
 
 			} else {
 				var newNode = loopy.model.addNode({
@@ -265,7 +277,7 @@ function Ink(loopy) {
 				});
 
 				// Edit it immediately
-				loopy.sidebar.edit(newNode);
+				!window.debug_mode ? loopy.sidebar.edit(newNode): '';
 			}
 
 		}
