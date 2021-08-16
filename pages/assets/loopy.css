@@ -176,6 +176,11 @@ footer {
 	justify-content: center;
 }
 
+#playbar div {
+	display: flex;
+	flex-direction: row;
+}
+
 .play_slider {
 	margin-left: 1em;
 	display: flex;
@@ -435,6 +440,10 @@ footer {
 	font-size: 18px;
 	font-weight: 100;
 	color: #333;
+}
+
+#modal_page div {
+	flex-direction: column;
 }
 
 #modal_page input {
