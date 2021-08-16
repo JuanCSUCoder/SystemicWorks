@@ -165,6 +165,17 @@ window.onload = function () {
 
 	debug_toggle.addEventListener("change", (ev: InputEvent) => {
 		window.debug_mode = (ev.currentTarget as HTMLInputElement).checked;
+
+		if (window.debug_mode) {
+			let confirmation = prompt("You are activating DEBUG MODE. Don't use this feature unless you know what you are doing. Write ACTIVATE to confirm this action");
+
+			if (confirmation != "ACTIVATE") {
+				window.debug_mode = false;
+				(ev.currentTarget as HTMLInputElement).checked = false;
+			}
+		}
+
+		sidebar_console.style.display = window.debug_mode ? "block" : "none";
 	});
 
 	subscribe("resize", () => {
@@ -180,6 +191,11 @@ window.onload = function () {
 	});
 
 	subscribe("canvas/moved", () => {
-		window.debug_mode ? console.log("Canvas Moved Event") : '';
+		if (window.debug_mode) {
+			console.log("Canvas Moved Event ----");
+			console.log("OffsetX: " + window.loopy.offsetX);
+			console.log("OffsetY: " + window.loopy.offsetY);
+			console.log("Scale: " + window.loopy.offsetScale);
+		}
 	});
 };

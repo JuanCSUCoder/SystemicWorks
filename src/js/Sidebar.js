@@ -226,7 +226,7 @@ function Sidebar(loopy) {
 				"<span>SystemicWorks</span> is " +
 				"made by <a target='_blank' rel='noreferrer' href='https://github.com/JuanCSUCoder'>JuanCSUCoder</a> based on the <a target='_blank' rel='noreferrer' href='https://ncase.me/loopy/'>LOOPY(v1.1)</a> project of <a target='_blank' rel='noreferrer' href='http://ncase.me'>nicky case</a> <br> <br>" +
 				"<hr /> <br> <label for='debug_toggle' style='font-size: 1.5rem'>Debug Mode </label> <input type='checkbox' id='debug_toggle' name='debug_toggle'/> <br>" +
-				"<br> <div id='debug_logs'></div>"
+				"<br> <div id='debug_logs' style='display:none;'></div>"
 
 		}));
 		self.addPage("Edit", page);
