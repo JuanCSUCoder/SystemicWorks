@@ -176,6 +176,11 @@ footer {
 	justify-content: center;
 }
 
+#playbar div {
+	display: flex;
+	flex-direction: row;
+}
+
 .play_slider {
 	margin-left: 1em;
 	display: flex;
@@ -437,6 +442,10 @@ footer {
 	color: #333;
 }
 
+#modal_page div {
+	flex-direction: column;
+}
+
 #modal_page input {
 	width: 100%;
 }
@@ -501,4 +510,16 @@ main li {
 
 #install_button:hover {
 	background-color: rgb(51, 153, 51);
+}
+
+#debug_logs {
+	background-color: black;
+	width: 100%;
+	height: 400px;
+
+	font-size: 1.2rem;
+	font-family: monospace;
+	color: white;
+
+	overflow-y: scroll;
 }
