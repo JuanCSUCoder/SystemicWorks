@@ -125,11 +125,11 @@ export default class Loopy {
 
       input.click();
 		});
-		
+
 		subscribe("file/loaded", (data: string) => {
       this.model.deserialize(data, "default.smwks");
 		});
-		
+
 		subscribe("wheel", (delta: number) => {
 			let weight = 40;
 
@@ -179,7 +179,7 @@ export default class Loopy {
     if (!data) {
       data = decodeURIComponent(this._blankData);
 		}
-		
+
 		this.model.deserialize(data, "default.smwks");
 
 		// File Handling API (unstable):
@@ -229,7 +229,7 @@ export default class Loopy {
     if (!this.modal.isShowing) {
       this.model.update();
 		}
-		
+
 		this.offsetScale = Math.min(Math.max(0.125, this.offsetScale), 4);
   }
 
