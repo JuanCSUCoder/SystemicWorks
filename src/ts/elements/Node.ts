@@ -368,10 +368,10 @@ export default class Node implements SimpleElement {
 
   getBoundingBox(): Bounds {
     return {
-      left: this.x - this.w,
-      top: this.y - this.h,
-      right: this.x + this.w,
-      bottom: this.y + this.h,
+      left: this.x - this.rx,
+      top: this.y - this.ry,
+      right: this.x + this.rx,
+      bottom: this.y + this.ry,
     };
   }
 }

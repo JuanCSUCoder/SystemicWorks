@@ -98,6 +98,17 @@ export default function LoopMark(model, config) {
 	// HELPER METHODS //
 	////////////////////
 
+	self.getBoundingBox = function () {
+		let box_size = 20;
+
+		return {
+			left: this.x - box_size,
+			top: this.y - box_size,
+			right: this.x + box_size,
+			bottom: this.y + box_size,
+		};
+	}
+
 	self.isPointInLoopMark = function (x, y) {
 		var dx = self.x - x;
 		var dy = self.y - y;

@@ -216,6 +216,7 @@ function Sidebar(loopy) {
 				"<span class='mini_button' onclick='window.publish(\"modal\",[\"save_link\"])'>Save as Link</span>" +
 				"<span class='mini_button' onclick='window.publish(\"export/file\")'>Save as File</span>" +
 				"<span class='mini_button' onclick='window.publish(\"import/file\")'>Load from File</span>" +
+				"<span class='mini_button' onclick='window.publish(\"export/image\")'>Export as Image</span>" +
 				"<a class='mini_button' target='_blank' rel='noreferrer' href='https://juancsucoder.github.io/SystemicWorks/report'>Report a Bug</a>" +
 				"<a class='mini_button' target='_blank' rel='noreferrer' href='https://github.com/JuanCSUCoder/SystemicWorks'>Source Code</a>" +
 				"<a class='mini_button' target='_blank' rel='noreferrer' href='https://github.com/JuanCSUCoder/SystemicWorks/blob/main/LICENSE'>License</a>" +

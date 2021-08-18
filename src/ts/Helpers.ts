@@ -247,3 +247,45 @@ export function _writeParagraph(paragraph: string[], font_size: number, ctx: Can
 function _isTextSeparable(text: string): boolean {
 	return text.includes(" ");
 }
+
+export function _crop(canvas: HTMLCanvasElement, offsetX: number, offsetY: number, width: number, height: number, margin: number, callback?: Function) {
+	// Debug
+	if (window.debug_mode) {
+		console.log("Canvas Image Crop -------");
+		console.log("OffsetX: " + offsetX);
+		console.log("OffsetY: " + offsetY);
+		console.log("Width: " + width);
+		console.log("Height: " + height);
+		console.log("-------------------------")
+	}
+
+  // create an in-memory canvas
+  var buffer = document.createElement('canvas');
+  var b_ctx = buffer.getContext('2d');
+  // set its width/height to the required ones
+	buffer.width = width * 2 + (margin * 2);
+	buffer.height = height * 2 + (margin * 2);
+  // draw the main canvas on our buffer one
+  // drawImage(source, source_X, source_Y, source_Width, source_Height, 
+  //  dest_X, dest_Y, dest_Width, dest_Height)
+	b_ctx.drawImage(
+    canvas,
+    offsetX * 2 - margin,
+    offsetY * 2 - margin,
+    width * 2 + margin * 2,
+    height * 2 + margin * 2,
+    0,
+    0,
+    width * 2 + margin * 2,
+    height * 2 + margin * 2
+  );
+	
+	let result = buffer.toDataURL();
+	
+  if (callback) {
+    // now call the callback with the dataURL of our buffer canvas
+    callback(result);
+	}
+
+	return result;
+};

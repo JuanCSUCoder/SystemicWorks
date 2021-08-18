@@ -11,7 +11,7 @@ import Playbar from "../js/PlayControls";
 import Modal from "../js/Modal";
 
 import Model from "./Model";
-import { _getParameterByName, _tool2String } from "./Helpers";
+import { Bounds, _crop, _getParameterByName, _tool2String } from "./Helpers";
 import * as MinPubSub from "../js/minpubsub";
 import { publish, subscribe } from "../js/minpubsub";
 
@@ -89,6 +89,33 @@ export default class Loopy {
     subscribe("model/changed", () => {
       this.dirty = true;
     });
+
+		subscribe("export/image", () => {
+			let element = document.createElement("a");
+
+			let margin: number = 20;
+			let diag_crop: Bounds = this.model.getBounds();
+
+			let img_src: string = _crop(
+        this.model.canvas,
+        diag_crop.left,
+        diag_crop.top,
+        diag_crop.right - diag_crop.left,
+				diag_crop.bottom - diag_crop.top,
+				margin
+			);;
+
+			window.debug_mode ? console.log(img_src) : '';
+
+			element.setAttribute("href", img_src);
+			element.setAttribute("download", "diagram.png");
+
+			element.style.display = "none";
+
+			document.body.appendChild(element);
+			element.click();
+			document.body.removeChild(element);
+		});
 
     subscribe("export/file", () => {
       let element = document.createElement("a");
