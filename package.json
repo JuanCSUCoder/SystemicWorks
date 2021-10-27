@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/JuanCSUCoder/SystemicWorks#readme",
   "devDependencies": {
-    "@webpack-cli/generators": "^2.2.0",
+    "@webpack-cli/generators": "^2.4.1",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.5.0",
     "gh-pages": "^3.2.3",
