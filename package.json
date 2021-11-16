@@ -26,7 +26,7 @@
   "devDependencies": {
     "@webpack-cli/generators": "^2.4.1",
     "copy-webpack-plugin": "^9.0.1",
-    "css-loader": "^6.5.0",
+    "css-loader": "^6.5.1",
     "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^5.5.0",
     "live-server": "^1.2.1",
