@@ -1,6 +1,8 @@
 # SystemicWorks
 ### an advanced and free tool for thinking in systems
 
+**Nobody seems to use this software anymore, so it will be no longer maintained :(**
+
 ![](https://img.shields.io/github/workflow/status/JuanCSUCoder/SystemicWorks/Node.js%20CI/main?label=Main%20Branch&style=flat-square)	![](https://img.shields.io/github/languages/code-size/JuanCSUCoder/SystemicWorks?style=flat-square)
 
 This repository contains the webapp of SystemicWorks, which will be an **advanced and free tool for thinking in systems**, developed from the source code and concept of [Nicky Case](http://ncase.me), and improved to compete with proprietary software.
